@@ -68,20 +68,21 @@ public class IGListaEvento extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbUsuario = new javax.swing.JTable();
-        btnIngresar2 = new javax.swing.JButton();
         txtBuscarUsuario = new javax.swing.JTextField();
-        btnModificar = new javax.swing.JButton();
         rbEventoFin = new javax.swing.JRadioButton();
         rbTodoEvento = new javax.swing.JRadioButton();
         rbEventoProximo = new javax.swing.JRadioButton();
+        btnIngresar2 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbUsuario = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(226, 224, 224));
 
         jPanel4.setBackground(new java.awt.Color(3, 158, 163));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Open Sans", 1, 20)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Lista de eventos");
 
@@ -90,9 +91,9 @@ public class IGListaEvento extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(208, 208, 208)
+                .addGap(389, 389, 389)
                 .addComponent(jLabel11)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +103,41 @@ public class IGListaEvento extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel6.setBackground(new java.awt.Color(226, 224, 224));
+        txtBuscarUsuario.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
+        txtBuscarUsuario.setBorder(null);
+        txtBuscarUsuario.setPreferredSize(null);
+        txtBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarUsuarioActionPerformed(evt);
+            }
+        });
+
+        rbEventoFin.setBackground(new java.awt.Color(226, 224, 224));
+        rbEventoFin.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        rbEventoFin.setText("Eventos finalizados  ");
+
+        rbTodoEvento.setBackground(new java.awt.Color(226, 224, 224));
+        rbTodoEvento.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        rbTodoEvento.setText("Todos los eventos");
+
+        rbEventoProximo.setBackground(new java.awt.Color(226, 224, 224));
+        rbEventoProximo.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        rbEventoProximo.setText("Eventos próximos");
+
+        btnIngresar2.setBackground(new java.awt.Color(244, 67, 54));
+        btnIngresar2.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnIngresar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar2.setText("Eliminar");
+
+        btnModificar.setBackground(new java.awt.Color(79, 175, 80));
+        btnModificar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         tbUsuario.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
         tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
@@ -128,107 +163,57 @@ public class IGListaEvento extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbUsuario);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
-        );
-
-        btnIngresar2.setBackground(new java.awt.Color(244, 67, 54));
-        btnIngresar2.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar2.setText("Eliminar");
-
-        txtBuscarUsuario.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtBuscarUsuario.setBorder(null);
-        txtBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarUsuarioActionPerformed(evt);
-            }
-        });
-
-        btnModificar.setBackground(new java.awt.Color(79, 175, 80));
-        btnModificar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-
-        rbEventoFin.setBackground(new java.awt.Color(226, 224, 224));
-        rbEventoFin.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
-        rbEventoFin.setText("Eventos finalizados  ");
-
-        rbTodoEvento.setBackground(new java.awt.Color(226, 224, 224));
-        rbTodoEvento.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
-        rbTodoEvento.setText("Todos los eventos");
-
-        rbEventoProximo.setBackground(new java.awt.Color(226, 224, 224));
-        rbEventoProximo.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
-        rbEventoProximo.setText("Eventos próximos");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(rbTodoEvento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rbEventoFin)
+                .addGap(135, 135, 135)
+                .addComponent(rbEventoProximo)
+                .addGap(102, 102, 102))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(rbTodoEvento)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbEventoFin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbEventoProximo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbTodoEvento)
+                    .addComponent(rbEventoFin)
+                    .addComponent(rbEventoProximo))
                 .addGap(18, 18, 18)
-                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbEventoProximo)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbTodoEvento)
-                        .addComponent(rbEventoFin)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,15 +221,15 @@ public class IGListaEvento extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarUsuarioActionPerformed
 
-    private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
-        System.out.println(tbUsuario.getSelectedRow());
-        System.out.println(tbUsuario.getValueAt(0, 2) ); 
-    }//GEN-LAST:event_tbUsuarioMouseClicked
-
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         IGModEvento modal = new IGModEvento(); 
         modal.setVisible(true);
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
+        System.out.println(tbUsuario.getSelectedRow());
+        System.out.println(tbUsuario.getValueAt(0, 2) );
+    }//GEN-LAST:event_tbUsuarioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -252,7 +237,6 @@ public class IGListaEvento extends javax.swing.JPanel {
     private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbEventoFin;
     private javax.swing.JRadioButton rbEventoProximo;
