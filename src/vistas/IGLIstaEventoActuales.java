@@ -19,7 +19,7 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         personalizarTable();
-        tbEventoActual.setFillsViewportHeight(true);
+       
         mostrarLista();
     }
 
@@ -43,23 +43,19 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         Rellenar la tabla
     */
     public void mostrarLista(){
+         Object[][] fila = new Object[4][5];
+        fila[0][0] = 7;
+        fila[0][1] = "Nombre del evento";
+        fila[0][2] = "Tecnología";
+        fila[0][3] = "Las Colinas";
+        fila[0][4] ="15:88";
+        Object[] titulo = {"ID", "Nombre del evento", "Tipo", "Salón", "Hora"};
         
-        tbEventoActual.setDefaultRenderer(Object.class, new Render());
-        JButton btnApertura = new JButton("Dar apertura");
-        btnApertura.setName("32");
-        Object[] titulo = {"Nombre del Evento", "tipo", "Salón", "Acción"};
-        Object[][] fila = new Object[4][4];
-        fila[0][0] = "Conferencia";
-        fila[0][1] = "tecnologia";
-        fila[0][2] = "Bella D";
-        fila[0][3] = btnApertura;
-        
-        DefaultTableModel modelo = new DefaultTableModel(fila, titulo)
-        {
-            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        DefaultTableModel model = new DefaultTableModel(fila, titulo){
+             public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
         };
-         tbEventoActual.setModel(modelo);
-           
+        
+        tbEventoActual.setModel(model);
          
     }
     
@@ -78,9 +74,10 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnIngresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbEventoActual = new javax.swing.JTable();
-        btnIngresar = new javax.swing.JButton();
+        btnIngresar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,15 +101,28 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(120, 144, 156));
         jLabel1.setText("Lista de eventos para el día de hoy  ");
 
+        btnIngresar.setBackground(new java.awt.Color(0, 150, 136));
+        btnIngresar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setText("Panel de control");
+
         tbEventoActual.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
         tbEventoActual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre del evento", "Tipo", "Salón", "Acción"
+                "ID", "Nombre del evento", "Tipo", "Salón", "Hora"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tbEventoActual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbEventoActualMouseClicked(evt);
@@ -120,29 +130,31 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbEventoActual);
 
-        btnIngresar.setBackground(new java.awt.Color(0, 150, 136));
-        btnIngresar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar.setText("Panel de control");
+        btnIngresar1.setBackground(new java.awt.Color(76, 175, 80));
+        btnIngresar1.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar1.setText("Dar entrada");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(208, 208, 208))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(565, 565, 565)
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(433, 433, 433)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(563, 563, 563)
+                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 189, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(166, 166, 166))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,11 +162,13 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,28 +185,18 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    /**
-     * Evento que localiza el btn (da apertura en al tabla)
-     * @param evt 
-     */
     private void tbEventoActualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventoActualMouseClicked
-         //obtengo la columna que se selecciono  
-        int column = tbEventoActual.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY() / tbEventoActual.getRowHeight();
-        
-        if(row < tbEventoActual.getRowCount() && row >= 0 &&
-                column < tbEventoActual.getColumnCount() && column >= 0){
-            Object value = tbEventoActual.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
-                JButton boton = (JButton) value;
-                darApertura(Integer.parseInt(boton.getName()));
-                
-            }
-        }     
+        //        System.out.println(tbUsuario.getSelectedRow());
+        //        System.out.println(tbUsuario.getValueAt(0, 2) );
+        int[] count = tbEventoActual.getSelectedRows();
+        for (int i = 0; i < count.length; i++) {
+            System.out.println(count[i]);
+        }
+
+        System.out.println();
     }//GEN-LAST:event_tbEventoActualMouseClicked
 
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -228,6 +232,7 @@ public class IGLIstaEventoActuales extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnIngresar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -14,12 +14,14 @@ public class Main {
     
     public static void main(String[] args) {
        login = new IGLogin();
-       login.setVisible(false);
+       login.setVisible(true);
        crearUsuario = new PanelControl();
        crearUsuario.setVisible(false);
        portero = new PanelEvento();
-       portero.setVisible(true);
-       
+       portero.setVisible(false);
+       eventoActual = new IGLIstaEventoActuales();
+       eventoActual.setVisible(false);
+              
     }
-    
+  
 }
