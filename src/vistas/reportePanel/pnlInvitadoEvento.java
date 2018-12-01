@@ -15,6 +15,8 @@ public class pnlInvitadoEvento extends javax.swing.JPanel {
         cantidad.add(rbAmbos);
         cantidad.add(rbHombres);
         cantidad.add(rbMujer);
+        rbAmbos.setSelected(true);
+        
     }
 
     
