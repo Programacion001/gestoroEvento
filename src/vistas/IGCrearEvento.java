@@ -1,13 +1,15 @@
-
+﻿
 package vistas;
 
 import controlador.CoordTipoEvento;
 import java.awt.Color;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
+import java.text.ParseException;
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 import modelo.VO.TipoEventoVO;
 
 public class IGCrearEvento extends javax.swing.JPanel {
@@ -19,8 +21,8 @@ public class IGCrearEvento extends javax.swing.JPanel {
     }
     public IGCrearEvento() {
         initComponents();
-        llamadado();
-      
+         llamadado();
+         
     }
     
     
@@ -65,30 +67,10 @@ public class IGCrearEvento extends javax.swing.JPanel {
        hilo.start();
     }
       
-    @SuppressWarnings("unchecked")
+   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        pnlInput1 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        txtTipoEvento = new javax.swing.JTextField();
-        btnAddEvento = new javax.swing.JButton();
-        pnlInput = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        cbTipoEvento = new javax.swing.JComboBox<>();
-        txtUsuario2 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtUsuario3 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        txtUsuario4 = new javax.swing.JTextField();
-        btnIngresar4 = new javax.swing.JButton();
-        btnIngresar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -201,9 +183,6 @@ public class IGCrearEvento extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel17.setText("Hora:");
 
-        txtUsuario4.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario4.setBorder(null);
-
         btnIngresar4.setBackground(new java.awt.Color(244, 67, 54));
         btnIngresar4.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
         btnIngresar4.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,20 +193,22 @@ public class IGCrearEvento extends javax.swing.JPanel {
         btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar1.setText("Crear evento ");
 
+
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
         pnlInputLayout.setHorizontalGroup(
             pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlInputLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
                         .addComponent(jLabel17))
                     .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel16)
                         .addComponent(cbTipoEvento, 0, 227, Short.MAX_VALUE)
                         .addComponent(txtUsuario3)))
+                      // .addComponent(jFormattedTextField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,7 +220,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
                         .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(127, 127, 127))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addContainerGap(251, Short.MAX_VALUE)
                 .addComponent(btnIngresar1)
                 .addGap(123, 123, 123)
                 .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,18 +245,18 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        //.addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
-        );
+        ));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -313,15 +294,8 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addComponent(pnlInput, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventoActionPerformed
-        agregarTipoEvento();
-        listaTipoEvento();
-    }//GEN-LAST:event_btnAddEventoActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    }// </editor-fold>        
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnAddEvento;
     private javax.swing.JButton btnIngresar1;
     private javax.swing.JButton btnIngresar4;
@@ -341,6 +315,39 @@ public class IGCrearEvento extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsuario1;
     private javax.swing.JTextField txtUsuario2;
     private javax.swing.JTextField txtUsuario3;
-    private javax.swing.JTextField txtUsuario4;
+    private javax.swing.JTextField txtUsuario5;
+
+    // End of variables declaration 
+}
+
+    private void btnAddEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventoActionPerformed
+        agregarTipoEvento();
+        listaTipoEvento();
+    }//GEN-LAST:event_btnAddEventoActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+       jPanel5 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        pnlInput1 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        txtTipoEvento = new javax.swing.JTextField();
+        btnAddEvento = new javax.swing.JButton();
+        pnlInput = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        txtUsuario1 = new javax.swing.JTextField();
+        cbTipoEvento = new javax.swing.JComboBox<>();
+        txtUsuario2 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtUsuario3 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnIngresar4 = new javax.swing.JButton();
+        btnIngresar1 = new javax.swing.JButton();
     // End of variables declaration//GEN-END:variables
 }
+
+                       
+   

@@ -81,4 +81,12 @@ public class InvitacionDAO {
  
 }
  }
+ 
+public void listaInvitaciones(InvitacionVO invitaciones){
+    ArrayList<InvitacionVO> invitacionList = new ArrayList<InvitacionVO>();
+    for (InvitacionVO x: invitacionList ){
+        invitacionList.add(invitaciones);
+    }
+    
+}
 }

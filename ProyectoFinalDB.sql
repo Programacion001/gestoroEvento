@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `proyectoDB`.`Evento` (
   `Ubicacion` VARCHAR(45) NOT NULL,
   `Fecha` DATE NOT NULL,
   `Nombre` VARCHAR(20) NOT NULL,
-  `Status` VARCHAR(20) NOT NULL,
+  `Status` VARCHAR(12) NOT NULL,
   `Tipo_Evento` INT NOT NULL,
   `id_Usuario` INT NOT NULL,
   PRIMARY KEY (`id_Evento`),
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `proyectoDB`.`Invitados` (
   `id_Invitados` INT NOT NULL AUTO_INCREMENT,
   `Cédula` VARCHAR(11) NOT NULL,
   `Apellido` VARCHAR(20) NOT NULL,
-  `Sexo` VARCHAR(20) NOT NULL,
+  `Sexo` VARCHAR(1) NOT NULL,
   `Direccion` VARCHAR(45) NOT NULL,
   `Nombre` VARCHAR(20) NOT NULL,
   `Email` VARCHAR(45) NULL,
@@ -122,7 +122,7 @@ CREATE UNIQUE INDEX `id_Invitado_UNIQUE` ON `proyectoDB`.`Invitados` (`id_Invita
 CREATE TABLE IF NOT EXISTS `proyectoDB`.`Asisten` (
   `id_Evento` INT NOT NULL,
   `id_invitado` INT NOT NULL,
-  `Status` BIT NOT NULL,
+  `Status` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`id_Evento`, `id_invitado`),
   CONSTRAINT `id_evento`
     FOREIGN KEY (`id_Evento`)

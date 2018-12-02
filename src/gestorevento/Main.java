@@ -26,12 +26,19 @@ public class Main {
     
     public static void main(String[] args) {
 
+        
+       login = new IGLogin();
+       
+       
+
+
 /////////// Inicializacion de las intefaces  //////////////////////////////
        login = new IGLogin();
        crearUsuario = new PanelControl();
-       
+
+      
 ///// Inicializacion de los coordinadores ///////////////////////////////////
-        coordLogin = new CoordLogin();
+          coordLogin = new CoordLogin();
         
 /////  inicializacion de la logica  ///////////////////////////////////
        logicaLogin = new LogicaLogin();
@@ -43,10 +50,9 @@ public class Main {
          coordLogin.setLogica(logicaLogin);
          
 //////////// visualizar las ventanas /////////////////////////////////////
-//        login.setVisible(true);
-          crearUsuario.setVisible(true);
- 
-   
+        login.setVisible(true);
+        crearUsuario.setVisible(true);
+
     }
   
 }
