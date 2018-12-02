@@ -36,6 +36,10 @@ public class Conexion {
      }
      return con;
  }  
+
+    public void desconetar() {
+      con =null;
+    }
  
 
 }

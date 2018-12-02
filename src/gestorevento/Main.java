@@ -28,7 +28,7 @@ public class Main {
     public static void main(String[] args) {
         
        login = new IGLogin();
-<<<<<<< HEAD
+//<<<<<<< HEAD
        login.setVisible(true);
 
        crearUsuario = new PanelControl();
@@ -43,7 +43,7 @@ public class Main {
        CoordLogin coordLogin = new CoordLogin();
        login.setCoordLogin(coordLogin);
        
-=======
+//=======
        coordLogin = new CoordLogin();
        logicaLogin = new LogicaLogin();
 //       logicaLogin.setCoordinador(coordLogin);   
@@ -59,7 +59,7 @@ public class Main {
 //////////// visualizar las ventanas /////////////////////////////////////
 //        login.setVisible(true);
           crearUsuario.setVisible(true);
->>>>>>> 94d1796052000d8a704902bb318a639453abc7e1
+//>>>>>>> 94d1796052000d8a704902bb318a639453abc7e1
       
 
     }

@@ -18,14 +18,14 @@ public class TipoUsuarioDAO {
         return tipoUsuarioID;
     }
             public void AgregarTipoUsuario( TipoUsuarioVO tipoUsuario ){
-               Connection conex = Conexion.getConnection();
+                    Conexion conex= new Conexion();
                try {
 			Statement estatuto = Conexion.getConnection().createStatement();
 		  	estatuto.executeUpdate("INSERT INTO Tipo_user VALUES ('"+tipoUsuario.getId()+"', '"
 					+tipoUsuario.getTipo()+"')");
 			JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente","Información",JOptionPane.INFORMATION_MESSAGE);
 			estatuto.close();
-			
+			conex.desconetar();
 			
 		} catch (SQLException e) {
             System.out.println(e.getMessage());
