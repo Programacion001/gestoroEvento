@@ -14,7 +14,7 @@ public class Conexion {
   private  static Connection con;
   
   
- private Conexion(){
+ public Conexion(){
   driver = "com.mysql.jdbc.Driver";
   url = "jdbc:mysql://127.0.1/gestorevento";
   usuario= "root";
