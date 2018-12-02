@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/DELL/Desktop/Programacion/Unidad%204%20Proyecto%20final/MVC,%20DAO,%20DTO/GestorEvento/src/vistas/IGPorteroRegistrarInvitado.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Programacion/Unidad%204%20Proyecto%20final/MVC,%20DAO,%20DTO/GestorEvento/src/gestorevento/Main.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Programacion/Unidad%204%20Proyecto%20final/MVC,%20DAO,%20DTO/GestorEvento/src/modelo/conexion/Conexion.java</file>
+        </group>
+>>>>>>> 5e31bea78384ea19e180eec3f95fecc4648eb4ee
     </open-files>
 </project-private>
