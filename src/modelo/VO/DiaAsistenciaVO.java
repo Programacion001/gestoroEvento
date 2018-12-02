@@ -1,16 +1,12 @@
 
-package vo;
+package modelo.VO;
 
 public class DiaAsistenciaVO {
 private int _Id;
 private String _dia;
 private int _cantidad;
 
-public DiaAsistenciaVO(int _Id, String _dia, int _cantidad){
-    this._Id = _Id;
-    this._dia = _dia;
-    this._cantidad = _cantidad;
-}
+public DiaAsistenciaVO(){}
 
     public int getId() {
         return _Id;

@@ -1,17 +1,12 @@
 
-package vo;
+package modelo.VO;
 
 public class UsuarioVO extends Persona {
 private String _nomUser;
 private String _password;
 private TipoUsuarioVO _tipo;
 
-public UsuarioVO(String _nomUser, String _password, TipoUsuarioVO _tipo){
-    this._nomUser = _nomUser;
-    this._password = _password;
-    this._tipo = _tipo;
-    
-}
+    public UsuarioVO(){}
 
     public String getNomUser() {
         return _nomUser;

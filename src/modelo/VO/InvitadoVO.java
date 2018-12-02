@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vo;
+package modelo.VO;
 
 /**
  *
@@ -15,13 +15,7 @@ private String _telefono;
 private String _sexo;
 private String _email;
 
-public InvitadoVO(String _direccion, String _telefono, String _sexo, String _email){
-    this._direccion = _direccion;
-    this._telefono = _telefono;
-    this._sexo = _sexo;
-    this._email = _email;
-    
-}
+public InvitadoVO(){}
 
     public String getDireccion() {
         return _direccion;

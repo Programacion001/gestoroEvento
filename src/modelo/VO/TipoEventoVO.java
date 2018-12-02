@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vo;
-
+package modelo.VO;
 /**
  *
  * @author fredd
@@ -13,10 +12,7 @@ public class TipoEventoVO {
 private int _Id;
 private String _tipo;
 
-public TipoEventoVO(int _Id, String _tipo){
-    this._Id = _Id;
-    this._tipo = _tipo;
-}
+public TipoEventoVO(){}
 
     public int getId() {
         return _Id;

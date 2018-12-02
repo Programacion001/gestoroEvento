@@ -18,11 +18,7 @@ private Date _fecha;
 private int _cantidadPersona;
 static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
-public PersonaEventoVO(int _Id,String _nombre, String _fch, int _cantidadPersona) throws ParseException{
-this._Id = _Id;
-this._nombre = _nombre;
-this._fecha = formato.parse(_fch);
-} 
+public PersonaEventoVO(){} 
 
     public int getId() {
         return _Id;

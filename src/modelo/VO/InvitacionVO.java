@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vo;
+package modelo.VO;
 
 public class InvitacionVO {
 private int _id;
@@ -11,12 +11,7 @@ private InvitadoVO _invitado;
 private EventoVO _Evento;
 private String _Status;
 
-public InvitacionVO(int _id, InvitadoVO _invitado, EventoVO _Evento, String _status){
-    this._id = _id;
-    this._invitado = _invitado;
-    this._Evento = _Evento;
-    this._Status = _status;
-}
+public InvitacionVO(){}
 
     public int getId() {
         return _id;

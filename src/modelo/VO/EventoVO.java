@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vo;
+package modelo.VO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,15 +18,7 @@ private String _Status;
 private TipoEventoVO _Tipo;
 static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
-public EventoVO(int _Id, String _nombre, String _fch, String _Ubicacion, String _Status, TipoEventoVO _Tipo) throws ParseException{
-    this._Id = _Id;
-    this._nombre = _nombre;
-    this._Fecha = formato.parse(_fch);
-    this._Ubicacion = _Ubicacion;
-    this._Status = _Status;
-    this._Tipo = _Tipo;
-    
-}
+public EventoVO(){}
 
     public int getId() {
         return _Id;

@@ -1,13 +1,10 @@
 
-package vo;
+package modelo.VO;
 
 public class TipoUsuarioVO {
 private int _Id;
 private String _tipo;
-public TipoUsuarioVO(int _id, String _tipo){
-    this._Id = _Id;
-    this._tipo = _tipo;
-}
+public TipoUsuarioVO(){}
 
     public int getId() {
         return _Id;
