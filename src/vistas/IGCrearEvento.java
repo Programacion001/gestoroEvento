@@ -1,28 +1,28 @@
 
 package vistas;
 
+import controlador.CoordTipoEvento;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 public class IGCrearEvento extends javax.swing.JPanel {
 
- 
+    private CoordTipoEvento coordTipoEvento; 
+
+    public void setCoordTipoEvento(CoordTipoEvento coordTipoEvento) {
+        this.coordTipoEvento = coordTipoEvento;
+    }
     public IGCrearEvento() {
         initComponents();
-        //panelBorder();
-      
-        
-        
+  
     }
     
-    private void panelBorder(){
-        Color gray = new Color(187,182,182);
-        Border blackline = BorderFactory.createLineBorder(gray);
-        pnlInput1.setBorder(blackline);
-        pnlInput.setBorder(blackline);
+    
+    private void agregarTipoEvento(){
+        coordTipoEvento.validarAgregarTipoEvento("Cocina");
     }
-        
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,7 +34,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
         pnlInput1 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         txtUsuario5 = new javax.swing.JTextField();
-        btnIngresar2 = new javax.swing.JButton();
+        btnAddEvento = new javax.swing.JButton();
         pnlInput = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtUsuario1 = new javax.swing.JTextField();
@@ -92,10 +92,15 @@ public class IGCrearEvento extends javax.swing.JPanel {
         txtUsuario5.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
         txtUsuario5.setBorder(null);
 
-        btnIngresar2.setBackground(new java.awt.Color(89, 163, 228));
-        btnIngresar2.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar2.setText("Añadir");
+        btnAddEvento.setBackground(new java.awt.Color(89, 163, 228));
+        btnAddEvento.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnAddEvento.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddEvento.setText("Añadir");
+        btnAddEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlInput1Layout = new javax.swing.GroupLayout(pnlInput1);
         pnlInput1.setLayout(pnlInput1Layout);
@@ -107,7 +112,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
-                .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
         pnlInput1Layout.setVerticalGroup(
@@ -115,7 +120,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
             .addGroup(pnlInput1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInput1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlInput1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -268,14 +273,17 @@ public class IGCrearEvento extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventoActionPerformed
+        agregarTipoEvento();
+    }//GEN-LAST:event_btnAddEventoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddEvento;
     private javax.swing.JButton btnIngresar1;
-    private javax.swing.JButton btnIngresar2;
     private javax.swing.JButton btnIngresar4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -283,18 +291,13 @@ public class IGCrearEvento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel pnlInput;
     private javax.swing.JPanel pnlInput1;
-    private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtUsuario1;
     private javax.swing.JTextField txtUsuario2;
     private javax.swing.JTextField txtUsuario3;
     private javax.swing.JTextField txtUsuario4;
     private javax.swing.JTextField txtUsuario5;
-    private javax.swing.JTextField txtUsuario6;
     // End of variables declaration//GEN-END:variables
 }
