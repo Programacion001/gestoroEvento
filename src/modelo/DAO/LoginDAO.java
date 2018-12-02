@@ -19,6 +19,7 @@ public class LoginDAO {
     
     public UsuarioVO confirmarUsuario(UsuarioVO usuario){
          Connection con = Conexion.getConnection();
+         System.out.println(usuario.getPassword());
          boolean usuarioActivo = false;
          try{
              Statement stm = con.createStatement();
@@ -31,24 +32,24 @@ public class LoginDAO {
                  usuarios.setNombre(rs.getString(3));
                  usuarios.setApellido(rs.getString(4));
                  usuarios.setNomUser(rs.getString(5));
-                 
+                 System.out.println(rs.getString(3));
                  listaUsuarios.add(usuarios);
              }
              
              for (int i = 0; i < listaUsuarios.size(); i++) {
                  
-                 if(listaUsuarios.get(i).getNomUser().equalsIgnoreCase(usuario.getNomUser())
-                         && listaUsuarios.get(i).getPassword().equalsIgnoreCase(usuario.getPassword())){
+                 if(listaUsuarios.get(i).getNomUser().compareTo(usuario.getNomUser()) == 0 && 
+                     listaUsuarios.get(i).getPassword().compareTo(usuario.getPassword()) == 0){
                      usuario = listaUsuarios.get(i);
-                     System.out.println(" Hola mundo");
                      usuarioActivo = true;
                     break;  
-                 }   
+     
+                 } 
+                 
              }
              
              if(usuarioActivo == false){
                  usuario = null;
-                 
              }
              rs.close();
              stm.close();
