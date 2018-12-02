@@ -16,13 +16,13 @@ public class Conexion {
   
  private Conexion(){
   driver = "com.mysql.jdbc.Driver";
-  url = "jdbc:mysql://127.0.1/test";
+  url = "jdbc:mysql://127.0.1/gestorevento";
   usuario= "root";
   password= "123456";
     try{
         Class.forName(driver);
         con = (Connection) DriverManager.getConnection(url,usuario, password);
-        JOptionPane.showMessageDialog(null, "Conectado la base de datos ");    
+//        JOptionPane.showMessageDialog(null, "Conectado la base de datos ");    
         
     }catch(ClassNotFoundException | SQLException e){
         e.printStackTrace();
