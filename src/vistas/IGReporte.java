@@ -184,11 +184,12 @@ public class IGReporte extends javax.swing.JPanel {
     }//GEN-LAST:event_lbPersonasEventosMouseClicked
 
     private void lbDiaAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDiaAsistenciaMouseClicked
-        irEventoVisita();
+       irDiaMayorAsistencia(); 
     }//GEN-LAST:event_lbDiaAsistenciaMouseClicked
 
     private void lbCrearInvitacion2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearInvitacion2MouseClicked
-        irDiaMayorAsistencia();
+        
+        irEventoVisita();
     }//GEN-LAST:event_lbCrearInvitacion2MouseClicked
 
     

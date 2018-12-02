@@ -21,7 +21,7 @@ public class Main {
        portero.setVisible(false);
        eventoActual = new IGLIstaEventoActuales();
        eventoActual.setVisible(false);
-              
+           
     }
   
 }
