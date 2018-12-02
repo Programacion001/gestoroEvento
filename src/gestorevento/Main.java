@@ -18,6 +18,7 @@ public class Main {
     public static void main(String[] args) {
        login = new IGLogin();
        login.setVisible(true);
+       
        CoordLogin coordLogin = new CoordLogin();
        login.setCoordLogin(coordLogin);
        
