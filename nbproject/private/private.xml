@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/LoginDAO.java</file>
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/UsuarioDAO.java</file>
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/TipoUsuarioDAO.java</file>
+=======
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/IGCrearInvitacion.java</file>
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/controlador/CoordInvitacion.java</file>
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/DAO/InvitacionDAO.java</file>
+>>>>>>> 94d1796052000d8a704902bb318a639453abc7e1
         </group>
     </open-files>
 </project-private>

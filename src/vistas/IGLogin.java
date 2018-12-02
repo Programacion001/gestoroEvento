@@ -4,15 +4,17 @@ package vistas;
 import com.placeholder.PlaceHolder;
 import controlador.CoordLogin;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import modelo.DAO.LoginDAO;
 import modelo.VO.UsuarioVO;
 
 public class IGLogin extends javax.swing.JFrame {
 
-  private CoordLogin controladorLogin;
-  private UsuarioVO usuario;
+  private CoordLogin coordLogin;
+  private UsuarioVO usuarioActivo;
 
     public UsuarioVO getUsuario() {
-        return usuario;
+        return usuarioActivo;
     }
     public IGLogin() {
         initComponents();
@@ -21,8 +23,8 @@ public class IGLogin extends javax.swing.JFrame {
         
         
     }
-   public void setCoordLogin(CoordLogin controladorLogin){
-       this.controladorLogin = controladorLogin;
+   public void setCoordLogin(CoordLogin coordLogin){
+       this.coordLogin = coordLogin;
    }
     private void holder(){
         PlaceHolder holder;
@@ -32,17 +34,17 @@ public class IGLogin extends javax.swing.JFrame {
     
     public void ingresar(){
         UsuarioVO usuarioActivo = new  UsuarioVO(); 
-        usuarioActivo.setNomUser("admin");
-        usuarioActivo.setPassword("123");
+        usuarioActivo.setNomUser(txtUsuario.getText());
+        usuarioActivo.setPassword( new String(txtPassword.getPassword()));
+        usuarioActivo = coordLogin.login(usuarioActivo);
+        if(usuarioActivo == null){
+          JOptionPane.showMessageDialog(null, "El usuario o contraseña no estan correctas"); 
+        }else{
+          JOptionPane.showMessageDialog(null, "Bienvenido " + usuarioActivo.getNomUser());   
+          this.setVisible(false);
+        }
         
-        if ( controladorLogin.login(usuarioActivo) != null) {
-            usuario = controladorLogin.login(usuarioActivo);
-            System.out.println("Ingreso");
-        }
-        else{
-            System.out.println("No puede ingresar");
-        }
-       
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -8,14 +8,11 @@ import modelo.VO.UsuarioVO;
 public class CoordLogin {
    
     private LogicaLogin logicaLogin;
-    
+ 
+    public void setLogica(LogicaLogin logicaLogin ){
+        this.logicaLogin = logicaLogin;
+    }
     public UsuarioVO login(UsuarioVO usuario){
-        try{
-        return logicaLogin.verificarLogicar(usuario);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return logicaLogin.verificarLogicar(usuario);
-        }
+        return logicaLogin.verificarLogin(usuario);
     }
 }
