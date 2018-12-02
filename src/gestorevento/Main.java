@@ -1,6 +1,9 @@
 
 package gestorevento;
 
+import controlador.CoordLogin;
+import modelo.DAO.LoginDAO;
+import modelo.VO.UsuarioVO;
 import vistas.IGLogin;
 import vistas.IGLIstaEventoActuales;
 import vistas.PanelControl;
@@ -15,6 +18,7 @@ public class Main {
     public static void main(String[] args) {
        login = new IGLogin();
        login.setVisible(true);
+
        crearUsuario = new PanelControl();
        crearUsuario.setVisible(true);
        portero = new PanelEvento();
@@ -22,6 +26,13 @@ public class Main {
        eventoActual = new IGLIstaEventoActuales();
        eventoActual.setVisible(false);
            
+
+       
+       CoordLogin coordLogin = new CoordLogin();
+       login.setCoordLogin(coordLogin);
+       
+      
+
     }
   
 }

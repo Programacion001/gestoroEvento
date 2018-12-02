@@ -1,0 +1,11 @@
+insert into tipo_user (Tipo) values ("admin");
+insert into tipo_user (Tipo) values ("portero");
+
+/*usuario*/
+
+insert into usuario (Contraseña, Nombre, Apellido, Nom_Usuario, Tipo_User) 
+values ("123","admin","admin","admin", 1)
+
+insert into usuario (Contraseña, Nombre, Apellido, Nom_Usuario, Tipo_User) 
+values ("123","Samuel","Mendez","samuel789", 2)
+
