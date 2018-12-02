@@ -41,7 +41,8 @@ public class Main {
          coordLogin.setLogica(logicaLogin);
       
 //////////// visualizar las ventanas /////////////////////////////////////
-        login.setVisible(true); 
+//        login.setVisible(true);
+          crearUsuario.setVisible(true);
       
     }
   
