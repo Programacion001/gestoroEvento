@@ -3,6 +3,9 @@ package vistas;
 
 import controlador.CoordTipoEvento;
 import java.awt.BorderLayout;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Logica.LogicaTipoEvento;
 
 
@@ -298,7 +301,11 @@ public class PanelControl extends javax.swing.JFrame {
     }//GEN-LAST:event_lbListaUsuarioMouseClicked
 
     private void lbCrearEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearEventoMouseClicked
-       irCreaEvento();
+        try {
+            irCreaEvento();
+        } catch (ParseException ex) {
+            Logger.getLogger(PanelControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lbCrearEventoMouseClicked
 
     private void lbListaEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbListaEventoMouseClicked
@@ -364,7 +371,7 @@ public class PanelControl extends javax.swing.JFrame {
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    private void irCreaEvento(){
+    private void irCreaEvento() throws ParseException{
         IGCrearEvento crearEvento = new IGCrearEvento();
        
         crearEvento.setCoordTipoEvento(coordTipoEvento);

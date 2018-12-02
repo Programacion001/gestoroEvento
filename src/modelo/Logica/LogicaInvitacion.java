@@ -52,5 +52,10 @@ public class LogicaInvitacion {
         invDAO = new InvitacionDAO();
         invDAO.eliminarInvitacion(evento, invitado);   
     }
+    
+    public void validadListaInvitacion(InvitacionVO invitacion){
+        invDAO = new InvitacionDAO();
+        invDAO.listaInvitaciones(invitacion);
+    }
     }
 
