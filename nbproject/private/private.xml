@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/VO/TipoUsuarioVO.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/VO/DiaAsistenciaVO.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/gestorevento/Main.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/reportePanel/pnlDiaMasVisitado.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/conexion/Conexion.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/IGReporte.java</file>
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/IGCrearInvitacion.java</file>
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/controlador/CoordInvitacion.java</file>
+            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/DAO/InvitacionDAO.java</file>
         </group>
     </open-files>
 </project-private>

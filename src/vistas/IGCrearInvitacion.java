@@ -11,9 +11,10 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import controlador.CoordInvitacion;
 
 public class IGCrearInvitacion extends javax.swing.JPanel {
-
+    private CoordInvitacion coordinadorInvitacion; 
  
     public IGCrearInvitacion() {
         initComponents();
@@ -21,8 +22,7 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
         personalizarTable();
         listarTabla();
         holder = new PlaceHolder(txtBuscarUsuario, " Buscar invitado por nombre ");
-       
-      
+
     }
     
     private void personalizarTable(){
@@ -199,6 +199,9 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
+   public void setCoordinador(CoordInvitacion coordinadorInvitacion){
+       this.coordinadorInvitacion = coordinadorInvitacion;
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificar;
