@@ -12,8 +12,8 @@ import modelo.conexion.Conexion;
 
 
 public class TipoEventoDAO {
-    
-    
+
+
   public void agregarTipoEvento( String tipoEvento){
         Connection con = Conexion.getConnection();
       try {

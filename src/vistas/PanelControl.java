@@ -1,18 +1,41 @@
 
 package vistas;
 
+import controlador.CoordTipoEvento;
 import java.awt.BorderLayout;
+import modelo.Logica.LogicaTipoEvento;
 
 
 
 public class PanelControl extends javax.swing.JFrame {
-
-
+    
+    IGCrearUsuario crearUsuario; 
+    IGReporte reporte;
+    IGCrearInvitacion crearInvitacion;
+    IGListaInvitado ListaInvitado;
+    IGAgregarInvitado AgregarInvitado;
+    IGCrearEvento crearEvento;
+    IGListaUsuario listaUsuario;
+    IGListaEvento listaEvento;
+    
+    //////coordinadores /////////////////
+    private LogicaTipoEvento logicaTipoEvento;
+    private CoordTipoEvento coordTipoEvento;
+    
     public PanelControl() {
         initComponents();
         this.setLocationRelativeTo(null);
-        irCreaUsuario();
+        iniciar();
        
+    }
+    
+    private void iniciar(){
+        irCreaUsuario();
+        
+        //// inicializar evento 
+        logicaTipoEvento = new LogicaTipoEvento();
+        coordTipoEvento = new CoordTipoEvento();
+        
     }
 
 
@@ -303,75 +326,106 @@ public class PanelControl extends javax.swing.JFrame {
      * Para ir al panel de crear usuario; 
      */
     private void irCreaUsuario(){
-        IGCrearUsuario crearUsuario = new IGCrearUsuario();
+        crearUsuario = new IGCrearUsuario();
         crearUsuario.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
     private void irReporte(){
-        IGReporte crearUsuario = new IGReporte();
-        crearUsuario.setSize(1003, 712);
+        reporte = new IGReporte();
+        reporte.setSize(1003, 712);
         pnlPrincipal.removeAll();
-        pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
+        pnlPrincipal.add(reporte, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
     private void irCreaInvitacion(){
-        IGCrearInvitacion crearInvitacion= new  IGCrearInvitacion();
+        crearInvitacion = new  IGCrearInvitacion();
         crearInvitacion.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(crearInvitacion, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-     private void irListaInvitado(){
-        IGListaInvitado crearUsuario = new  IGListaInvitado ();
-        crearUsuario.setSize(1003, 712);
+    private void irListaInvitado(){
+        ListaInvitado = new  IGListaInvitado ();
+        ListaInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
-        pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
+        pnlPrincipal.add(ListaInvitado, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
-     private void irAgregarInvitado(){
-        IGAgregarInvitado invitado = new IGAgregarInvitado();
-        invitado.setSize(1003, 712);
+    private void irAgregarInvitado(){
+        AgregarInvitado = new IGAgregarInvitado();
+        AgregarInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
-        pnlPrincipal.add(invitado, BorderLayout.CENTER);
+        pnlPrincipal.add(AgregarInvitado, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
     private void irCreaEvento(){
         IGCrearEvento crearEvento = new IGCrearEvento();
+        
+        crearEvento.setCoordTipoEvento(coordTipoEvento);
+        coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
+        
         crearEvento.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(crearEvento, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
+
+    public IGCrearUsuario getCrearUsuario() {
+        return crearUsuario;
+    }
+
+    public IGReporte getReporte() {
+        return reporte;
+    }
+
+    public IGCrearInvitacion getCrearInvitacion() {
+        return crearInvitacion;
+    }
+
+    public IGListaInvitado getListaInvitado() {
+        return ListaInvitado;
+    }
+
+    public IGAgregarInvitado getAgregarInvitado() {
+        return AgregarInvitado;
+    }
+
+    public IGCrearEvento getCrearEvento() {
+        return crearEvento;
+    }
+
+    public IGListaUsuario getListaUsuario() {
+        return listaUsuario;
+    }
+
+    public IGListaEvento getListaEvento() {
+        return listaEvento;
+    }
     private void irListaUsuario(){
-        IGListaUsuario listaUsuario= new IGListaUsuario ();
+        listaUsuario= new IGListaUsuario ();
         listaUsuario.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(listaUsuario, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
-    
-     private void irListaEvento(){
-        IGListaEvento listaEvento = new  IGListaEvento();
+    private void irListaEvento(){
+        listaEvento = new IGListaEvento();
         listaEvento.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(listaEvento, BorderLayout.CENTER);
         pnlPrincipal.revalidate();
         pnlPrincipal.repaint();
     }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
