@@ -1,16 +1,10 @@
+package modelo.VO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
 
-package vo;
-
-/**
- *
- * @author fredd
- */
 public class PersonaEventoVO {
 private int _Id;
 private String _nombre;

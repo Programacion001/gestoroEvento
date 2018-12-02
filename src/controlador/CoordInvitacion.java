@@ -37,4 +37,8 @@ public class CoordInvitacion {
   public void eliminarInvitacion(EventoVO evento, InvitadoVO invitado) throws SQLException{
       logicainv.validarEliminarInvitacion(evento, invitado);
   }
+  
+  public void listaInvitacion(InvitacionVO invitacion){
+      logicainv.validadListaInvitacion(invitacion);
+  }
 }
