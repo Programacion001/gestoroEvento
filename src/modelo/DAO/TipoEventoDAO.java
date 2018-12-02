@@ -3,7 +3,10 @@ package modelo.DAO;
 
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,5 +32,26 @@ public class TipoEventoDAO {
       }
         
     }
-
+  public ArrayList<TipoEventoVO> consultarEvento(){
+     Connection con = Conexion.getConnection();
+     ArrayList<TipoEventoVO> tipos = new ArrayList<TipoEventoVO>();
+     
+      try {
+          Statement stm = con.createStatement();
+          ResultSet rs = stm.executeQuery("SELECT * FROM tipo_evento");
+          
+          while(rs.next()){
+              TipoEventoVO tipoEvento = new TipoEventoVO();
+              tipoEvento.setId(rs.getInt(1));
+              tipoEvento.setTipo(rs.getString(2));
+              tipos.add(tipoEvento);
+              
+          }
+          stm.close();
+      } catch (SQLException ex) {
+          Logger.getLogger(TipoEventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
+     
+      return tipos;
+  }
 }

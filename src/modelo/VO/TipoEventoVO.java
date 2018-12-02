@@ -14,6 +14,7 @@ private String _tipo;
 
 public TipoEventoVO(){}
 
+   
     public int getId() {
         return _Id;
     }
@@ -29,5 +30,12 @@ public TipoEventoVO(){}
     public void setTipo(String _tipo) {
         this._tipo = _tipo;
     }
+
+    @Override
+    public String toString() {
+        return _tipo;
+    }
+    
+    
 
 }

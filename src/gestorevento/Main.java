@@ -2,10 +2,7 @@
 package gestorevento;
 
 import controlador.CoordLogin;
-import controlador.CoordTipoEvento;
 import modelo.Logica.LogicaLogin;
-import modelo.Logica.LogicaTipoEvento;
-import vistas.IGCrearEvento;
 import vistas.IGLogin;
 import vistas.IGCrearInvitacion;
 import vistas.IGLIstaEventoActuales;
@@ -48,7 +45,8 @@ public class Main {
 //////////// visualizar las ventanas /////////////////////////////////////
 //        login.setVisible(true);
           crearUsuario.setVisible(true);
-      
+ 
+   
     }
   
 }
