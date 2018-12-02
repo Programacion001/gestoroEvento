@@ -9,7 +9,6 @@ public class Persona {
 private int _Id;
  private String _nombre;
  private String _apellido;
- private String _cedula;
  
  public Persona(){   }
 
@@ -37,12 +36,4 @@ private int _Id;
         this._apellido = _apellido;
     }
 
-    public String getCedula() {
-        return _cedula;
-    }
-
-    public void setCedula(String _cedula) {
-        this._cedula = _cedula;
-    }
- 
 }
