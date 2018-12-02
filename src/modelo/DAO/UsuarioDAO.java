@@ -8,6 +8,7 @@ import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.VO.UsuarioVO;
 import modelo.conexion.Conexion;
@@ -82,7 +83,13 @@ public class UsuarioDAO {
         }
 	}
 
-
+public void listaUsuarios(UsuarioVO usuario){
+    ArrayList<UsuarioVO> usuarioList = new ArrayList<UsuarioVO>();
+    for (UsuarioVO x: usuarioList ){
+        usuarioList.add(usuario);
+    }
+    
+}
 }
 
      
@@ -90,15 +97,7 @@ public class UsuarioDAO {
      
      
      
-<<<<<<< HEAD
-   
- 
 
-=======
-     
-     
-    
->>>>>>> a137888a5968ad7c804a0c46876b8a272029b5d5
     
     
     
@@ -111,9 +110,3 @@ public class UsuarioDAO {
     
     
     
-    
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> a137888a5968ad7c804a0c46876b8a272029b5d5

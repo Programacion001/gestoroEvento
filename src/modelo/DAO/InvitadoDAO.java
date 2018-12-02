@@ -8,6 +8,7 @@ package modelo.DAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.VO.InvitadoVO;
 import modelo.VO.UsuarioVO;
@@ -94,7 +95,20 @@ public class InvitadoDAO {
 	}            
                 
                 
-                
+            public void listaInvitado(InvitadoVO invitados){
+    ArrayList<InvitadoVO> invitadoList = new ArrayList<InvitadoVO>();
+    for (InvitadoVO x: invitadoList ){
+        invitadoList.add(invitados);
+    }
+    public InvitadoVO eventoActuarPersonas(int idEvento){
+     private InvitadoOVO invitaciones;
+    ArrayList<InvitacionVO> invitadosList = new ArrayList<InvitacionVO>();
+    for (InvitacionVO x: invitadosList ){
+        invitadosList.add(invitaciones);
+    }
+        return invitadosList;
+  
+}    
                 
                 
                 

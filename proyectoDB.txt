@@ -57,7 +57,7 @@ CREATE TABLE `Evento` (
   `Ubicacion` VARCHAR(45) NOT NULL,
   `Fecha` DATE NOT NULL,
   `Nombre` VARCHAR(20) NOT NULL,
-  `Status` VARCHAR(20) NOT NULL,
+  `Status` VARCHAR(12) NOT NULL,
   `Tipo_Evento` INT NOT NULL,
   `id_Usuario` INT NOT NULL,
   PRIMARY KEY (`id_Evento`),
@@ -87,7 +87,7 @@ CREATE INDEX `id_tipo_idx` ON `Evento` (`Tipo_Evento` ASC) VISIBLE;
 CREATE TABLE `Invitados` (
   `id_Invitados` INT NOT NULL AUTO_INCREMENT,
   `Apellido` VARCHAR(20) NOT NULL,
-  `Sexo` VARCHAR(20) NOT NULL,
+  `Sexo` VARCHAR(1) NOT NULL,
   `Direccion` VARCHAR(45) NOT NULL,
   `Nombre` VARCHAR(20) NOT NULL,
   `Email` VARCHAR(45) NULL,
@@ -105,7 +105,7 @@ CREATE UNIQUE INDEX `id_Invitado_UNIQUE` ON `Invitados` (`id_Invitados` ASC) VIS
 CREATE TABLE `Asisten` (
   `id_Evento` INT NOT NULL,
   `id_invitado` INT NOT NULL,
-  `Status` BIT NOT NULL,
+  `Status` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`id_Evento`, `id_invitado`),
   CONSTRAINT `id_evento`
     FOREIGN KEY (`id_Evento`)
