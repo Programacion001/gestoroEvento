@@ -16,7 +16,7 @@ public class Main {
        login = new IGLogin();
        login.setVisible(true);
        crearUsuario = new PanelControl();
-       crearUsuario.setVisible(false);
+       crearUsuario.setVisible(true);
        portero = new PanelEvento();
        portero.setVisible(false);
        eventoActual = new IGLIstaEventoActuales();
