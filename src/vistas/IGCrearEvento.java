@@ -3,19 +3,22 @@ package vistas;
 
 import controlador.CoordTipoEvento;
 import java.awt.Color;
+import java.text.ParseException;
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 
 public class IGCrearEvento extends javax.swing.JPanel {
-
+    static MaskFormatter formatoHora;
     private CoordTipoEvento coordTipoEvento; 
 
     public void setCoordTipoEvento(CoordTipoEvento coordTipoEvento) {
         this.coordTipoEvento = coordTipoEvento;
     }
-    public IGCrearEvento() {
+    public IGCrearEvento() throws ParseException {
         initComponents();
-  
+      
     }
     
     
@@ -44,9 +47,9 @@ public class IGCrearEvento extends javax.swing.JPanel {
         txtUsuario3 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        txtUsuario4 = new javax.swing.JTextField();
         btnIngresar4 = new javax.swing.JButton();
         btnIngresar1 = new javax.swing.JButton();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField(formatoHora);
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -159,9 +162,6 @@ public class IGCrearEvento extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel17.setText("Hora:");
 
-        txtUsuario4.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario4.setBorder(null);
-
         btnIngresar4.setBackground(new java.awt.Color(244, 67, 54));
         btnIngresar4.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
         btnIngresar4.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,20 +172,24 @@ public class IGCrearEvento extends javax.swing.JPanel {
         btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar1.setText("Crear evento ");
 
+        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("hh:mm:ss"))));
+        jFormattedTextField2.setText("");
+        jFormattedTextField2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
         pnlInputLayout.setHorizontalGroup(
             pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlInputLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
                         .addComponent(jLabel17))
-                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel16)
-                        .addComponent(jComboBox1, 0, 227, Short.MAX_VALUE)
-                        .addComponent(txtUsuario3)))
+                    .addComponent(jLabel16)
+                    .addComponent(jComboBox1, 0, 227, Short.MAX_VALUE)
+                    .addComponent(txtUsuario3)
+                    .addComponent(jFormattedTextField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,7 +201,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
                         .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(127, 127, 127))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addContainerGap(251, Short.MAX_VALUE)
                 .addComponent(btnIngresar1)
                 .addGap(123, 123, 123)
                 .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,13 +226,13 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -283,6 +287,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
     private javax.swing.JButton btnIngresar1;
     private javax.swing.JButton btnIngresar4;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -297,7 +302,6 @@ public class IGCrearEvento extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsuario1;
     private javax.swing.JTextField txtUsuario2;
     private javax.swing.JTextField txtUsuario3;
-    private javax.swing.JTextField txtUsuario4;
     private javax.swing.JTextField txtUsuario5;
     // End of variables declaration//GEN-END:variables
 }
