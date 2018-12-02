@@ -28,15 +28,27 @@ public class Main {
     
     
     public static void main(String[] args) {
+<<<<<<< HEAD
+        
+       login = new IGLogin();
+//<<<<<<< HEAD
+       login.setVisible(true);
+=======
+>>>>>>> a137888a5968ad7c804a0c46876b8a272029b5d5
 
 /////////// Inicializacion de las intefaces  //////////////////////////////
        login = new IGLogin();
        crearUsuario = new PanelControl();
        
+<<<<<<< HEAD
+//=======
+       coordLogin = new CoordLogin();
+=======
 ///// Inicializacion de los coordinadores ///////////////////////////////////
         coordLogin = new CoordLogin();
         
 /////  inicializacion de la logica  ///////////////////////////////////
+>>>>>>> a137888a5968ad7c804a0c46876b8a272029b5d5
        logicaLogin = new LogicaLogin();
        
 ///////////// enlazar la interfase con el coordinador //////////////////////
@@ -48,6 +60,10 @@ public class Main {
 //////////// visualizar las ventanas /////////////////////////////////////
 //        login.setVisible(true);
           crearUsuario.setVisible(true);
+<<<<<<< HEAD
+//>>>>>>> 94d1796052000d8a704902bb318a639453abc7e1
+=======
+>>>>>>> a137888a5968ad7c804a0c46876b8a272029b5d5
       
     }
   
