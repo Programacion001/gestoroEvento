@@ -3,6 +3,7 @@ package gestorevento;
 
 import controlador.CoordLogin;
 import modelo.DAO.LoginDAO;
+import modelo.DAO.TipoEventoDAO;
 import modelo.Logica.LogicaLogin;
 import modelo.VO.UsuarioVO;
 import vistas.IGLogin;
@@ -26,13 +27,23 @@ public class Main {
     
     
     public static void main(String[] args) {
-        
+
+/////////// Inicializacion de las intefaces  //////////////////////////////
        login = new IGLogin();
-       coordLogin = new CoordLogin();
-       logicaLogin = new LogicaLogin();
+       crearUsuario = new PanelControl();
+       TipoEventoDAO n = new TipoEventoDAO();
+       n.agregarTipoEvento("tecnologia");
+       
 //       logicaLogin.setCoordinador(coordLogin);   
 //        invitaciones = new IGCrearInvitacion();
 //       invitaciones.setVisible(true); 
+
+
+///// Inicializacion de los coordinadores ///////////////////////////////////
+        coordLogin = new CoordLogin();
+        
+/////  inicializacion de la logica  ///////////////////////////////////
+       logicaLogin = new LogicaLogin();
 
 ///////////// enlazar la interfase con el coordinador //////////////////////
          login.setCoordLogin(coordLogin);
