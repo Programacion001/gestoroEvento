@@ -1,55 +1,76 @@
-
+﻿
 package vistas;
 
 import controlador.CoordTipoEvento;
 import java.awt.Color;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import java.text.ParseException;
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
+import modelo.VO.TipoEventoVO;
 
 public class IGCrearEvento extends javax.swing.JPanel {
-    static MaskFormatter formatoHora;
+
     private CoordTipoEvento coordTipoEvento; 
 
     public void setCoordTipoEvento(CoordTipoEvento coordTipoEvento) {
         this.coordTipoEvento = coordTipoEvento;
     }
-    public IGCrearEvento() throws ParseException {
+    public IGCrearEvento() {
         initComponents();
-      
+         llamadado();
+         
     }
     
     
     private void agregarTipoEvento(){
-        coordTipoEvento.validarAgregarTipoEvento("Cocina");
+        coordTipoEvento.validarAgregarTipoEvento(txtTipoEvento.getText());
+        txtTipoEvento.setText("");
+        listaTipoEvento();
+       
+    }
+    
+    private void listaTipoEvento(){
+      ArrayList<TipoEventoVO> tiposEvento = new ArrayList<TipoEventoVO>();
+      tiposEvento = coordTipoEvento.validarConsultaTipoEvento();
+       cbTipoEvento.removeAllItems();
+        cbTipoEvento.addItem("Sel. tipo de evento");
+        for (int i = 0; i < tiposEvento.size(); i++) {
+            TipoEventoVO n = tiposEvento.get(i);
+            cbTipoEvento.addItem(n.getTipo());
+        }
+        
+    }
+            
+     int count = 0;
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(500);
+                           listaTipoEvento();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
     }
       
-    @SuppressWarnings("unchecked")
+   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        pnlInput1 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        txtUsuario5 = new javax.swing.JTextField();
-        btnAddEvento = new javax.swing.JButton();
-        pnlInput = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtUsuario2 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtUsuario3 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        btnIngresar4 = new javax.swing.JButton();
-        btnIngresar1 = new javax.swing.JButton();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField(formatoHora);
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -92,8 +113,8 @@ public class IGCrearEvento extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel18.setText("Tipo:");
 
-        txtUsuario5.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario5.setBorder(null);
+        txtTipoEvento.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        txtTipoEvento.setBorder(null);
 
         btnAddEvento.setBackground(new java.awt.Color(89, 163, 228));
         btnAddEvento.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
@@ -113,7 +134,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addGap(62, 62, 62)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                 .addComponent(btnAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
@@ -125,7 +146,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addGroup(pnlInput1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlInput1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -141,8 +162,8 @@ public class IGCrearEvento extends javax.swing.JPanel {
         txtUsuario1.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
         txtUsuario1.setBorder(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sel. tipo de evento ", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setAutoscrolls(true);
+        cbTipoEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sel. tipo de evento "}));
+        cbTipoEvento.setAutoscrolls(true);
 
         txtUsuario2.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
         txtUsuario2.setBorder(null);
@@ -172,9 +193,6 @@ public class IGCrearEvento extends javax.swing.JPanel {
         btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar1.setText("Crear evento ");
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("hh:mm:ss"))));
-        jFormattedTextField2.setText("");
-        jFormattedTextField2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
 
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
@@ -186,10 +204,11 @@ public class IGCrearEvento extends javax.swing.JPanel {
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addGap(125, 125, 125)
                         .addComponent(jLabel17))
-                    .addComponent(jLabel16)
-                    .addComponent(jComboBox1, 0, 227, Short.MAX_VALUE)
-                    .addComponent(txtUsuario3)
-                    .addComponent(jFormattedTextField2))
+                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel16)
+                        .addComponent(cbTipoEvento, 0, 227, Short.MAX_VALUE)
+                        .addComponent(txtUsuario3)))
+                      // .addComponent(jFormattedTextField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +230,7 @@ public class IGCrearEvento extends javax.swing.JPanel {
             pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlInputLayout.createSequentialGroup()
@@ -227,17 +246,17 @@ public class IGCrearEvento extends javax.swing.JPanel {
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        //.addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
-        );
+        ));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -275,19 +294,12 @@ public class IGCrearEvento extends javax.swing.JPanel {
                 .addComponent(pnlInput, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventoActionPerformed
-        agregarTipoEvento();
-    }//GEN-LAST:event_btnAddEventoActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    }// </editor-fold>        
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnAddEvento;
     private javax.swing.JButton btnIngresar1;
     private javax.swing.JButton btnIngresar4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JComboBox<String> cbTipoEvento;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -299,9 +311,43 @@ public class IGCrearEvento extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel pnlInput;
     private javax.swing.JPanel pnlInput1;
+    private javax.swing.JTextField txtTipoEvento;
     private javax.swing.JTextField txtUsuario1;
     private javax.swing.JTextField txtUsuario2;
     private javax.swing.JTextField txtUsuario3;
     private javax.swing.JTextField txtUsuario5;
+
+    // End of variables declaration 
+}
+
+    private void btnAddEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventoActionPerformed
+        agregarTipoEvento();
+        listaTipoEvento();
+    }//GEN-LAST:event_btnAddEventoActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+       jPanel5 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        pnlInput1 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        txtTipoEvento = new javax.swing.JTextField();
+        btnAddEvento = new javax.swing.JButton();
+        pnlInput = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        txtUsuario1 = new javax.swing.JTextField();
+        cbTipoEvento = new javax.swing.JComboBox<>();
+        txtUsuario2 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtUsuario3 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnIngresar4 = new javax.swing.JButton();
+        btnIngresar1 = new javax.swing.JButton();
     // End of variables declaration//GEN-END:variables
 }
+
+                       
+   

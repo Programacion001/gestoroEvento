@@ -1,7 +1,9 @@
 
 package controlador;
 
+import java.util.ArrayList;
 import modelo.Logica.LogicaTipoEvento;
+import modelo.VO.TipoEventoVO;
 
 
 public class CoordTipoEvento {
@@ -14,4 +16,9 @@ public class CoordTipoEvento {
     public void validarAgregarTipoEvento(String tipoEvento){
         logicaTipoEvento.validarAgregarTipoEvento(tipoEvento);
     }
+    
+    public ArrayList<TipoEventoVO> validarConsultaTipoEvento(){
+       return logicaTipoEvento.validarConsultaTipoEvento();
+//         return null;
+   }
 }

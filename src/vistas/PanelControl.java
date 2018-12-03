@@ -12,7 +12,6 @@ import modelo.Logica.LogicaTipoEvento;
 
 public class PanelControl extends javax.swing.JFrame {
     
-    IGCrearUsuario crearUsuario; 
     IGReporte reporte;
     IGCrearInvitacion crearInvitacion;
     IGListaInvitado ListaInvitado;
@@ -333,7 +332,7 @@ public class PanelControl extends javax.swing.JFrame {
      * Para ir al panel de crear usuario; 
      */
     private void irCreaUsuario(){
-        crearUsuario = new IGCrearUsuario();
+        IGCrearUsuario crearUsuario = new IGCrearUsuario();
         crearUsuario.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
@@ -374,7 +373,7 @@ public class PanelControl extends javax.swing.JFrame {
     }
     private void irCreaEvento() throws ParseException{
         IGCrearEvento crearEvento = new IGCrearEvento();
-        
+       
         crearEvento.setCoordTipoEvento(coordTipoEvento);
         coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
         
@@ -385,37 +384,6 @@ public class PanelControl extends javax.swing.JFrame {
         pnlPrincipal.repaint();
     }
 
-    public IGCrearUsuario getCrearUsuario() {
-        return crearUsuario;
-    }
-
-    public IGReporte getReporte() {
-        return reporte;
-    }
-
-    public IGCrearInvitacion getCrearInvitacion() {
-        return crearInvitacion;
-    }
-
-    public IGListaInvitado getListaInvitado() {
-        return ListaInvitado;
-    }
-
-    public IGAgregarInvitado getAgregarInvitado() {
-        return AgregarInvitado;
-    }
-
-    public IGCrearEvento getCrearEvento() {
-        return crearEvento;
-    }
-
-    public IGListaUsuario getListaUsuario() {
-        return listaUsuario;
-    }
-
-    public IGListaEvento getListaEvento() {
-        return listaEvento;
-    }
     private void irListaUsuario(){
         listaUsuario= new IGListaUsuario ();
         listaUsuario.setSize(1003, 712);

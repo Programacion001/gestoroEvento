@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelo.VO.InvitacionVO;
 import modelo.VO.InvitadoVO;
 import modelo.VO.UsuarioVO;
 import modelo.conexion.Conexion;
@@ -60,10 +61,7 @@ public class InvitadoDAO {
             System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "No se Elimino");
 		}
-    
-    
-    
-    
+
     }            
                 
                 
@@ -94,6 +92,7 @@ public class InvitadoDAO {
         }
 	}            
                 
+<<<<<<< HEAD
                 
             public void listaInvitado(InvitadoVO invitados){
     ArrayList<InvitadoVO> invitadoList = new ArrayList<InvitadoVO>();
@@ -101,6 +100,9 @@ public class InvitadoDAO {
         invitadoList.add(invitados);
     }
    
+=======
+
+>>>>>>> 886b96f474d93628b323ac49b7f539bb3c030f1a
 }    
                 
           public InvitadoVO eventoActuarPersonas(int idEvento){
@@ -141,4 +143,4 @@ public class InvitadoDAO {
     
     
     
-}
+
