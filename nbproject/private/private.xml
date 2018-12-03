@@ -3,17 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/IGCrearInvitacion.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/controlador/CoordInvitacion.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/modelo/DAO/InvitacionDAO.java</file>
-            <file>file:/C:/Users/fredd/Desktop/gestoroEvento/src/vistas/reportePanel/pnlInvitadoEvento.java</file>
-=======
-            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/conexion/Conexion.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/Logica/LogicaLogin.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/controlador/CoordInvitacion.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/Logica/LogicaInvitacion.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/Logica/LogicaTipoEvento.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/controlador/CoordUsuario.java</file>
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/Logica/LogicaUsuario.java</file>
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/InvitadoDAO.java</file>
             <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/DAO/TipoUsuarioDAO.java</file>
->>>>>>> d8cf349296d65548a1ef186fe31f63afd09ae182
+            <file>file:/C:/Users/Bill%20Aponte/Desktop/proyecto/gestoroEvento/src/modelo/Logica/LogicaTipoUsuario.java</file>
         </group>
     </open-files>
 </project-private>

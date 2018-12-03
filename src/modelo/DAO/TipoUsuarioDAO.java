@@ -17,6 +17,8 @@ public class TipoUsuarioDAO {
      public TipoUsuarioVO getTipoUsuario() {
         return tipoUsuarioID;
     }
+
+   
             public void AgregarTipoUsuario( TipoUsuarioVO tipoUsuario ){
                     Conexion conex= new Conexion();
                try {
@@ -32,6 +34,8 @@ public class TipoUsuarioDAO {
 			JOptionPane.showMessageDialog(null, "No se Registro");
 		}
 	}
+
+    
             
 
 }

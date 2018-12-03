@@ -100,17 +100,15 @@ public class InvitadoDAO {
     for (InvitadoVO x: invitadoList ){
         invitadoList.add(invitados);
     }
-    public InvitadoVO eventoActuarPersonas(int idEvento){
-     private InvitadoOVO invitaciones;
-    ArrayList<InvitacionVO> invitadosList = new ArrayList<InvitacionVO>();
-    for (InvitacionVO x: invitadosList ){
-        invitadosList.add(invitaciones);
-    }
-        return invitadosList;
-  
+   
 }    
                 
-                
+          public InvitadoVO eventoActuarPersonas(int idEvento){
+     return null;
+     
+
+    }
+        
                 
  
  
