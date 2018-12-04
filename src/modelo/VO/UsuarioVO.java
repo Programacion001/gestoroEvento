@@ -5,6 +5,24 @@ public class UsuarioVO extends Persona {
 private String _nomUser;
 private String _password;
 private TipoUsuarioVO _tipo;
+private String tipoUsuario;
+private int intTipoUsuario;
+
+    public int getIntTipoUsuario() {
+        return intTipoUsuario;
+    }
+
+    public void setIntTipoUsuario(int intTipoUsuario) {
+        this.intTipoUsuario = intTipoUsuario;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
     public UsuarioVO(){}
 

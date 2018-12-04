@@ -23,23 +23,23 @@ public class UsuarioDAO {
         return usuario;
     }
     
-     public void AgregarUsuario( UsuarioVO invitado ){
+    public void AgregarUsuario( UsuarioVO usuario ){
      
-     Connection conex = Conexion.getConnection();
-               try {
-			Statement estatuto = Conexion.getConnection().createStatement();
-		  	estatuto.executeUpdate("INSERT INTO persona VALUES ('"+invitado.getId()+"', '"
-					+invitado.getPassword()+"', '"+invitado.getNombre()+"', '"
-					+invitado.getApellido()+"', '"+invitado.getNomUser()+"')");
-			JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente","Información",JOptionPane.INFORMATION_MESSAGE);
-			estatuto.close();
-			conex.close();
-			
-		} catch (SQLException e) {
+        Connection conex = Conexion.getConnection();
+        
+        try {
+            Statement estatuto = Conexion.getConnection().createStatement();
+            estatuto.executeUpdate("INSERT INTO usuario (Contraseña, Nombre, Apellido, Nom_usuario, Tipo_user) VALUES ('"
+				+usuario.getPassword()+"', '"+usuario.getNombre()+"', '"
+				+usuario.getApellido()+"', '"+usuario.getNomUser()+"','"+usuario.getIntTipoUsuario()+"')");
+            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente","Información",JOptionPane.INFORMATION_MESSAGE);
+            estatuto.close();
+	
+        }catch (SQLException e) {
             System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "No se Registro");
-		}
+            JOptionPane.showMessageDialog(null, "No se Registro");
 	}
+    }
 
      
      public void EliminarUsuario ( int id){

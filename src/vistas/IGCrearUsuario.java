@@ -1,27 +1,119 @@
 
 package vistas;
 
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
+import controlador.CoordTipoUsuario;
+import controlador.CoordUsuario;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.VO.TipoUsuarioVO;
+import modelo.VO.UsuarioVO;
+
+
 
 public class IGCrearUsuario extends javax.swing.JPanel {
 
- 
+    private CoordTipoUsuario coordTipoUsuario;
+    private CoordUsuario coordUsuario;
+
+    public void setCoordUsuario(CoordUsuario coordUsuario) {
+        this.coordUsuario = coordUsuario;
+    }
+    private int count = 0;
+    
     public IGCrearUsuario() {
         initComponents();
-        panelBorder();
-      
-        
-        
+        llamadado();
     }
     
-    private void panelBorder(){
-        /*Color gray = new Color(187,182,182);
-        Border blackline = BorderFactory.createLineBorder(gray);
-        jPanel2.setBorder(blackline);
-        jPanel3.setBorder(blackline);*/
+    public CoordTipoUsuario getcoordTipoUsuario() {
+        return coordTipoUsuario;
     }
+
+    public void setcoordTipoUsuario(CoordTipoUsuario coordTipoUsuario) {
+        this.coordTipoUsuario = coordTipoUsuario;
+    }
+    
+    
+    private void agregarTipoEvento(){
+        TipoUsuarioVO tipoUsuario= new TipoUsuarioVO();
+        tipoUsuario.setTipo(txtTipoUsuario.getText());
+        coordTipoUsuario.validarAgregarTipoEvento(tipoUsuario);
+        txtTipoUsuario.setText("");    
+    }
+    
+     private void agregarUsuario(){
+        String tipoUsuario = (String) cbTipoUsuario.getSelectedItem();
+        if(tipoUsuario.compareTo("Sel. tipo de evento") == 0){
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un tipo de evento","Advertencia",JOptionPane.WARNING_MESSAGE); 
+        }else{
+            int usuarioTipo = coordTipoUsuario.BusquedaTipoUsuario(tipoUsuario);
+            String passUno = new String(passFirst.getPassword());
+            String passDos = new String(passSecond.getPassword());
+            if (passUno.compareTo(passDos) == 0) {
+                UsuarioVO usuario = new UsuarioVO();
+                usuario.setNombre(txtNombre.getText());
+                usuario.setApellido(txtApellido.getText());
+                usuario.setIntTipoUsuario(usuarioTipo);
+                usuario.setNomUser(txtUsuario.getText());
+                usuario.setPassword(passDos);
+                coordUsuario.agregarUsuario(usuario);
+                limpiarCampos();
+            }else{
+                JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden","Advertencia",JOptionPane.WARNING_MESSAGE); 
+            }
+            
+        }
+            
+        
+    }
+     
+   private void limpiarCampos(){
+      
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtUsuario.setText("");
+        passFirst.setText("");
+        passSecond.setText("");
+   }
+    
+   private void listaTipoUsuario(){
+      ArrayList<TipoUsuarioVO> tiposUsuario = new ArrayList<TipoUsuarioVO>();
+      tiposUsuario = coordTipoUsuario.validarConsultaTipoEvento();
+       cbTipoUsuario.removeAllItems();
+        cbTipoUsuario.addItem("Sel. tipo de evento");
+        for (int i = 0; i < tiposUsuario.size(); i++) {
+            TipoUsuarioVO n = tiposUsuario.get(i);
+            cbTipoUsuario.addItem(n.getTipo());
+        }
+        
+    }
+   
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(1000);
+                           listaTipoUsuario();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
+    
+     
+    
+   
+   
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,22 +125,22 @@ public class IGCrearUsuario extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
-        btnIngresar1 = new javax.swing.JButton();
+        txtTipoUsuario = new javax.swing.JTextField();
+        btnAgregarTipo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtUsuario2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        txtUsuario = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtUsuario3 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        passFirst = new javax.swing.JPasswordField();
+        passSecond = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
-        btnIngresar4 = new javax.swing.JButton();
-        btnIngresar3 = new javax.swing.JButton();
+        btnAgregarUsuario = new javax.swing.JButton();
+        btnLimpiarCompos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -91,13 +183,18 @@ public class IGCrearUsuario extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel13.setText("Tipo:");
 
-        txtUsuario.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario.setBorder(null);
+        txtTipoUsuario.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtTipoUsuario.setBorder(null);
 
-        btnIngresar1.setBackground(new java.awt.Color(89, 163, 228));
-        btnIngresar1.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar1.setText("Añadir");
+        btnAgregarTipo.setBackground(new java.awt.Color(89, 163, 228));
+        btnAgregarTipo.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnAgregarTipo.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarTipo.setText("Añadir");
+        btnAgregarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarTipoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -107,9 +204,9 @@ public class IGCrearUsuario extends javax.swing.JPanel {
                 .addGap(89, 89, 89)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnIngresar1)
+                .addComponent(btnAgregarTipo)
                 .addGap(72, 72, 72))
         );
         jPanel2Layout.setVerticalGroup(
@@ -118,9 +215,9 @@ public class IGCrearUsuario extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnIngresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -132,21 +229,21 @@ public class IGCrearUsuario extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel14.setText("Nombre:");
 
-        txtUsuario1.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario1.setBorder(null);
+        txtNombre.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtNombre.setBorder(null);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sel. tipo de usuario ", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setAutoscrolls(true);
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sel. tipo de usuario"}));
+        cbTipoUsuario.setAutoscrolls(true);
 
-        txtUsuario2.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario2.setBorder(null);
+        txtUsuario.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtUsuario.setBorder(null);
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel15.setText("Usuario:");
 
-        txtUsuario3.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario3.setBorder(null);
+        txtApellido.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtApellido.setBorder(null);
 
         jLabel16.setBackground(new java.awt.Color(0, 0, 0));
         jLabel16.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
@@ -160,15 +257,25 @@ public class IGCrearUsuario extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel18.setText("Confimar contraseña:");
 
-        btnIngresar4.setBackground(new java.awt.Color(89, 163, 228));
-        btnIngresar4.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar4.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar4.setText("Agregar usuario ");
+        btnAgregarUsuario.setBackground(new java.awt.Color(89, 163, 228));
+        btnAgregarUsuario.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnAgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarUsuario.setText("Agregar usuario ");
+        btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarUsuarioActionPerformed(evt);
+            }
+        });
 
-        btnIngresar3.setBackground(new java.awt.Color(244, 67, 54));
-        btnIngresar3.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar3.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar3.setText("Limpiar campos ");
+        btnLimpiarCompos.setBackground(new java.awt.Color(244, 67, 54));
+        btnLimpiarCompos.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnLimpiarCompos.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiarCompos.setText("Limpiar campos ");
+        btnLimpiarCompos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarComposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -179,24 +286,24 @@ public class IGCrearUsuario extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel17)
                     .addComponent(jLabel16)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                        .addComponent(txtUsuario3, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(passFirst, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel15)
-                    .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(129, 129, 129))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(239, 239, 239)
-                .addComponent(btnIngresar4)
+                .addComponent(btnAgregarUsuario)
                 .addGap(98, 98, 98)
-                .addComponent(btnIngresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLimpiarCompos, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -204,35 +311,35 @@ public class IGCrearUsuario extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(passFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIngresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLimpiarCompos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
 
@@ -278,12 +385,25 @@ public class IGCrearUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAgregarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTipoActionPerformed
+       agregarTipoEvento();
+       listaTipoUsuario();
+    }//GEN-LAST:event_btnAgregarTipoActionPerformed
+
+    private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
+        agregarUsuario();
+    }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
+
+    private void btnLimpiarComposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarComposActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnLimpiarComposActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresar1;
-    private javax.swing.JButton btnIngresar3;
-    private javax.swing.JButton btnIngresar4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAgregarTipo;
+    private javax.swing.JButton btnAgregarUsuario;
+    private javax.swing.JButton btnLimpiarCompos;
+    private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -296,11 +416,11 @@ public class IGCrearUsuario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField passFirst;
+    private javax.swing.JPasswordField passSecond;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTipoUsuario;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtUsuario1;
-    private javax.swing.JTextField txtUsuario2;
-    private javax.swing.JTextField txtUsuario3;
     // End of variables declaration//GEN-END:variables
 }

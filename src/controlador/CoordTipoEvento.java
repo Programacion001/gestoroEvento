@@ -19,6 +19,13 @@ public class CoordTipoEvento {
     
     public ArrayList<TipoEventoVO> validarConsultaTipoEvento(){
        return logicaTipoEvento.validarConsultaTipoEvento();
-//         return null;
+
+   }
+    public int BusquedaTipoEvento(String tipoEvento){
+        return logicaTipoEvento.verificarBusquedaTipo(tipoEvento);
+    }
+    
+    public String buscarEventoPorId(int id){
+        return logicaTipoEvento.veriFicarBuscarEventoPorId(id);
    }
 }

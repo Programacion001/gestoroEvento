@@ -2,7 +2,15 @@
 package gestorevento;
 
 import controlador.CoordLogin;
+import java.util.Date;
+import modelo.DAO.EventoDAO;
+import modelo.DAO.TipoEventoDAO;
+import modelo.DAO.TipoUsuarioDAO;
+import modelo.DAO.UsuarioDAO;
 import modelo.Logica.LogicaLogin;
+import modelo.VO.EventoVO;
+import modelo.VO.TipoUsuarioVO;
+import modelo.VO.UsuarioVO;
 import vistas.IGLogin;
 import vistas.IGCrearInvitacion;
 import vistas.IGLIstaEventoActuales;
@@ -20,14 +28,15 @@ public class Main {
     // demas variable
     private static IGLIstaEventoActuales eventoActual; 
     private static PanelControl crearUsuario;
-    private static PanelEvento portero;
     private static IGCrearInvitacion invitaciones;
+   
     
     
     public static void main(String[] args) {
 
 /////////// Inicializacion de las intefaces  //////////////////////////////
        login = new IGLogin();
+       eventoActual = new IGLIstaEventoActuales();
        crearUsuario = new PanelControl();
        
 ///// Inicializacion de los coordinadores ///////////////////////////////////
@@ -39,14 +48,14 @@ public class Main {
 ///////////// enlazar la interfase con el coordinador //////////////////////
          login.setCoordLogin(coordLogin);
          
-/////////////coordinador  con la logica/////////////////////////
+///////////coordinador  con la logica/////////////////////////
          coordLogin.setLogica(logicaLogin);
          
 //////////// visualizar las ventanas /////////////////////////////////////
-//        login.setVisible(true);
-          crearUsuario.setVisible(true);
- 
-   
+        login.setVisible(true);
+//        eventoActual.setVisible(true);
+//      crearUsuario.setVisible(true);
+    
     }
-  
+
 }
