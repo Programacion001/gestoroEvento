@@ -13,9 +13,6 @@ public class LogicaTipoUsuario {
     private CoordTipoUsuario coordTipoUsuario;
     private TipoUsuarioDAO tipoUsuarioConsulta;
     
-    public void setCoordTipoUsuario(CoordTipoEvento coordTipoEvento) {
-        this.coordTipoUsuario = coordTipoUsuario;
-    }
     
     public void validarAgregarTipoEvento(TipoUsuarioVO tipoUsuario){
 

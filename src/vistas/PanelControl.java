@@ -22,7 +22,7 @@ public class PanelControl extends javax.swing.JFrame {
     IGListaInvitado ListaInvitado;
     IGAgregarInvitado AgregarInvitado;
     IGCrearEvento crearEvento;
-    IGListaUsuario listaUsuario;
+ 
     private int count = 0;
     static UsuarioVO  usuarioActivo; 
     
@@ -142,7 +142,11 @@ public class PanelControl extends javax.swing.JFrame {
     }
 
     private void irListaUsuario(){
-        listaUsuario= new IGListaUsuario ();
+        IGListaUsuario listaUsuario = new IGListaUsuario();
+        coordUsuario.setLogicaUsuario(logicaUsuario);
+        listaUsuario.setCoordUsuario(coordUsuario);
+       
+        
         listaUsuario.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(listaUsuario, BorderLayout.CENTER);
@@ -156,6 +160,7 @@ public class PanelControl extends javax.swing.JFrame {
         coordEvento.setLogicaEvento(logicaEvento);
         coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
         coordEvento.setLogicaEvento(logicaEvento);
+        
         listaEvento.setCoordEvento(coordEvento);
         listaEvento.setCoordTipoEvento(coordTipoEvento);
         

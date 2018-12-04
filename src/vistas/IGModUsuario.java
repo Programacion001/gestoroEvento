@@ -1,16 +1,133 @@
 
 package vistas;
 
+import controlador.CoordTipoUsuario;
+import controlador.CoordUsuario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.Logica.LogicaTipoUsuario;
+import modelo.Logica.LogicaUsuario;
+import modelo.VO.TipoUsuarioVO;
+import modelo.VO.UsuarioVO;
+
 
 public class IGModUsuario extends javax.swing.JFrame {
-
- 
+    
+    private UsuarioVO usuario;
+    private CoordUsuario coordUsuario;
+    private LogicaUsuario logicarUsuario;
+    private CoordTipoUsuario coordTipoUsuario;
+    private LogicaTipoUsuario logicaTipoUsuario;
+    private int count = 0;
+    
     public IGModUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
-    
+          usuario = new UsuarioVO();
+          coordUsuario = new CoordUsuario();
+          logicarUsuario = new LogicaUsuario();
+          coordTipoUsuario = new CoordTipoUsuario();
+          logicaTipoUsuario = new LogicaTipoUsuario();
+          llamadado();
+           
+          coordUsuario.setLogicaUsuario(logicarUsuario);
+          logicarUsuario.setCoordUsuario(coordUsuario);
+          coordTipoUsuario.setLogicaTipoUsuario(logicaTipoUsuario);
     }
 
+    public void setUsuario(UsuarioVO usuario) {
+        this.usuario = usuario;
+    }
+    
+    private void iniciar(){
+        System.out.println("Hola" + usuario.getNombre() );
+        lbNombre.setText(usuario.getNombre() + " " + usuario.getApellido());
+        passFirst.setText(usuario.getPassword());
+        passSecond.setText(usuario.getPassword());
+        txtApellido.setText(usuario.getApellido());
+        txtNombre.setText(usuario.getNombre());
+        txtUsuario.setText(usuario.getNomUser());
+    }
+     private void listaTipoEvento(){
+         ArrayList<TipoUsuarioVO> tiposUsuario = new ArrayList<TipoUsuarioVO>();
+         tiposUsuario = coordTipoUsuario.validarConsultaTipoEvento();
+          cbTipoUsuario.removeAllItems();
+          cbTipoUsuario.addItem("Sel. tipo de usuario");
+         for (int i = 0; i < tiposUsuario.size(); i++) {
+             TipoUsuarioVO n = tiposUsuario.get(i);
+              cbTipoUsuario.addItem(n.getTipo());
+         }
+     }
+    
+    private void modificarUsuario()
+    {   String tipoUsuario = (String) cbTipoUsuario.getSelectedItem();
+        if(tipoUsuario.compareTo("Sel. tipo de usuario") == 0){
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un tipo de evento","Advertencia",JOptionPane.WARNING_MESSAGE); 
+        }else{
+            int usuarioTipo = coordTipoUsuario.BusquedaTipoUsuario(tipoUsuario);
+            String passUno = new String(passFirst.getPassword());
+            String passDos = new String(passSecond.getPassword());
+            if (passUno.compareTo(passDos) == 0) {
+                UsuarioVO usuarioMod = new UsuarioVO();
+                usuarioMod.setNombre(txtNombre.getText());
+                usuarioMod .setApellido(txtApellido.getText());
+                usuarioMod .setIntTipoUsuario(usuarioTipo);
+                usuarioMod .setNomUser(txtUsuario.getText());
+                usuarioMod .setPassword(passDos);
+                usuarioMod .setId(usuario.getId());
+                coordUsuario.modificarUsuario(usuarioMod);
+            }else{
+                JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden","Advertencia",JOptionPane.WARNING_MESSAGE); 
+            }
+            
+        }
+    }
+    
+    /*
+     private void modificarEvento(){
+       
+        String tipoEvento = (String) cbTipoEvento.getSelectedItem();
+        if(tipoEvento.compareTo("Sel. tipo de evento") == 0){
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un tipo de evento","Advertencia",JOptionPane.WARNING_MESSAGE); 
+        }else{
+            int eventoTipo = coordTipoEvento.BusquedaTipoEvento(tipoEvento);
+            EventoVO eventoMod = new EventoVO();
+            eventoMod .setFecha(java.sql.Date.valueOf(txtFormatFecha.getText()));
+            eventoMod .setNombre(txtNombre.getText());
+            eventoMod .setHora(txtHora.getText());
+            eventoMod .setStatus("Proximamente");
+            eventoMod .setIdUsuario(1); //cambiar el id del usuario 
+            eventoMod .setTipo(eventoTipo); // modificar el tipo
+            eventoMod .setUbicacion(txtUbicacion.getText());
+            eventoMod .setId(evento.getId());
+            coordEvento.modificar(eventoMod);
+            
+            }
+        }
+    */
+    
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           iniciar();
+                           listaTipoEvento();
+                        } catch (Exception e) {
+                          
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
+    
     private void descartarCambio(){
         this.setVisible(false);
         
@@ -21,21 +138,21 @@ public class IGModUsuario extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtUsuario2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        txtUsuario = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtUsuario3 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        passFirst = new javax.swing.JPasswordField();
+        passSecond = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
         btnDescartar = new javax.swing.JButton();
-        btnIngresar4 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        btnGuadarCambios = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -47,21 +164,21 @@ public class IGModUsuario extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel14.setText("Nombre:");
 
-        txtUsuario1.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtNombre.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sel. tipo de usuario ", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setAutoscrolls(true);
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Sel. tipo de usuario"}));
+        cbTipoUsuario.setAutoscrolls(true);
 
-        txtUsuario2.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtUsuario.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel15.setText("Usuario:");
 
-        txtUsuario3.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtApellido.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtApellido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel16.setBackground(new java.awt.Color(0, 0, 0));
         jLabel16.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
@@ -85,10 +202,48 @@ public class IGModUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnIngresar4.setBackground(new java.awt.Color(76, 175, 80));
-        btnIngresar4.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar4.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar4.setText("Guardar cambios ");
+        btnGuadarCambios.setBackground(new java.awt.Color(76, 175, 80));
+        btnGuadarCambios.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnGuadarCambios.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuadarCambios.setText("Guardar cambios ");
+        btnGuadarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuadarCambiosActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(97, 97, 97));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Editando el usuario: ");
+
+        lbNombre.setBackground(new java.awt.Color(255, 255, 255));
+        lbNombre.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        lbNombre.setForeground(new java.awt.Color(187, 182, 182));
+        lbNombre.setText("    ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(jLabel12)
+                .addGap(26, 26, 26)
+                .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(lbNombre))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -99,112 +254,76 @@ public class IGModUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17)
-                    .addComponent(txtUsuario3)
-                    .addComponent(jComboBox1, 0, 219, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(txtApellido)
+                    .addComponent(cbTipoUsuario, 0, 219, Short.MAX_VALUE)
+                    .addComponent(passFirst))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addGap(66, 66, 66))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuadarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnDescartar)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(128, 128, 128))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(txtUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(passFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                        .addComponent(passSecond, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 42, Short.MAX_VALUE))
-        );
-
-        jPanel1.setBackground(new java.awt.Color(97, 97, 97));
-
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Editando el usuario: ");
-
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel11.setText("Ronald Castillo");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addContainerGap(194, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addContainerGap())
+                    .addComponent(btnGuadarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 398, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
         );
 
         pack();
@@ -213,6 +332,10 @@ public class IGModUsuario extends javax.swing.JFrame {
     private void btnDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescartarActionPerformed
         descartarCambio();
     }//GEN-LAST:event_btnDescartarActionPerformed
+
+    private void btnGuadarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuadarCambiosActionPerformed
+        modificarUsuario();
+    }//GEN-LAST:event_btnGuadarCambiosActionPerformed
 
  
     public static void main(String args[]) {
@@ -249,21 +372,21 @@ public class IGModUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescartar;
-    private javax.swing.JButton btnIngresar4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JButton btnGuadarCambios;
+    private javax.swing.JComboBox<String> cbTipoUsuario;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField txtUsuario1;
-    private javax.swing.JTextField txtUsuario2;
-    private javax.swing.JTextField txtUsuario3;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JPasswordField passFirst;
+    private javax.swing.JPasswordField passSecond;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

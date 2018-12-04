@@ -129,7 +129,7 @@ public class IGListaEvento extends javax.swing.JPanel {
             }
             
         }else{
-            JOptionPane.showMessageDialog(null,"Debe de selecionar un evento para eliminarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un evento para eliminarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
        
     }
@@ -138,7 +138,7 @@ public class IGListaEvento extends javax.swing.JPanel {
         if( idEvento > 0){
             IGModEvento modal = new IGModEvento(); 
             modal.setVisible(true);
-            System.out.println("desde la interfaz ");
+            
             modal.setEvento(coordEvento.validarInfoEvento(idEvento));
         }else{
             JOptionPane.showMessageDialog(null,"Debe de seleccionar un evento para editarlo","Advertencia",JOptionPane.WARNING_MESSAGE);    
