@@ -1,12 +1,26 @@
 
 package vistas;
 
+import controlador.CoordInvitado;
+import static java.lang.Thread.sleep;
 import javax.swing.ButtonGroup;
+import modelo.Logica.LogicaInvitado;
+import modelo.VO.InvitadoVO;
 
 
 public class IGModInvitado extends javax.swing.JFrame {
 
- 
+    public void setInvitado(InvitadoVO invitado) {
+        this.invitado = invitado;
+    }
+
+    private InvitadoVO invitado;
+    
+    private int count = 0;
+    private String sexo ;
+    private CoordInvitado coordInvitado;
+    private LogicaInvitado logicaInvitado;
+    
     public IGModInvitado() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -14,37 +28,92 @@ public class IGModInvitado extends javax.swing.JFrame {
         genero.add(rbFemenino);
         genero.add(rbMasculino);
         rbMasculino.setSelected(true);
-       
+         coordInvitado = new CoordInvitado();
+         logicaInvitado = new  LogicaInvitado();
+        
+         coordInvitado.setLogicaInvitado(logicaInvitado);
+         
+        llamadado();
     
     }
 
     private void descartarCambio(){
         this.setVisible(false);
-        
+      
+            
+    }
+    
+    private void iniciar(){
+         sexo = invitado.getSexo();
+         lbNombre.setText(invitado.getNombre() + " " +invitado.getApellido());
+        if(sexo.compareTo("F") == 0){
+            rbFemenino.setSelected(true);
+        }else{
+             rbMasculino.setSelected(true);
+        }
+        txtApellido.setText(invitado.getApellido());
+        txtDireccion.setText(invitado.getDireccion());
+        txtEmail.setText(invitado.getEmail());
+        txtNombre.setText(invitado.getNombre());
+        txtTelefono.setText(invitado.getTelefono());
+    }
+    
+    private void modificarInvitado(){
+        InvitadoVO invitadoMod = new InvitadoVO();
+        invitadoMod .setNombre(txtNombre.getText());
+        invitadoMod .setApellido(txtApellido.getText());
+        invitadoMod .setEmail(txtEmail.getText());
+        invitadoMod .setDireccion(txtDireccion.getText());
+        invitadoMod .setTelefono(txtTelefono.getText());
+        invitadoMod .setSexo(sexo);
+        invitadoMod .setId(invitado.getId());
+        coordInvitado.modificarInvitado(invitadoMod);
+    }
+    
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           iniciar();
+                           
+                        } catch (Exception e) {
+                          
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        txtUsuario1 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txtUsuario5 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        txtUsuario3 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        txtUsuario4 = new javax.swing.JTextField();
-        txtUsuario2 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         rbFemenino = new javax.swing.JRadioButton();
         rbMasculino = new javax.swing.JRadioButton();
         btnDescartar = new javax.swing.JButton();
-        btnIngresar4 = new javax.swing.JButton();
+        btnGuardarCambios = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(226, 224, 224));
@@ -52,8 +121,8 @@ public class IGModInvitado extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtUsuario1.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtApellido.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtApellido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel14.setBackground(new java.awt.Color(0, 0, 0));
         jLabel14.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
@@ -63,25 +132,25 @@ public class IGModInvitado extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel18.setText("Nombre:");
 
-        txtUsuario5.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtNombre.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel16.setBackground(new java.awt.Color(0, 0, 0));
         jLabel16.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel16.setText("Email:");
 
-        txtUsuario3.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtEmail.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtEmail.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel17.setText("Dirección:");
 
-        txtUsuario4.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtDireccion.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtDireccion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtUsuario2.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtUsuario2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTelefono.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        txtTelefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
@@ -94,10 +163,20 @@ public class IGModInvitado extends javax.swing.JFrame {
         rbFemenino.setBackground(new java.awt.Color(255, 255, 255));
         rbFemenino.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
         rbFemenino.setText("Femenino ");
+        rbFemenino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbFemeninoActionPerformed(evt);
+            }
+        });
 
         rbMasculino.setBackground(new java.awt.Color(255, 255, 255));
         rbMasculino.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
         rbMasculino.setText("Marculino");
+        rbMasculino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbMasculinoActionPerformed(evt);
+            }
+        });
 
         btnDescartar.setBackground(new java.awt.Color(244, 67, 54));
         btnDescartar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
@@ -109,10 +188,15 @@ public class IGModInvitado extends javax.swing.JFrame {
             }
         });
 
-        btnIngresar4.setBackground(new java.awt.Color(76, 175, 80));
-        btnIngresar4.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar4.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar4.setText("Guardar cambios ");
+        btnGuardarCambios.setBackground(new java.awt.Color(76, 175, 80));
+        btnGuardarCambios.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnGuardarCambios.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarCambios.setText("Guardar cambios ");
+        btnGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCambiosActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(97, 97, 97));
 
@@ -121,20 +205,20 @@ public class IGModInvitado extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Editando el invitado: ");
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel11.setText("Ronald Castillo");
+        lbNombre.setBackground(new java.awt.Color(255, 255, 255));
+        lbNombre.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        lbNombre.setForeground(new java.awt.Color(187, 182, 182));
+        lbNombre.setText("       ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
+                .addGap(134, 134, 134)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -143,7 +227,7 @@ public class IGModInvitado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(lbNombre))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,16 +240,16 @@ public class IGModInvitado extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel17)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                         .addComponent(jLabel18)
-                        .addComponent(txtUsuario5))
+                        .addComponent(txtNombre))
                     .addComponent(jLabel16)
-                    .addComponent(txtUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel19)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -176,7 +260,7 @@ public class IGModInvitado extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106)
                 .addComponent(btnDescartar)
                 .addContainerGap(132, Short.MAX_VALUE))
@@ -190,24 +274,24 @@ public class IGModInvitado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -217,7 +301,7 @@ public class IGModInvitado extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDescartar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -240,6 +324,18 @@ public class IGModInvitado extends javax.swing.JFrame {
     private void btnDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescartarActionPerformed
         descartarCambio();
     }//GEN-LAST:event_btnDescartarActionPerformed
+
+    private void rbFemeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemeninoActionPerformed
+       sexo = "F";
+    }//GEN-LAST:event_rbFemeninoActionPerformed
+
+    private void rbMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMasculinoActionPerformed
+        sexo = "M";
+    }//GEN-LAST:event_rbMasculinoActionPerformed
+
+    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+        modificarInvitado();
+    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
  
     public static void main(String args[]) {
@@ -279,51 +375,23 @@ public class IGModInvitado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescartar;
-    private javax.swing.JButton btnDescartar1;
-    private javax.swing.JButton btnDescartar2;
-    private javax.swing.JButton btnIngresar4;
-    private javax.swing.JButton btnIngresar5;
-    private javax.swing.JButton btnIngresar6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JPasswordField jPasswordField4;
+    private javax.swing.JLabel lbNombre;
     private javax.swing.JRadioButton rbFemenino;
     private javax.swing.JRadioButton rbMasculino;
-    private javax.swing.JTextField txtUsuario1;
-    private javax.swing.JTextField txtUsuario10;
-    private javax.swing.JTextField txtUsuario11;
-    private javax.swing.JTextField txtUsuario2;
-    private javax.swing.JTextField txtUsuario3;
-    private javax.swing.JTextField txtUsuario4;
-    private javax.swing.JTextField txtUsuario5;
-    private javax.swing.JTextField txtUsuario6;
-    private javax.swing.JTextField txtUsuario7;
-    private javax.swing.JTextField txtUsuario8;
-    private javax.swing.JTextField txtUsuario9;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

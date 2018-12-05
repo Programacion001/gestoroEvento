@@ -2,12 +2,16 @@
 package vistas;
 
 import controlador.CoordEvento;
+import controlador.CoordInvitacion;
+import controlador.CoordInvitado;
 import controlador.CoordTipoEvento;
 import controlador.CoordTipoUsuario;
 import controlador.CoordUsuario;
 import java.awt.BorderLayout;
 import static java.lang.Thread.sleep;
 import modelo.Logica.LogicaEvento;
+import modelo.Logica.LogicaInvitacion;
+import modelo.Logica.LogicaInvitado;
 import modelo.Logica.LogicaTipoEvento;
 import modelo.Logica.LogicaTipoUsuario;
 import modelo.Logica.LogicaUsuario;
@@ -18,9 +22,6 @@ import modelo.VO.UsuarioVO;
 public class PanelControl extends javax.swing.JFrame {
     
     IGReporte reporte;
-    IGCrearInvitacion crearInvitacion;
-    IGListaInvitado ListaInvitado;
-    IGAgregarInvitado AgregarInvitado;
     IGCrearEvento crearEvento;
  
     private int count = 0;
@@ -31,13 +32,16 @@ public class PanelControl extends javax.swing.JFrame {
     private CoordEvento coordEvento;
     private CoordTipoUsuario coordTipoUsuario;
     private CoordUsuario coordUsuario;
+    private CoordInvitado coordinvitado;
+    private CoordInvitacion coordinadorInvitacion; 
     
-     
     ////// Logica //////
     private LogicaTipoEvento logicaTipoEvento;
     private LogicaEvento logicaEvento;
     private LogicaTipoUsuario logicaTipoUsuario;
     private LogicaUsuario logicaUsuario;
+    private LogicaInvitado logicaInvitado;
+    private LogicaInvitacion logicaInvitacion;
     
     public UsuarioVO getusuarioActivo() {
         return usuarioActivo;
@@ -57,7 +61,6 @@ public class PanelControl extends javax.swing.JFrame {
     }
     
     private void iniciar(){
-//        irCreaUsuario();
 //        txtNameUser.setText(usuarioActivo.getNombre() + " " + usuarioActivo.getApellido());
         //// inicializar evento 
         logicaTipoEvento = new LogicaTipoEvento();
@@ -72,6 +75,11 @@ public class PanelControl extends javax.swing.JFrame {
         logicaUsuario = new LogicaUsuario();
         coordUsuario = new CoordUsuario();
         
+        coordinvitado = new CoordInvitado();
+        logicaInvitado = new LogicaInvitado();
+        
+        logicaInvitacion = new LogicaInvitacion();
+        coordinadorInvitacion = new CoordInvitacion();
         irCreaUsuario();
         
     }
@@ -103,7 +111,17 @@ public class PanelControl extends javax.swing.JFrame {
         pnlPrincipal.repaint();
     }
     private void irCreaInvitacion(){
-        crearInvitacion = new  IGCrearInvitacion();
+        IGCrearInvitacion crearInvitacion = new  IGCrearInvitacion();
+        
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        crearInvitacion.setCoordInvitado(coordinvitado);
+
+        coordEvento.setLogicaEvento(logicaEvento);
+        crearInvitacion.setCoordEvento(coordEvento);
+        
+        coordinadorInvitacion.setLogicaInv(logicaInvitacion);
+        crearInvitacion.setCoordinador(coordinadorInvitacion);
+        
         crearInvitacion.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(crearInvitacion, BorderLayout.CENTER);
@@ -111,7 +129,11 @@ public class PanelControl extends javax.swing.JFrame {
         pnlPrincipal.repaint();
     }
     private void irListaInvitado(){
-        ListaInvitado = new  IGListaInvitado ();
+        IGListaInvitado ListaInvitado = new  IGListaInvitado();
+        
+        ListaInvitado.setCoordInvitado(coordinvitado);
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        
         ListaInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(ListaInvitado, BorderLayout.CENTER);
@@ -119,7 +141,14 @@ public class PanelControl extends javax.swing.JFrame {
         pnlPrincipal.repaint();
     }
     private void irAgregarInvitado(){
-        AgregarInvitado = new IGAgregarInvitado();
+        IGAgregarInvitado AgregarInvitado = new IGAgregarInvitado();
+        
+        AgregarInvitado.setCoordEvento(coordEvento);
+        coordEvento.setLogicaEvento(logicaEvento);
+        
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        AgregarInvitado.setCoordInvitado(coordinvitado);
+        
         AgregarInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(AgregarInvitado, BorderLayout.CENTER);
@@ -143,10 +172,10 @@ public class PanelControl extends javax.swing.JFrame {
 
     private void irListaUsuario(){
         IGListaUsuario listaUsuario = new IGListaUsuario();
+        
         coordUsuario.setLogicaUsuario(logicaUsuario);
         listaUsuario.setCoordUsuario(coordUsuario);
        
-        
         listaUsuario.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(listaUsuario, BorderLayout.CENTER);

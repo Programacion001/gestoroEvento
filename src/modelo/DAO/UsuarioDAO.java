@@ -110,7 +110,7 @@ public class UsuarioDAO {
         }
     }
     
-      public UsuarioVO InfoUsuario(int id){
+    public UsuarioVO InfoUsuario(int id){
        Connection con = Conexion.getConnection();
        UsuarioVO usuario = new UsuarioVO();
           

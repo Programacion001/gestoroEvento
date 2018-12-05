@@ -29,7 +29,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jComboBox2" min="-2" pref="228" max="-2" attributes="0"/>
+                  <Component id="cbEvento" min="-2" pref="228" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" pref="883" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -42,7 +42,7 @@
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="jComboBox2" min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="cbEvento" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jPanel3" pref="453" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
@@ -95,13 +95,16 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="cbEvento">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Seleccionar evento&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; })" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Seleccionar evento&quot;})" type="code"/>
         </Property>
         <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEventoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -132,21 +135,21 @@
                               <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtUsuario5" alignment="0" pref="227" max="32767" attributes="0"/>
-                              <Component id="txtUsuario3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtUsuario4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNombre" alignment="0" pref="227" max="32767" attributes="0"/>
+                              <Component id="txtemail" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtUsuario1" alignment="1" min="-2" pref="227" max="-2" attributes="0"/>
+                                  <Component id="txtApellido" alignment="1" min="-2" pref="227" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtUsuario2" min="-2" pref="227" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" min="-2" pref="227" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
@@ -159,9 +162,9 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="246" max="32767" attributes="0"/>
-                          <Component id="btnIngresar1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="btnIngresar3" min="-2" pref="156" max="-2" attributes="0"/>
+                          <Component id="btnLimpiarCampos" min="-2" pref="156" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -177,12 +180,12 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel18" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Component id="txtUsuario5" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtNombre" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel20" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuario1" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtApellido" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -190,16 +193,16 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel16" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuario3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtemail" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuario4" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtDireccion" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel15" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuario2" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txtTelefono" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -211,8 +214,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnIngresar1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnIngresar3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnAgregar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnLimpiarCampos" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
@@ -231,20 +234,20 @@
             <Property name="text" type="java.lang.String" value="Genero:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario1">
+        <Component class="javax.swing.JTextField" name="txtApellido">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Open Sans" size="30" style="0"/>
+              <Font name="Open Sans" size="15" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario2">
+        <Component class="javax.swing.JTextField" name="txtTelefono">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Open Sans" size="30" style="0"/>
+              <Font name="Open Sans" size="15" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -262,10 +265,10 @@
             <Property name="text" type="java.lang.String" value="Telefono:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario3">
+        <Component class="javax.swing.JTextField" name="txtemail">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Open Sans" size="30" style="0"/>
+              <Font name="Open Sans" size="15" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -294,10 +297,10 @@
             <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario4">
+        <Component class="javax.swing.JTextField" name="txtDireccion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Open Sans" size="30" style="0"/>
+              <Font name="Open Sans" size="15" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -315,10 +318,10 @@
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuario5">
+        <Component class="javax.swing.JTextField" name="txtNombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Open Sans" size="30" style="0"/>
+              <Font name="Open Sans" size="15" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -333,7 +336,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Open Sans" size="17" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
+            <Property name="text" type="java.lang.String" value="Apellido:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbFemenino">
@@ -346,6 +349,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Femenino "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbFemeninoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbMasculino">
           <Properties>
@@ -357,8 +363,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Marculino"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbMasculinoActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnIngresar1">
+        <Component class="javax.swing.JButton" name="btnAgregar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e4" green="a3" red="59" type="rgb"/>
@@ -371,8 +380,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar invitado"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnIngresar3">
+        <Component class="javax.swing.JButton" name="btnLimpiarCampos">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="36" green="43" red="f4" type="rgb"/>
@@ -385,6 +397,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar campos "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarCamposActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

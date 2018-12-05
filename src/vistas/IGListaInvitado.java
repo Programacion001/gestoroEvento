@@ -2,26 +2,34 @@
 package vistas;
 
 import com.placeholder.PlaceHolder;
+import controlador.CoordInvitado;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import modelo.VO.InvitadoVO;
 
 public class  IGListaInvitado  extends javax.swing.JPanel {
 
- 
+    private CoordInvitado coordInvitado;
+    private int count = 0;
+    private int idInvitado;
+    
+    public void setCoordInvitado(CoordInvitado coordInvitado) {
+        this.coordInvitado = coordInvitado;
+    }
     public  IGListaInvitado () {
         initComponents();
-        PlaceHolder holder;
         personalizarTable();
-        listarTabla();
-        holder = new PlaceHolder(txtBuscarUsuario, "Buscar invitado por nombre y apellido ");
-       
-      
+        llamadado();
+
     }
     
     private void personalizarTable(){
@@ -37,13 +45,17 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
     }
     
     private void listarTabla(){
+        ArrayList<InvitadoVO> invitados = coordInvitado.listaInvitado();
         
-        Object[][] fila = new Object[4][5];
-        fila[0][0] = 7;
-        fila[0][1] = "Ronald Castillo";
-        fila[0][2] = "M";
-        fila[0][3] = "ronaldcastillo789@gmail.com";
-        fila[0][4] = "854-854-957";
+        Object[][] fila = new Object[invitados.size()][5];
+        for (int i = 0; i <invitados.size(); i++) {
+            fila[i][0] = invitados.get(i).getId();
+            fila[i][1] = invitados.get(i).getNombre() + " " + invitados.get(i).getApellido();
+            fila[i][2] = invitados.get(i).getSexo();
+            fila[i][3] = invitados.get(i).getEmail();
+            fila[i][4] = invitados.get(i).getTelefono();
+        }
+        
         Object[] titulo = {"ID", "Nombre y apellido", "Genero", "Email", "Teléfono"};
         
         DefaultTableModel model = new DefaultTableModel(fila, titulo){
@@ -51,11 +63,53 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
         };
         
         tbUsuario.setModel(model);
-        
-
     }
     
+     private void modificar(){
+         if (idInvitado > 0) {
+             IGModInvitado modal = new IGModInvitado(); 
+             modal.setVisible(true);
+             modal.setInvitado(coordInvitado.verificarInfoInvitado(idInvitado));
+         }else{
+             JOptionPane.showMessageDialog(null,"Debe de seleccionar un evento para editarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
+         }
+     }
+     
+     private void eliminar(){
+         if(idInvitado > 0){
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere eliminarlo?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (respuesta == 0) {
+                System.out.println(respuesta);
+                coordInvitado.eiminarInvitado(idInvitado);
+                listarTabla();
+                idInvitado = -1;
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un usuario para eliminarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+     }
 
+        private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           listarTabla();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,11 +117,11 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        btnIngresar2 = new javax.swing.JButton();
-        txtBuscarUsuario = new javax.swing.JTextField();
+        btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUsuario = new javax.swing.JTable();
+        btnActualizar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -95,17 +149,13 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnIngresar2.setBackground(new java.awt.Color(244, 67, 54));
-        btnIngresar2.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnIngresar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar2.setText("Eliminar");
-
-        txtBuscarUsuario.setFont(new java.awt.Font("Open Sans", 0, 30)); // NOI18N
-        txtBuscarUsuario.setBorder(null);
-        txtBuscarUsuario.setPreferredSize(new java.awt.Dimension(0, 50));
-        txtBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setBackground(new java.awt.Color(244, 67, 54));
+        btnEliminar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarUsuarioActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -143,6 +193,16 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbUsuario);
 
+        btnActualizar.setBackground(new java.awt.Color(79, 175, 80));
+        btnActualizar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setText("Actualizar tabla ");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,57 +216,56 @@ public class  IGListaInvitado  extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 47, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(140, 140, 140))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(56, 56, 56))))))
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(txtBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarUsuarioActionPerformed
-
     private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
-        System.out.println(tbUsuario.getSelectedRow());
-        System.out.println(tbUsuario.getValueAt(0, 2) ); 
+       idInvitado = (int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0);
     }//GEN-LAST:event_tbUsuarioMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        IGModInvitado modal = new IGModInvitado(); 
-        modal.setVisible(true);
+       modificar();
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+       listarTabla();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        eliminar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresar2;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbUsuario;
-    private javax.swing.JTextField txtBuscarUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -83,28 +83,7 @@ public class IGModUsuario extends javax.swing.JFrame {
         }
     }
     
-    /*
-     private void modificarEvento(){
-       
-        String tipoEvento = (String) cbTipoEvento.getSelectedItem();
-        if(tipoEvento.compareTo("Sel. tipo de evento") == 0){
-            JOptionPane.showMessageDialog(null,"Debe de seleccionar un tipo de evento","Advertencia",JOptionPane.WARNING_MESSAGE); 
-        }else{
-            int eventoTipo = coordTipoEvento.BusquedaTipoEvento(tipoEvento);
-            EventoVO eventoMod = new EventoVO();
-            eventoMod .setFecha(java.sql.Date.valueOf(txtFormatFecha.getText()));
-            eventoMod .setNombre(txtNombre.getText());
-            eventoMod .setHora(txtHora.getText());
-            eventoMod .setStatus("Proximamente");
-            eventoMod .setIdUsuario(1); //cambiar el id del usuario 
-            eventoMod .setTipo(eventoTipo); // modificar el tipo
-            eventoMod .setUbicacion(txtUbicacion.getText());
-            eventoMod .setId(evento.getId());
-            coordEvento.modificar(eventoMod);
-            
-            }
-        }
-    */
+
     
     private void llamadado(){
          Thread hilo = new Thread() {
