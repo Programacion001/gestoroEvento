@@ -24,10 +24,13 @@ public class ReporteDAO {
         ArrayList<PersonaEventoVO> listaReporte = new ArrayList<PersonaEventoVO>();
         PersonaEventoVO reportes = null;
         try{
-    PreparedStatement consulta = con.prepareStatement("select E.id_evento, E.Nombre,E.Tipo_Evento, E.Fecha, Count(I.id_evento)'Cantidad' from asisten I \n" +
-"inner join evento E on I.id_evento  = E.id_evento\n" +
-"where I.status = 'Presente'\n" +
-"Group by I.id_evento;");
+    PreparedStatement consulta = con.prepareStatement("select E.id_evento, E.Nombre,E.Tipo_Evento, E.Fecha, Count(I.id_evento)'Cantidad', tp.tipo from asisten I \n" +
+        "inner join evento E \n" +
+        "on I.id_evento  = E.id_evento \n" +
+        "inner join tipo_evento tp \n" +
+        "on  E.Tipo_Evento = tp.id_Tipo\n" +
+        "where I.status = 'Presente'\n" +
+        "Group by I.id_evento");
       ResultSet response = consulta.executeQuery();
         while(response.next()){
         int idevento = response.getInt(1);
@@ -35,7 +38,8 @@ public class ReporteDAO {
         int tipoevento = response.getInt(3);
         Date fecha = response.getDate(4);
         int cantidad = response.getInt(5);
-        reportes = new PersonaEventoVO(idevento,nombre,tipoevento,fecha,cantidad);
+        String tipoEventoString = response.getString(6);
+        reportes = new PersonaEventoVO(idevento,nombre,fecha,tipoevento,cantidad,tipoEventoString);
         listaReporte.add(reportes);        
     }
         response.close();
@@ -46,39 +50,37 @@ public class ReporteDAO {
     return listaReporte;
     }
 //// REPORTE POR SEXO 
-    public ArrayList<PersonaEventoVO> eventoSexo(String dato, int num) throws SQLException{
+    public ArrayList<PersonaEventoVO> eventoSexo(int num) throws SQLException{
         ArrayList<PersonaEventoVO> listaReporte = new ArrayList<PersonaEventoVO>();
-        PersonaEventoVO reportes = null;
+      
         try{
             PreparedStatement consulta = con.prepareStatement("select E.id_evento, E.Nombre,E.Tipo_Evento, E.Fecha,count(case when inv.sexo = 'F' then 1 else null end) Mujeres,\n" +
-"count(case when inv.sexo = 'M' then 1 else null end) Hombres,count(i.id_evento)Total from asisten I left join \n" +
-"invitados inv on inv.id_invitados = i.id_invitado inner join evento E on e.id_evento = i.id_evento\n " +
-"where I.status = 'Presente' group by i.id_evento limit ?");
-        consulta.setInt(1, num);
+            "count(case when inv.sexo = 'M' then 1 else null end) Hombres,count(i.id_evento)Total, tp.tipo from asisten I left join \n" +
+            "invitados inv on inv.id_invitados = i.id_invitado inner join evento E on e.id_evento = i.id_evento inner join tipo_evento tp\n" +
+            "on E.tipo_evento = tp.id_tipo\n" +
+            "where I.status = 'Presente' group by i.id_evento ");
         ResultSet response = consulta.executeQuery();
         while(response.next()){
-        int idevento = response.getInt(1);
-        String nombre = response.getString(2);
-        int tipoevento = response.getInt(3);
-        Date fecha = response.getDate(4);
-        int mujeres = response.getInt(5);
-        int hombres = response.getInt(6);
-        int cantidad = response.getInt(7);
-        if (dato == "mujeres" && mujeres > hombres){
-        reportes = new PersonaEventoVO(idevento,nombre,tipoevento,fecha,cantidad); 
-        listaReporte.add(reportes); 
-        } else if (dato == "hombres" && hombres > mujeres){
-        reportes = new PersonaEventoVO(idevento,nombre,tipoevento,fecha,cantidad);
-        listaReporte.add(reportes); 
-        }else if (dato == "ambos"){
-        reportes = new PersonaEventoVO(idevento,nombre,tipoevento,fecha,cantidad);
-        listaReporte.add(reportes); 
-        }         
+                PersonaEventoVO reportes = new PersonaEventoVO(); 
+         
+                reportes.setId(response.getInt(1));
+                reportes.setNombre(response.getString(2));
+                reportes.setTipo(response.getInt(3));
+                reportes.setFecha(response.getDate(4));
+                reportes.setCantidadPersona(response.getInt(7));
+                reportes.setMujeres(response.getInt(5));
+                reportes.setHombres(response.getInt(6));
+                reportes.setTipoEvento(response.getString(8));
+                listaReporte.add(reportes);       
+               
+                
+          
         }response.close();}
         catch(SQLException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Error 402 de consulta");    
         }
+        System.out.println(listaReporte);
         return listaReporte;
     }
     

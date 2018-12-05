@@ -9,22 +9,17 @@ public class LogicaReporte {
    ReporteDAO reportes;
    
    public ArrayList<PersonaEventoVO> verificarNumPersona() throws SQLException{
-    ArrayList<PersonaEventoVO> listareporte = new ArrayList<PersonaEventoVO>();
+        reportes = new ReporteDAO();
+        return reportes.numPersonaEvento();
+    }
    
-   reportes = new ReporteDAO();
-   reportes.numPersonaEvento();
-   return null;
-}
-   
-   public ArrayList<PersonaEventoVO> verificarEventoSexo(String dato, int num) throws SQLException{
-    reportes = new ReporteDAO();
-    reportes.eventoSexo(dato, num);
-    
-    return null;   }
+   public ArrayList<PersonaEventoVO> verificarEventoSexo(int num) throws SQLException{
+        reportes = new ReporteDAO();
+        return reportes.eventoSexo(num);
+    }
    
    public ArrayList<DiaAsistenciaVO> verificarDiaMasAsistencia() throws SQLException{
        reportes = new ReporteDAO();
-       reportes.diaMayorAsistencia();
-    return null;
+        return reportes.diaMayorAsistencia();
    }
 }

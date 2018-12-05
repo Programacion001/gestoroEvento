@@ -2,6 +2,7 @@
 package controlador;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.VO.PersonaEventoVO;
 import modelo.VO.DiaAsistenciaVO;
 import vistas.reportePanel.pnlDiaMasVisitado;
@@ -19,27 +20,9 @@ public class CoordReporte {
     public pnlDiaMasVisitado getDiaIG(){
        return iGDiaVisitado;
     }
-        // SET INTERFAZ DIA VISITADO
-    public void setIGDiaVisitado(pnlDiaMasVisitado diavisitado){
-        this.iGDiaVisitado = diavisitado;
-    }
-        // GET INTERFAZ Evento VISITADO
-        public pnlEventoVisitado getEventoIG(){
-       return iGEventoVisitado;
-    }
-        // SET INTERFAZ Evento VISITADO
-    public void setIGEventoVisitado(pnlEventoVisitado eventovisitado){
-        this.iGEventoVisitado = eventovisitado;
-    }
-           // GET INTERFAZ Invitados Eventos
-        public pnlInvitadoEvento getInvitadoEventoIG(){
-       return iGInvitadoEvento;
-    }
-        // SET INTERFAZ Invitados Eventos
-    public void setIGinvitadoEvento(pnlInvitadoEvento invitadoevento){
-        this.iGInvitadoEvento = invitadoevento;
-    } 
-    
+     
+ 
+     
     /// GET LOGICA
     public LogicaReporte getLogicaReporte(){
         return reportelogic;
@@ -50,15 +33,15 @@ public class CoordReporte {
     }
     /////////////////////////////////////////////////////////////////////////////
     
-    public void realizarReporteDiaVisitado() throws SQLException{
-        reportelogic.verificarDiaMasAsistencia();
+    public ArrayList<DiaAsistenciaVO>  realizarReporteDiaVisitado() throws SQLException{
+        return reportelogic.verificarDiaMasAsistencia();
     }
     
-    public void realizarReporteEventoSexo(String dato, int num) throws SQLException{
-        reportelogic.verificarEventoSexo(dato, num);
+    public ArrayList<PersonaEventoVO>  realizarReporteEventoSexo(int num) throws SQLException{
+        return reportelogic.verificarEventoSexo(num);
     }
     
-    public void realizaReportePersonas() throws SQLException{
-        reportelogic.verificarNumPersona();
+    public ArrayList<PersonaEventoVO> numPersona() throws SQLException{
+        return reportelogic.verificarNumPersona();
     }
 }
