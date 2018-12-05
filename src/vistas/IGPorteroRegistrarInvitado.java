@@ -2,28 +2,60 @@
 package vistas;
 
 import com.placeholder.PlaceHolder;
+import controlador.CoordInvitacion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.Thread.sleep;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import modelo.VO.EventoVO;
+import modelo.VO.InvitadoVO;
 
 public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
 
- 
+    private CoordInvitacion  coordInvitacion;
+    private EventoVO evento;
+    private int count = 0;
+    private int idInvitado = -1;
+    
+
+    public CoordInvitacion getCoordInvitacion() {
+        return coordInvitacion;
+    }
+
+    public void setCoordInvitacion(CoordInvitacion coordInvitacion) {
+        this.coordInvitacion = coordInvitacion;
+    }
+
+    public EventoVO getEvento() {
+        return evento;
+    }
+
+    public void setEvento(EventoVO evento) {
+        this.evento = evento;
+    }
+    
     public IGPorteroRegistrarInvitado() {
         initComponents();
+        llamadado();
         personalizarTable();
-        listarTabla();
+        System.out.println("Hola1");
+        
         
 
     }
     
     private void personalizarTable(){
+        
         JTableHeader Theader = tbUsuario.getTableHeader();
         Color bgHeader = new Color(158,158,158);
         Theader.setBackground(bgHeader); //background
@@ -32,18 +64,27 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         tbUsuario.setFont(new Font("Open Sans", Font.PLAIN, 15));
         tbUsuario.setForeground(bgHeader);
         tbUsuario.setRowHeight(30);
-       //((DefaultTableCellRenderer)Theader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+       
     }
     
-    private void listarTabla(){
+  private void listarTabla() throws SQLException{
+        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacionAusente(22); ///modificar 
+        String cantidad = Integer.toString(invitados.size());
+         lbRest.setText(cantidad);
+         Object[][] fila = new Object[invitados.size()][6];
+        for (int i = 0; i < invitados.size(); i++) {
+            
+            fila[i][0] = invitados.get(i).getId();
+            fila[i][1] = invitados.get(i).getNombre() + " " + invitados.get(i).getApellido();
+            fila[i][2] = invitados.get(i).getSexo();
+            fila[i][3] = invitados.get(i).getEmail();
+            fila[i][4] =invitados.get(i).getTelefono();
+            fila[i][5] =invitados.get(i).getStatus();
+            System.out.println(invitados.get(i).getApellido());
+            
+        }
+       
         
-        Object[][] fila = new Object[4][6];
-        fila[0][0] = 7;
-        fila[0][1] = "Marcos Matos";
-        fila[0][2] = "M";
-        fila[0][3] = "marcosa@gmail.com";
-        fila[0][4] ="829-987-6579";
-        fila[0][5] ="Presente";
         Object[] titulo = {"ID", "Nombre y apellido", "Genero", "Email", "Teléfonos", "Estatus"};
         
         DefaultTableModel model = new DefaultTableModel(fila, titulo){
@@ -51,8 +92,46 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         };
         
         tbUsuario.setModel(model);
+  
+    }
+  
+    private void registrarInvitacion() throws SQLException{
+        /*
+         public void modificarStatusInvitacion(EventoVO evento, InvitadoVO invitado, String status) 
+        */
+        if(idInvitado > 0){
+            EventoVO evento = new EventoVO();
+            evento.setId(22); /// modificar 
+            InvitadoVO invitado = new InvitadoVO();
+            invitado.setId(idInvitado);
+            coordInvitacion.modificarStatusInvitacion(evento, invitado,"Presente");
+        }else{
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar un invitado para eliminarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
         
         
+    }
+    
+    
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(50);
+                           listarTabla();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
     }
     
 
@@ -67,8 +146,8 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btnEventoActual1 = new javax.swing.JButton();
+        lbRest = new javax.swing.JLabel();
+        btnDarEntrada = new javax.swing.JButton();
 
         jPanel6.setBackground(new java.awt.Color(226, 224, 224));
 
@@ -124,36 +203,43 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel1.setText("Personas restantes");
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
-        jLabel2.setText("25");
+        lbRest.setBackground(new java.awt.Color(0, 0, 0));
+        lbRest.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        lbRest.setText("  ");
 
-        btnEventoActual1.setBackground(new java.awt.Color(79, 175, 80));
-        btnEventoActual1.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
-        btnEventoActual1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEventoActual1.setText("Dar entrada");
+        btnDarEntrada.setBackground(new java.awt.Color(79, 175, 80));
+        btnDarEntrada.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
+        btnDarEntrada.setForeground(new java.awt.Color(255, 255, 255));
+        btnDarEntrada.setText("Dar entrada");
+        btnDarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDarEntradaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(71, 71, 71))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnEventoActual1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58))))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 65, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbRest, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnDarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(58, 58, 58))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,11 +249,11 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
                 .addGap(79, 79, 79)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lbRest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addComponent(btnEventoActual1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -184,25 +270,32 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
-//        System.out.println(tbUsuario.getSelectedRow());
-//        System.out.println(tbUsuario.getValueAt(0, 2) ); 
-        int[] count = tbUsuario.getSelectedRows();
-        for (int i = 0; i < count.length; i++) {
-            System.out.println(count[i]);
-        }
-        
-        System.out.println();
+            idInvitado = (int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0);
+            System.out.println(idInvitado);
     }//GEN-LAST:event_tbUsuarioMouseClicked
+
+    private void btnDarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarEntradaActionPerformed
+        try {
+            registrarInvitacion();
+        } catch (SQLException ex) {
+            Logger.getLogger(IGPorteroRegistrarInvitado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            listarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(IGPorteroRegistrarInvitado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDarEntradaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEventoActual1;
+    private javax.swing.JButton btnDarEntrada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbRest;
     private javax.swing.JTable tbUsuario;
     // End of variables declaration//GEN-END:variables
 }

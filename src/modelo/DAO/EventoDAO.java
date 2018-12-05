@@ -155,7 +155,7 @@ public class EventoDAO{
         }  
      }
      
-     public void eliminarEvento(int id){
+    public void eliminarEvento(int id){
          Connection con = Conexion.getConnection();
        
         try {
@@ -169,4 +169,33 @@ public class EventoDAO{
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }  
      }
+     
+    public int busquedaEvento(String evento){
+       Connection con = Conexion.getConnection();
+       int id = -1;
+      try {
+          String query = "SELECT  id_evento  from  evento WHERE Nombre = ?";
+          PreparedStatement prepareStmt = con.prepareStatement(query);
+          prepareStmt.setString(1, evento);
+          ResultSet rs = prepareStmt.executeQuery();
+          while(rs.next()){
+              id = rs.getInt(1); 
+          }
+          prepareStmt.close();
+      } catch (SQLException ex) {
+          Logger.getLogger(TipoEventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return id;
+    }
+    public void  modificarEstatusEvento(int id, String status) throws SQLException{
+        Connection con = Conexion.getConnection();
+        System.out.println(id);
+        System.out.println(status);
+        String query = "UPDATE evento SET Status = ? where id_Evento = ?";
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setInt(2, id);
+        stmt.setString(1, status);
+        stmt.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Este evento ha cerrado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+    }
 }

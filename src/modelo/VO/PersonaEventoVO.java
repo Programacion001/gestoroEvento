@@ -1,24 +1,24 @@
+package modelo.VO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
 
-package vo;
-
-/**
- *
- * @author fredd
- */
 public class PersonaEventoVO {
 private int _Id;
 private String _nombre;
 private Date _fecha;
 private int _cantidadPersona;
-static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-
+private int _tipo;
 public PersonaEventoVO(){} 
+public PersonaEventoVO(int idevento,String nombre,int tipoevento, Date fecha,int cantidad){
+    this._Id = idevento;
+    this._nombre = nombre;
+    this._fecha = fecha;
+    this._tipo = tipoevento;
+    this._cantidadPersona = cantidad;
+}
 
     public int getId() {
         return _Id;

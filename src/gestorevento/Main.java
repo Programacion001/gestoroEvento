@@ -38,6 +38,7 @@ public class Main {
        login = new IGLogin();
        eventoActual = new IGLIstaEventoActuales();
        crearUsuario = new PanelControl();
+       PanelEvento panelEvento = new PanelEvento(); 
        
 ///// Inicializacion de los coordinadores ///////////////////////////////////
         coordLogin = new CoordLogin();
@@ -55,6 +56,8 @@ public class Main {
 //        login.setVisible(true);
 //        eventoActual.setVisible(true);
       crearUsuario.setVisible(true);
+
+
     
     }
 

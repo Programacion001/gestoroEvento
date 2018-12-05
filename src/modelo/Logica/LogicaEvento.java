@@ -2,6 +2,7 @@
 package modelo.Logica;
 
 import controlador.CoordEvento;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,5 +82,32 @@ public class LogicaEvento {
          consultaEvento.eliminarEvento(id);
     }
     
+    public int verificarBusquedaEvento(String evento){
+       
+       if (evento.compareTo("Seleccionar evento") == 0) {
+           JOptionPane.showMessageDialog(null, "Debe de elegir un tipo de evento");
+           return -1;
+           
+       }
+       else{
+         consultaEvento = new EventoDAO();
+         return consultaEvento.busquedaEvento(evento);
+       }
+    } 
     
-}
+    public void modificarEstatusEvento(int id, String status) throws SQLException{
+        if(id > 0 || status.compareTo("Finalizado") == 0 || status.compareTo("Proximamente") == 0){
+            consultaEvento = new EventoDAO();
+            consultaEvento.modificarEstatusEvento(id, status);
+            
+        }else{
+           JOptionPane.showMessageDialog(null, "No se ha podido eliminar");
+        }
+          
+    }
+    
+   }
+
+    
+    
+

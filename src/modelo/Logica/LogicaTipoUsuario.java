@@ -45,22 +45,5 @@ public class LogicaTipoUsuario {
        
    }
    
-//   public int verificarBusquedaTipo(String tipoEvento){
-//       
-//       if (tipoEvento.compareTo("Sel. tipo de evento") == 0) {
-//           JOptionPane.showMessageDialog(null, "Debe de elegir un tipo de evento");
-//           return -1;
-//           
-//       }
-//       else{
-//           tipoEventoConsulta = new TipoEventoDAO();
-//           return tipoEventoConsulta.buscarEvento(tipoEvento);
-//       }
-//       
-//   }
-   
-//   public String veriFicarBuscarEventoPorId(int id){
-//       tipoEventoConsulta = new TipoEventoDAO();
-//       return tipoEventoConsulta.buscarEventoPorId(id);
-//   }
+
 }

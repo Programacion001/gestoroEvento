@@ -1,6 +1,7 @@
 
 package controlador;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Logica.LogicaEvento;
 import modelo.VO.EventoVO;
@@ -44,6 +45,14 @@ public class CoordEvento {
     }
     public void eliminarEvento(int id){
          logicaEvento.verificarEliminarEvento(id);
+    }
+    
+    public int busquedaEvento(String evento){
+        return logicaEvento.verificarBusquedaEvento(evento);
+    }
+    
+    public void modificarEstatusEvento(int id, String status) throws SQLException{
+        logicaEvento.modificarEstatusEvento(id, status);
     }
     
     

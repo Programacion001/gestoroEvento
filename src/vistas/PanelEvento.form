@@ -85,7 +85,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbNomEvento" min="-2" pref="195" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                      <Component id="btnEventoActual1" min="-2" pref="281" max="-2" attributes="0"/>
+                      <Component id="btnEventoFinalizado" min="-2" pref="281" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -95,7 +95,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" pref="49" max="32767" attributes="0"/>
                       <Component id="lbNomEvento" alignment="3" max="32767" attributes="0"/>
-                      <Component id="btnEventoActual1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnEventoFinalizado" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -129,7 +129,7 @@
                 <Property name="text" type="java.lang.String" value="Conferencia de Huawei "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEventoActual1">
+            <Component class="javax.swing.JButton" name="btnEventoFinalizado">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="50" green="af" red="4f" type="rgb"/>
@@ -142,6 +142,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Terminar registro del evento  "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEventoFinalizadoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

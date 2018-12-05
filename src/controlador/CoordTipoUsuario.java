@@ -25,8 +25,5 @@ public class CoordTipoUsuario {
     public int BusquedaTipoUsuario(String tipoUsuario){
         return logicaTipoUsuario.verificarBusquedaTipo(tipoUsuario);
     }
-//    
-//    public String buscarEventoPorId(int id){
-//        return logicaTipoEvento.veriFicarBuscarEventoPorId(id);
-//   }
+
 }

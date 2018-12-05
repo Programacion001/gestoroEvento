@@ -15,6 +15,9 @@ import javax.swing.table.JTableHeader;
 import controlador.CoordInvitacion;
 import controlador.CoordInvitado;
 import static java.lang.Thread.sleep;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.VO.EventoVO;
 import modelo.VO.InvitadoVO;
 
@@ -24,7 +27,7 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
     private CoordInvitado coordInvitado;
     private CoordEvento coordEvento;
     private int count = 0;
-
+    private int idInvitado = -1;
     public void setCoordinadorInvitacion(CoordInvitacion coordinadorInvitacion) {
         this.coordinadorInvitacion = coordinadorInvitacion;
     }
@@ -45,14 +48,14 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
     }
     
     private void personalizarTable(){
-        JTableHeader Theader = tbUsuario.getTableHeader();
+        JTableHeader Theader = tbInvitado.getTableHeader();
         Color bgHeader = new Color(158,158,158);
         Theader.setBackground(bgHeader); //background
         Theader.setForeground(Color.white); // color de font 
         Theader.setFont(new Font("Open Sans", Font.PLAIN, 17)); //font style size
-        tbUsuario.setFont(new Font("Open Sans", Font.PLAIN, 15));
-        tbUsuario.setForeground(bgHeader);
-        tbUsuario.setRowHeight(30);
+        tbInvitado.setFont(new Font("Open Sans", Font.PLAIN, 15));
+        tbInvitado.setForeground(bgHeader);
+        tbInvitado.setRowHeight(30);
        
     }
     
@@ -76,7 +79,7 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
              public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
         };
         
-        tbUsuario.setModel(model);
+        tbInvitado.setModel(model);
     }
     
     
@@ -88,6 +91,22 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
              cbEvento.addItem(n.getNombre());
          }
      }
+    
+   private void btnCrearInvitacion() throws SQLException{
+       String evento = (String) cbEvento.getSelectedItem();
+       int idEvento = coordEvento.busquedaEvento(evento);
+       
+        EventoVO eventoInvt = new EventoVO();
+        eventoInvt.setId(idEvento);
+        
+        InvitadoVO invitadaInt = new InvitadoVO();
+        invitadaInt.setId(idInvitado);
+        
+        coordinadorInvitacion.registrarInvitacion(eventoInvt, invitadaInt);
+         System.out.println(coordEvento.busquedaEvento(evento));
+         System.out.println(idInvitado);
+         
+    }
     
      private void llamadado(){
          Thread hilo = new Thread() {
@@ -110,6 +129,8 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
         };
        hilo.start();
     }
+     
+     
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,10 +138,10 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JButton();
+        btnCrearInvitacion = new javax.swing.JButton();
         cbEvento = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbUsuario = new javax.swing.JTable();
+        tbInvitado = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -148,21 +169,21 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnModificar.setBackground(new java.awt.Color(79, 175, 80));
-        btnModificar.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("Crear Invitación");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+        btnCrearInvitacion.setBackground(new java.awt.Color(79, 175, 80));
+        btnCrearInvitacion.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
+        btnCrearInvitacion.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrearInvitacion.setText("Crear Invitación");
+        btnCrearInvitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+                btnCrearInvitacionActionPerformed(evt);
             }
         });
 
         cbEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Seleccionar evento"}));
         cbEvento.setAutoscrolls(true);
 
-        tbUsuario.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
-        tbUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tbInvitado.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        tbInvitado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -178,12 +199,12 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        tbUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbInvitado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbUsuarioMouseClicked(evt);
+                tbInvitadoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbUsuario);
+        jScrollPane1.setViewportView(tbInvitado);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -199,7 +220,7 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(557, 557, 557)
-                        .addComponent(btnModificar))
+                        .addComponent(btnCrearInvitacion))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
@@ -211,38 +232,35 @@ public class IGCrearInvitacion extends javax.swing.JPanel {
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCrearInvitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
-//        System.out.println(tbUsuario.getSelectedRow());
-//        System.out.println(tbUsuario.getValueAt(0, 2) ); 
-        int[] count = tbUsuario.getSelectedRows();
-        for (int i = 0; i < count.length; i++) {
-            System.out.println(count[i]);
+    private void tbInvitadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbInvitadoMouseClicked
+        idInvitado = (int) tbInvitado.getValueAt(tbInvitado.getSelectedRow(), 0);
+    }//GEN-LAST:event_tbInvitadoMouseClicked
+
+    private void btnCrearInvitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearInvitacionActionPerformed
+        try {
+            btnCrearInvitacion();
+        } catch (SQLException ex) {
+            Logger.getLogger(IGCrearInvitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        System.out.println();
-    }//GEN-LAST:event_tbUsuarioMouseClicked
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
-    }//GEN-LAST:event_btnModificarActionPerformed
+    }//GEN-LAST:event_btnCrearInvitacionActionPerformed
 
    public void setCoordinador(CoordInvitacion coordinadorInvitacion){
        this.coordinadorInvitacion = coordinadorInvitacion;
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnCrearInvitacion;
     private javax.swing.JComboBox<String> cbEvento;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbUsuario;
+    private javax.swing.JTable tbInvitado;
     // End of variables declaration//GEN-END:variables
 }

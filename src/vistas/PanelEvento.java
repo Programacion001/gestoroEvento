@@ -2,9 +2,14 @@
 package vistas;
 
 import controlador.CoordEvento;
+import controlador.CoordInvitacion;
 import java.awt.BorderLayout;
 import static java.lang.Thread.sleep;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Logica.LogicaEvento;
+import modelo.Logica.LogicaInvitacion;
 import modelo.VO.EventoVO;
 import modelo.VO.UsuarioVO;
 
@@ -19,17 +24,24 @@ public class PanelEvento extends javax.swing.JFrame {
     private CoordEvento coordEvento;
     private LogicaEvento logicaEvento;
     private EventoVO evento;
+    
+    private CoordInvitacion coordInvitacion;
+    private LogicaInvitacion logicaInvitacion;
+    
     private int count = 0;
     
     public PanelEvento() {
         initComponents();
         this.setLocationRelativeTo(null);
-        irRegistraInvitado();
+        
         
         coordEvento = new CoordEvento();
         logicaEvento = new LogicaEvento();
+        coordInvitacion = new CoordInvitacion();
+        logicaInvitacion = new LogicaInvitacion();
         coordEvento.setLogicaEvento(logicaEvento);
         logicaEvento.setCoordinador(coordEvento);
+        
         llamadado();
     }
     
@@ -56,7 +68,9 @@ public class PanelEvento extends javax.swing.JFrame {
                     if (count == 0) {
                         try {
                            sleep(100);
+                           irRegistraInvitado();
                            iniciar();
+                           
                         } catch (Exception e) {
 
                         }
@@ -69,6 +83,14 @@ public class PanelEvento extends javax.swing.JFrame {
         };
        hilo.start();
     }
+    
+    public void inalizarEntrada() throws SQLException{
+       coordEvento.modificarEstatusEvento(22, "Finalizado"); /// arraglar 
+       IGLIstaEventoActuales eventoActuales = new IGLIstaEventoActuales();
+       eventoActuales.setVisible(true);
+       eventoActuales.setUsuarioActivo(usuarioActivo);
+       this.setVisible(false);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,7 +100,7 @@ public class PanelEvento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         lbNomEvento = new javax.swing.JLabel();
-        btnEventoActual1 = new javax.swing.JButton();
+        btnEventoFinalizado = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnEventoActual = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -105,10 +127,15 @@ public class PanelEvento extends javax.swing.JFrame {
         lbNomEvento.setForeground(new java.awt.Color(187, 182, 182));
         lbNomEvento.setText("Conferencia de Huawei ");
 
-        btnEventoActual1.setBackground(new java.awt.Color(79, 175, 80));
-        btnEventoActual1.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
-        btnEventoActual1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEventoActual1.setText("Terminar registro del evento  ");
+        btnEventoFinalizado.setBackground(new java.awt.Color(79, 175, 80));
+        btnEventoFinalizado.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
+        btnEventoFinalizado.setForeground(new java.awt.Color(255, 255, 255));
+        btnEventoFinalizado.setText("Terminar registro del evento  ");
+        btnEventoFinalizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEventoFinalizadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,7 +147,7 @@ public class PanelEvento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbNomEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(163, 163, 163)
-                .addComponent(btnEventoActual1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEventoFinalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,7 +155,7 @@ public class PanelEvento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                 .addComponent(lbNomEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEventoActual1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnEventoFinalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBackground(new java.awt.Color(158, 158, 158));
@@ -291,6 +318,14 @@ public class PanelEvento extends javax.swing.JFrame {
         cerrarSesion();
     }//GEN-LAST:event_lbCerrarSesionMouseClicked
 
+    private void btnEventoFinalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventoFinalizadoActionPerformed
+        try {
+            inalizarEntrada();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelEvento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEventoFinalizadoActionPerformed
+
     
     private void iniciar(){
         
@@ -310,11 +345,14 @@ public class PanelEvento extends javax.swing.JFrame {
        this.setVisible(false);
    }
 
-    /**
-     * Para ir al panel de crear usuario; 
-     */
-    private void irRegistraInvitado(){
+   
+    private void irListaInvitado(){
         IGPorteroListaInvitado listaInvitado = new  IGPorteroListaInvitado();
+        
+        coordInvitacion.setLogicaInv(logicaInvitacion);
+        listaInvitado.setCoordInvitacion(coordInvitacion);
+        listaInvitado.setEvento(evento);
+        
         listaInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(listaInvitado, BorderLayout.CENTER);
@@ -323,8 +361,13 @@ public class PanelEvento extends javax.swing.JFrame {
     }
    
     
-    private void irListaInvitado(){
+    private void irRegistraInvitado(){
         IGPorteroRegistrarInvitado registrarInvitado = new  IGPorteroRegistrarInvitado();
+        
+        registrarInvitado.setCoordInvitacion(coordInvitacion);
+        coordInvitacion.setLogicaInv(logicaInvitacion);
+       
+        
         registrarInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(registrarInvitado, BorderLayout.CENTER);
@@ -368,7 +411,7 @@ public class PanelEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEventoActual;
-    private javax.swing.JButton btnEventoActual1;
+    private javax.swing.JButton btnEventoFinalizado;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

@@ -1,20 +1,30 @@
 
 package modelo.VO;
 
+import java.util.Date;
+
 public class DiaAsistenciaVO {
-private int _Id;
+
 private String _dia;
 private int _cantidad;
+private float _porciento;
 
 public DiaAsistenciaVO(){}
+public DiaAsistenciaVO(String dia, int cantidad,float porciento){
+    this._porciento = porciento;
+    this._dia = dia;
+    this._cantidad = cantidad;
+}
 
-    public int getId() {
-        return _Id;
+    public float getPorciento() {
+        return _porciento;
     }
 
-    public void setId(int _Id) {
-        this._Id = _Id;
+    public void setPorciento(float _porciento) {
+        this._porciento = _porciento;
     }
+
+
 
     public String getDia() {
         return _dia;

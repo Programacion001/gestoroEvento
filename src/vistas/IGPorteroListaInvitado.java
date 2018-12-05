@@ -1,23 +1,38 @@
 
 package vistas;
 
+import controlador.CoordInvitacion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.Thread.sleep;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import modelo.VO.EventoVO;
+import modelo.VO.InvitadoVO;
 
 public class IGPorteroListaInvitado extends javax.swing.JPanel {
 
- 
+    private CoordInvitacion  coordInvitacion;
+    private EventoVO evento;
+    private int count = 0;
+    public void setEvento(EventoVO evento) {
+        this.evento = evento;
+    }
+    public void setCoordInvitacion(CoordInvitacion coordInvitacion) {
+        this.coordInvitacion = coordInvitacion;
+    }
+    
     public IGPorteroListaInvitado() {
         initComponents();
         personalizarTable();
-        listarTabla();
+        llamadado();
+      
 
     }
     
@@ -33,15 +48,23 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
        //((DefaultTableCellRenderer)Theader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
     }
     
-    private void listarTabla(){
+    private void listarTabla() throws SQLException{
+        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacion(22);
+        String cantidad = Integer.toString(invitados.size());
+        lbNumInvitado.setText(cantidad);
+         Object[][] fila = new Object[invitados.size()][6];
+        for (int i = 0; i < invitados.size(); i++) {
+            fila[i][0] = invitados.get(i).getId();
+            fila[i][1] = invitados.get(i).getNombre() + " " + invitados.get(i).getApellido();
+            fila[i][2] = invitados.get(i).getSexo();
+            fila[i][3] = invitados.get(i).getEmail();
+            fila[i][4] =invitados.get(i).getTelefono();
+            fila[i][5] =invitados.get(i).getStatus();
+            System.out.println(invitados.get(i).getApellido());
+            
+        }
+       
         
-        Object[][] fila = new Object[4][6];
-        fila[0][0] = 7;
-        fila[0][1] = "Marcos Matos";
-        fila[0][2] = "M";
-        fila[0][3] = "marcosa@gmail.com";
-        fila[0][4] ="829-987-6579";
-        fila[0][5] ="Presente";
         Object[] titulo = {"ID", "Nombre y apellido", "Genero", "Email", "Teléfonos", "Estatus"};
         
         DefaultTableModel model = new DefaultTableModel(fila, titulo){
@@ -53,6 +76,27 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
         
     }
     
+    
+      private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(50);
+                           listarTabla();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
 
         
     @SuppressWarnings("unchecked")
@@ -65,7 +109,7 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbNumInvitado = new javax.swing.JLabel();
 
         jPanel6.setBackground(new java.awt.Color(226, 224, 224));
 
@@ -121,9 +165,9 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         jLabel1.setText("Total de personas: ");
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
-        jLabel2.setText("253");
+        lbNumInvitado.setBackground(new java.awt.Color(0, 0, 0));
+        lbNumInvitado.setFont(new java.awt.Font("Open Sans", 0, 17)); // NOI18N
+        lbNumInvitado.setText("    ");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -138,8 +182,8 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbNumInvitado, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
@@ -151,7 +195,7 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
                 .addGap(84, 84, 84)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lbNumInvitado))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -184,10 +228,10 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbNumInvitado;
     private javax.swing.JTable tbUsuario;
     // End of variables declaration//GEN-END:variables
 }

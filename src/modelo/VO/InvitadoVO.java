@@ -14,8 +14,17 @@ private String _direccion;
 private String _telefono;
 private String _sexo;
 private String _email;
+private String _status;
+    public InvitadoVO(){}
+    public String getStatus() {
+        return _status;
+    }
 
-public InvitadoVO(){}
+    public void setStatus(String _status) {
+        this._status = _status;
+    }
+
+
 
     public String getDireccion() {
         return _direccion;

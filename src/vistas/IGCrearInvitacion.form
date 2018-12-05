@@ -32,7 +32,7 @@
                   <Group type="102" attributes="0">
                       <Component id="cbEvento" min="-2" pref="183" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="557" max="-2" attributes="0"/>
-                      <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCrearInvitacion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="1" min="-2" pref="883" max="-2" attributes="0"/>
               </Group>
@@ -48,7 +48,7 @@
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cbEvento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnModificar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btnCrearInvitacion" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="405" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnModificar">
+    <Component class="javax.swing.JButton" name="btnCrearInvitacion">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="50" green="af" red="4f" type="rgb"/>
@@ -116,7 +116,7 @@
         <Property name="text" type="java.lang.String" value="Crear Invitaci&#xf3;n"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearInvitacionActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbEvento">
@@ -137,7 +137,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tbUsuario">
+        <Component class="javax.swing.JTable" name="tbInvitado">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Open Sans" size="18" style="0"/>
@@ -185,7 +185,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbUsuarioMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbInvitadoMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
