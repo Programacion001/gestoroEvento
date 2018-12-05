@@ -52,7 +52,7 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
             }
             else if (dias.get(i).getDia().compareToIgnoreCase("Jueves") == 0) {
                 String cant = Integer.toString(dias.get(i).getCantidad());
-                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                String por = Float.toString((float) Math.round(dias.get(i).getPorciento()));
                 lbCantJueves.setText(cant);
                 lbPorJueves.setText(por + "%");
             }

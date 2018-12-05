@@ -61,8 +61,8 @@ public class PanelControl extends javax.swing.JFrame {
     }
     
     private void iniciar(){
-//        txtNameUser.setText(usuarioActivo.getNombre() + " " + usuarioActivo.getApellido());
-        //// inicializar evento 
+        txtNameUser.setText(usuarioActivo.getNombre() + " " + usuarioActivo.getApellido());
+         //inicializar evento 
         logicaTipoEvento = new LogicaTipoEvento();
         coordTipoEvento = new CoordTipoEvento();
         

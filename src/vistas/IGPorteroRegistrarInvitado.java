@@ -44,14 +44,12 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         this.evento = evento;
     }
     
-    public IGPorteroRegistrarInvitado() {
+    public IGPorteroRegistrarInvitado() throws SQLException {
         initComponents();
-        llamadado();
         personalizarTable();
-        System.out.println("Hola1");
+       llamadado();
         
         
-
     }
     
     private void personalizarTable(){
@@ -68,19 +66,19 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
     }
     
   private void listarTabla() throws SQLException{
-        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacionAusente(22); ///modificar 
+        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacionAusente(evento.getId()); ///modificar 
         String cantidad = Integer.toString(invitados.size());
          lbRest.setText(cantidad);
          Object[][] fila = new Object[invitados.size()][6];
+         
         for (int i = 0; i < invitados.size(); i++) {
-            
+              System.out.println(invitados);
             fila[i][0] = invitados.get(i).getId();
             fila[i][1] = invitados.get(i).getNombre() + " " + invitados.get(i).getApellido();
             fila[i][2] = invitados.get(i).getSexo();
             fila[i][3] = invitados.get(i).getEmail();
             fila[i][4] =invitados.get(i).getTelefono();
             fila[i][5] =invitados.get(i).getStatus();
-            System.out.println(invitados.get(i).getApellido());
             
         }
        
@@ -100,11 +98,12 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
          public void modificarStatusInvitacion(EventoVO evento, InvitadoVO invitado, String status) 
         */
         if(idInvitado > 0){
-            EventoVO evento = new EventoVO();
-            evento.setId(22); /// modificar 
-            InvitadoVO invitado = new InvitadoVO();
-            invitado.setId(idInvitado);
-            coordInvitacion.modificarStatusInvitacion(evento, invitado,"Presente");
+            EventoVO eventoMod = new EventoVO();
+            eventoMod.setId(evento.getId()); /// modificar 
+            System.out.println(evento.getId());
+            InvitadoVO invitadoMod = new InvitadoVO();
+            invitadoMod.setId(idInvitado);
+            coordInvitacion.modificarStatusInvitacion(eventoMod, invitadoMod,"Presente");
         }else{
             JOptionPane.showMessageDialog(null,"Debe de seleccionar un invitado para eliminarlo","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
@@ -121,6 +120,7 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
                         try {
                            sleep(50);
                            listarTabla();
+                            
                         } catch (Exception e) {
 
                         }
@@ -148,6 +148,7 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lbRest = new javax.swing.JLabel();
         btnDarEntrada = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         jPanel6.setBackground(new java.awt.Color(226, 224, 224));
 
@@ -217,6 +218,16 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
             }
         });
 
+        btnActualizar.setBackground(new java.awt.Color(79, 175, 80));
+        btnActualizar.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setText("acttualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -226,31 +237,38 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 65, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbRest, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(71, 71, 71))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnDarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(58, 58, 58))))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbRest, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lbRest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lbRest))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(btnDarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,11 +289,12 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
 
     private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
             idInvitado = (int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0);
-            System.out.println(idInvitado);
+            System.out.println((int) tbUsuario.getValueAt(tbUsuario.getSelectedRow(), 0));
+            
     }//GEN-LAST:event_tbUsuarioMouseClicked
 
     private void btnDarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarEntradaActionPerformed
-        try {
+        try{
             registrarInvitacion();
         } catch (SQLException ex) {
             Logger.getLogger(IGPorteroRegistrarInvitado.class.getName()).log(Level.SEVERE, null, ex);
@@ -287,8 +306,13 @@ public class IGPorteroRegistrarInvitado extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDarEntradaActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+         llamadado();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnDarEntrada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;

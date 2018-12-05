@@ -112,6 +112,7 @@ public class InvitacionDAO {
     
       public ArrayList<InvitadoVO> listaInvitacionAusente(int idevento) throws SQLException{
       ArrayList<InvitadoVO> listainvitados = new ArrayList<InvitadoVO>();
+         
      PreparedStatement consulta = con.prepareStatement(
              "select i.id_evento,inv.id_invitados,inv.apellido,inv.nombre,inv.sexo,inv.email,inv.telefono,"
              + "i.Status from invitados inv inner join\n" +

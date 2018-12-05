@@ -49,7 +49,7 @@ public class IGPorteroListaInvitado extends javax.swing.JPanel {
     }
     
     private void listarTabla() throws SQLException{
-        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacion(22);
+        ArrayList<InvitadoVO> invitados =  coordInvitacion.listaInvitacion(evento.getId());
         String cantidad = Integer.toString(invitados.size());
         lbNumInvitado.setText(cantidad);
          Object[][] fila = new Object[invitados.size()][6];

@@ -85,7 +85,7 @@ public class PanelEvento extends javax.swing.JFrame {
     }
     
     public void inalizarEntrada() throws SQLException{
-       coordEvento.modificarEstatusEvento(22, "Finalizado"); /// arraglar 
+       coordEvento.modificarEstatusEvento(idEvento, "Finalizado"); /// arraglar 
        IGLIstaEventoActuales eventoActuales = new IGLIstaEventoActuales();
        eventoActuales.setVisible(true);
        eventoActuales.setUsuarioActivo(usuarioActivo);
@@ -302,7 +302,11 @@ public class PanelEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbRegistrarInvitadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbRegistrarInvitadoMouseClicked
-        irRegistraInvitado();        
+        try {        
+            irRegistraInvitado();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelEvento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lbRegistrarInvitadoMouseClicked
 
     private void lbListaInvitadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbListaInvitadoMouseClicked
@@ -361,12 +365,13 @@ public class PanelEvento extends javax.swing.JFrame {
     }
    
     
-    private void irRegistraInvitado(){
+    private void irRegistraInvitado() throws SQLException{
         IGPorteroRegistrarInvitado registrarInvitado = new  IGPorteroRegistrarInvitado();
         
-        registrarInvitado.setCoordInvitacion(coordInvitacion);
+        
         coordInvitacion.setLogicaInv(logicaInvitacion);
-       
+        registrarInvitado.setCoordInvitacion(coordInvitacion);
+        registrarInvitado.setEvento(evento);
         
         registrarInvitado.setSize(1003, 712);
         pnlPrincipal.removeAll();
