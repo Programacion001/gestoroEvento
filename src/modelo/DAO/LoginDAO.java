@@ -1,6 +1,6 @@
 
 package modelo.DAO;
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,20 +19,25 @@ public class LoginDAO {
     
     public UsuarioVO confirmarUsuario(UsuarioVO usuario){
          Connection con = Conexion.getConnection();
-         System.out.println(usuario.getPassword());
+         
          boolean usuarioActivo = false;
+         String query ="select u.id_Usuario, u.Contraseña, u.nombre, u.Apellido, u.Nom_usuario, u.Tipo_user, tp.Tipo\n" +
+                "from usuario as u\n" +
+                "join tipo_user as tp\n" +
+                "on u.Tipo_user = tp.id_Tipo";
          try{
              Statement stm = con.createStatement();
-             ResultSet rs =  stm.executeQuery("SELECT* FROM usuario ");
+             ResultSet rs =  stm.executeQuery(query);
              ArrayList<UsuarioVO> listaUsuarios = new ArrayList<UsuarioVO>();
              while(rs.next()){
                  UsuarioVO usuarios = new UsuarioVO();
-                 usuarios.setId(rs.getInt(1));
+               
+                 System.out.println(rs.getString(7));
                  usuarios.setPassword(rs.getString(2));
                  usuarios.setNombre(rs.getString(3));
                  usuarios.setApellido(rs.getString(4));
                  usuarios.setNomUser(rs.getString(5));
-                 System.out.println(rs.getString(3));
+                 usuarios.setTipoUsuario(rs.getString(7));
                  listaUsuarios.add(usuarios);
              }
              

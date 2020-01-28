@@ -1,19 +1,105 @@
 
 package vistas.reportePanel;
 
+import controlador.CoordReporte;
 import java.awt.Color;
 import java.awt.Font;
+import static java.lang.Thread.sleep;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.JTableHeader;
+import modelo.VO.DiaAsistenciaVO;
 
 public class pnlDiaMasVisitado extends javax.swing.JPanel {
 
+    private CoordReporte coordReporte;
+    private int count = 0;
     public pnlDiaMasVisitado() {
         initComponents();
-       
+        llamadado();
+        
     }
 
+    public CoordReporte getCoordReporte() {
+        return coordReporte;
+    }
+
+    public void setCoordReporte(CoordReporte coordReporte) {
+        this.coordReporte = coordReporte;
+    }
     
     
+    private void dias() throws SQLException{
+        ArrayList<DiaAsistenciaVO> dias = coordReporte.realizarReporteDiaVisitado();
+        for (int i = 0; i < dias.size(); i++) {
+            if (dias.get(i).getDia().compareToIgnoreCase("Lunes") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbCantLunes.setText(cant);
+                lbPorLunes.setText(por + "%");
+            }
+             else if (dias.get(i).getDia().compareToIgnoreCase("Martes") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbCantMates.setText(cant);
+                lbPorMates.setText(por + "%");
+            }
+            else if (dias.get(i).getDia().compareToIgnoreCase("Miercoles") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbCantMiercoles.setText(cant );
+                lbPorMiercoles.setText(por + "%");
+            }
+            else if (dias.get(i).getDia().compareToIgnoreCase("Jueves") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.round(dias.get(i).getPorciento()));
+                lbCantJueves.setText(cant);
+                lbPorJueves.setText(por + "%");
+            }
+             else if (dias.get(i).getDia().compareToIgnoreCase("Viernes") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbCantViernes.setText(cant);
+                lbPorViernes.setText(por + "%");
+            }
+            else if (dias.get(i).getDia().compareToIgnoreCase("Sabado") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbCantSabado.setText(cant);
+                lbPorSabado.setText(por + "%");
+            }
+            else if (dias.get(i).getDia().compareToIgnoreCase("Domingo") == 0) {
+                String cant = Integer.toString(dias.get(i).getCantidad());
+                String por = Float.toString((float) Math.floor(dias.get(i).getPorciento()));
+                lbDomLunes.setText(cant);
+                lbPorDomingo.setText(por + "%");
+            }
+            System.out.println(dias.get(i).getDia());
+            System.out.println(dias.get(i).getPorciento());
+        }
+    }
+    
+
+     private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           dias();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,44 +110,44 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        lbCantLunes = new javax.swing.JLabel();
+        lbPorLunes = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
+        lbCantMates = new javax.swing.JLabel();
+        lbPorMates = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
+        lbCantJueves = new javax.swing.JLabel();
+        lbPorJueves = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
+        lbCantViernes = new javax.swing.JLabel();
+        lbPorViernes = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
-        jLabel56 = new javax.swing.JLabel();
-        jLabel57 = new javax.swing.JLabel();
+        lbCantMiercoles = new javax.swing.JLabel();
+        lbPorMiercoles = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
+        lbCantSabado = new javax.swing.JLabel();
+        lbPorSabado = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
+        lbDomLunes = new javax.swing.JLabel();
+        lbPorDomingo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(226, 224, 224));
 
@@ -87,15 +173,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel25.setForeground(new java.awt.Color(97, 97, 97));
         jLabel25.setText("Porcentaje: ");
 
-        jLabel26.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel26.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel26.setText("7844");
+        lbCantLunes.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantLunes.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantLunes.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantLunes.setText(" 0");
 
-        jLabel27.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel27.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel27.setText("25%");
+        lbPorLunes.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorLunes.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorLunes.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorLunes.setText("0%");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -108,11 +194,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -123,11 +209,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel26))
+                    .addComponent(lbCantLunes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jLabel27))
+                    .addComponent(lbPorLunes))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -148,15 +234,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel35.setForeground(new java.awt.Color(97, 97, 97));
         jLabel35.setText("Porcentaje: ");
 
-        jLabel36.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel36.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel36.setText("7844");
+        lbCantMates.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantMates.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantMates.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantMates.setText("0");
 
-        jLabel37.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel37.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel37.setText("25%");
+        lbPorMates.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorMates.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorMates.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorMates.setText("0%");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -169,11 +255,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel35)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorMates, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel34)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantMates, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -184,11 +270,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(jLabel36))
+                    .addComponent(lbCantMates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(jLabel37))
+                    .addComponent(lbPorMates))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -209,15 +295,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel40.setForeground(new java.awt.Color(97, 97, 97));
         jLabel40.setText("Porcentaje: ");
 
-        jLabel41.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel41.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel41.setText("7844");
+        lbCantJueves.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantJueves.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantJueves.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantJueves.setText("0");
 
-        jLabel42.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel42.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel42.setText("25%");
+        lbPorJueves.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorJueves.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorJueves.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorJueves.setText("0%");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -230,11 +316,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel40)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -245,11 +331,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jLabel41))
+                    .addComponent(lbCantJueves))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
-                    .addComponent(jLabel42))
+                    .addComponent(lbPorJueves))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -270,15 +356,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel50.setForeground(new java.awt.Color(97, 97, 97));
         jLabel50.setText("Porcentaje: ");
 
-        jLabel51.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel51.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel51.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel51.setText("7844");
+        lbCantViernes.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantViernes.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantViernes.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantViernes.setText("0");
 
-        jLabel52.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel52.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel52.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel52.setText("25%");
+        lbPorViernes.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorViernes.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorViernes.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorViernes.setText("0%");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -291,11 +377,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel50)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel49)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -306,11 +392,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
-                    .addComponent(jLabel51))
+                    .addComponent(lbCantViernes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
-                    .addComponent(jLabel52))
+                    .addComponent(lbPorViernes))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -331,15 +417,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel55.setForeground(new java.awt.Color(97, 97, 97));
         jLabel55.setText("Porcentaje: ");
 
-        jLabel56.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel56.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel56.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel56.setText("7844");
+        lbCantMiercoles.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantMiercoles.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantMiercoles.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantMiercoles.setText("0");
 
-        jLabel57.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel57.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel57.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel57.setText("25%");
+        lbPorMiercoles.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorMiercoles.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorMiercoles.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorMiercoles.setText("0%");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -352,11 +438,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel55)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel54)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -367,11 +453,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel54)
-                    .addComponent(jLabel56))
+                    .addComponent(lbCantMiercoles))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel55)
-                    .addComponent(jLabel57))
+                    .addComponent(lbPorMiercoles))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -392,15 +478,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel60.setForeground(new java.awt.Color(97, 97, 97));
         jLabel60.setText("Porcentaje: ");
 
-        jLabel61.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel61.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel61.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel61.setText("7844");
+        lbCantSabado.setBackground(new java.awt.Color(187, 182, 182));
+        lbCantSabado.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbCantSabado.setForeground(new java.awt.Color(187, 182, 182));
+        lbCantSabado.setText("0");
 
-        jLabel62.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel62.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel62.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel62.setText("25%");
+        lbPorSabado.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorSabado.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorSabado.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorSabado.setText("0%");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -413,11 +499,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel60)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel59)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbCantSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -428,11 +514,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel59)
-                    .addComponent(jLabel61))
+                    .addComponent(lbCantSabado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel60)
-                    .addComponent(jLabel62))
+                    .addComponent(lbPorSabado))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -453,15 +539,15 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
         jLabel65.setForeground(new java.awt.Color(97, 97, 97));
         jLabel65.setText("Porcentaje: ");
 
-        jLabel66.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel66.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel66.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel66.setText("7844");
+        lbDomLunes.setBackground(new java.awt.Color(187, 182, 182));
+        lbDomLunes.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbDomLunes.setForeground(new java.awt.Color(187, 182, 182));
+        lbDomLunes.setText("  0");
 
-        jLabel67.setBackground(new java.awt.Color(187, 182, 182));
-        jLabel67.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
-        jLabel67.setForeground(new java.awt.Color(187, 182, 182));
-        jLabel67.setText("25%");
+        lbPorDomingo.setBackground(new java.awt.Color(187, 182, 182));
+        lbPorDomingo.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
+        lbPorDomingo.setForeground(new java.awt.Color(187, 182, 182));
+        lbPorDomingo.setText("   0%");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -474,11 +560,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel65)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbPorDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel64)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbDomLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -489,11 +575,11 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel64)
-                    .addComponent(jLabel66))
+                    .addComponent(lbDomLunes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel65)
-                    .addComponent(jLabel67))
+                    .addComponent(lbPorDomingo))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -549,59 +635,47 @@ public class pnlDiaMasVisitado extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lbCantJueves;
+    private javax.swing.JLabel lbCantLunes;
+    private javax.swing.JLabel lbCantMates;
+    private javax.swing.JLabel lbCantMiercoles;
+    private javax.swing.JLabel lbCantSabado;
+    private javax.swing.JLabel lbCantViernes;
+    private javax.swing.JLabel lbDomLunes;
+    private javax.swing.JLabel lbPorDomingo;
+    private javax.swing.JLabel lbPorJueves;
+    private javax.swing.JLabel lbPorLunes;
+    private javax.swing.JLabel lbPorMates;
+    private javax.swing.JLabel lbPorMiercoles;
+    private javax.swing.JLabel lbPorSabado;
+    private javax.swing.JLabel lbPorViernes;
     // End of variables declaration//GEN-END:variables
 }

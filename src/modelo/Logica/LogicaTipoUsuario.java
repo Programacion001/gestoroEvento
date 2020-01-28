@@ -1,42 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.Logica;
 
+import controlador.CoordTipoEvento;
 import controlador.CoordTipoUsuario;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 import modelo.DAO.TipoUsuarioDAO;
 import modelo.VO.TipoUsuarioVO;
 
-/**
- *
- * @author Bill Aponte
- */
+
 public class LogicaTipoUsuario {
-private CoordTipoUsuario coordUsuario;
-private TipoUsuarioDAO tipoUsuario;
+    private CoordTipoUsuario coordTipoUsuario;
+    private TipoUsuarioDAO tipoUsuarioConsulta;
+    
+    
+    public void validarAgregarTipoEvento(TipoUsuarioVO tipoUsuario){
 
-    public void setCoordUsuario(CoordTipoUsuario coordUsuario) {
-        this.coordUsuario = coordUsuario;
+        if(tipoUsuario.getTipo().compareTo("") == 0){
+            JOptionPane.showMessageDialog(null, "Debe de llenar el campo");
+        }
+        else{
+            tipoUsuarioConsulta = new TipoUsuarioDAO();
+            tipoUsuarioConsulta.AgregarTipoUsuario(tipoUsuario);
+        }
     }
- public void validarAgregarTipoUsuario(TipoUsuarioVO tipo)throws SQLException{
-
-if(tipo.getTipo().compareTo("")==0)   {
-JOptionPane.showMessageDialog(null, "Debe de completar llenar el campo");
-} 
-else{
-tipoUsuario = new TipoUsuarioDAO();
-tipoUsuario.AgregarTipoUsuario(tipo);
+    
+   public ArrayList<TipoUsuarioVO> validarConsultaTipoUsuario(){
+      
+       tipoUsuarioConsulta = new TipoUsuarioDAO();
+       return tipoUsuarioConsulta.consultarTipoUsuario();
+   }
+   
+     public int verificarBusquedaTipo(String tipoUsuario){
+       
+       if (tipoUsuario.compareTo("Sel. tipo de evento") == 0) {
+           JOptionPane.showMessageDialog(null, "Debe de elegir un tipo de evento");
+           return -1;
+           
+       }
+       else{
+           tipoUsuarioConsulta = new TipoUsuarioDAO();
+           return tipoUsuarioConsulta.buscarEvento(tipoUsuario);
+       }
+       
+   }
+   
 
 }
- }
-
-   
-    }
-
-   
-

@@ -1,7 +1,7 @@
 
 package modelo.conexion;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -15,12 +15,14 @@ public class Conexion {
   
   
  public Conexion(){
-  driver = "com.mysql.jdbc.Driver";
+  driver = "com.mysql.cj.jdbc.Driver";
   url = "jdbc:mysql://127.0.1/gestorevento";
   usuario= "root";
   password= "123456";
     try{
+        // NOMBRE DEL DRIVER
         Class.forName(driver);
+        // REALIZAR CONEXION
         con = (Connection) DriverManager.getConnection(url,usuario, password);
 //        JOptionPane.showMessageDialog(null, "Conectado la base de datos ");    
         
@@ -36,10 +38,6 @@ public class Conexion {
      }
      return con;
  }  
-
-    public void desconetar() {
-      con =null;
-    }
  
 
 }

@@ -5,15 +5,19 @@
  */
 package modelo.Logica;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.VO.InvitadoVO;
 import modelo.VO.EventoVO;
 import modelo.DAO.InvitacionDAO;
 import modelo.VO.InvitacionVO;
 public class LogicaInvitacion {
-        InvitacionDAO invDAO;
+    InvitacionDAO invDAO;
+    
     public void validarInvitacion(EventoVO evento,InvitadoVO invitado) throws SQLException{
-        if(invitado.getId()>0 && evento.getId()>0){
+        
+        if(invitado.getId() > 0 && evento.getId() >0){
+            System.out.println("Dao");
             invDAO = new InvitacionDAO();
             invDAO.registrarInvitacion(evento, invitado);
         }else{	
@@ -53,9 +57,15 @@ public class LogicaInvitacion {
         invDAO.eliminarInvitacion(evento, invitado);   
     }
     
-    public void validadListaInvitacion(InvitacionVO invitacion){
+    public ArrayList<InvitadoVO> validadListaInvitacion(int idevento) throws SQLException{
         invDAO = new InvitacionDAO();
-        invDAO.listaInvitaciones(invitacion);
+        return invDAO.listaInvitacion(idevento);
     }
-    }
+    
+    public ArrayList<InvitadoVO> verificarListaInvitacionAusente(int idevento) throws SQLException{
+         invDAO = new InvitacionDAO();
+        return invDAO.listaInvitacionAusente(idevento);
+      }
+    
+ }
 

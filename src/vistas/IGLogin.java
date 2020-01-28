@@ -41,7 +41,11 @@ public class IGLogin extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "El usuario o contraseña no estan correctas"); 
         }else{
           JOptionPane.showMessageDialog(null, "Bienvenido " + usuarioActivo.getNomUser());   
+          IGLIstaEventoActuales eventoActuales = new IGLIstaEventoActuales();
+          eventoActuales.setVisible(true);
+          eventoActuales.setUsuarioActivo(usuarioActivo);
           this.setVisible(false);
+          
         }
         
         

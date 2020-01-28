@@ -1,46 +1,236 @@
 
 package vistas;
 
+import controlador.CoordEvento;
+import controlador.CoordInvitacion;
+import controlador.CoordInvitado;
 import controlador.CoordTipoEvento;
+import controlador.CoordTipoUsuario;
+import controlador.CoordUsuario;
 import java.awt.BorderLayout;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.lang.Thread.sleep;
+import modelo.Logica.LogicaEvento;
+import modelo.Logica.LogicaInvitacion;
+import modelo.Logica.LogicaInvitado;
 import modelo.Logica.LogicaTipoEvento;
+import modelo.Logica.LogicaTipoUsuario;
+import modelo.Logica.LogicaUsuario;
+import modelo.VO.UsuarioVO;
 
 
 
 public class PanelControl extends javax.swing.JFrame {
     
     IGReporte reporte;
-    IGCrearInvitacion crearInvitacion;
-    IGListaInvitado ListaInvitado;
-    IGAgregarInvitado AgregarInvitado;
     IGCrearEvento crearEvento;
-    IGListaUsuario listaUsuario;
-    IGListaEvento listaEvento;
+ 
+    private int count = 0;
+    static UsuarioVO  usuarioActivo; 
     
     //////coordinadores /////////////////
-    private LogicaTipoEvento logicaTipoEvento;
     private CoordTipoEvento coordTipoEvento;
+    private CoordEvento coordEvento;
+    private CoordTipoUsuario coordTipoUsuario;
+    private CoordUsuario coordUsuario;
+    private CoordInvitado coordinvitado;
+    private CoordInvitacion coordinadorInvitacion; 
     
+    ////// Logica //////
+    private LogicaTipoEvento logicaTipoEvento;
+    private LogicaEvento logicaEvento;
+    private LogicaTipoUsuario logicaTipoUsuario;
+    private LogicaUsuario logicaUsuario;
+    private LogicaInvitado logicaInvitado;
+    private LogicaInvitacion logicaInvitacion;
+    
+    public UsuarioVO getusuarioActivo() {
+        return usuarioActivo;
+    }
+
+    public void setusuarioActivo(UsuarioVO usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
+    }
+   
+
     public PanelControl() {
         initComponents();
         this.setLocationRelativeTo(null);
-        iniciar();
+        llamadado();
+        
        
     }
     
     private void iniciar(){
-        irCreaUsuario();
-        
-        //// inicializar evento 
+        txtNameUser.setText(usuarioActivo.getNombre() + " " + usuarioActivo.getApellido());
+         //inicializar evento 
         logicaTipoEvento = new LogicaTipoEvento();
         coordTipoEvento = new CoordTipoEvento();
         
+        logicaEvento = new LogicaEvento();
+        coordEvento = new CoordEvento();
+        
+        logicaTipoUsuario = new LogicaTipoUsuario();
+        coordTipoUsuario = new CoordTipoUsuario();
+        
+        logicaUsuario = new LogicaUsuario();
+        coordUsuario = new CoordUsuario();
+        
+        coordinvitado = new CoordInvitado();
+        logicaInvitado = new LogicaInvitado();
+        
+        logicaInvitacion = new LogicaInvitacion();
+        coordinadorInvitacion = new CoordInvitacion();
+        irCreaUsuario();
+        
     }
 
+    /**
+     * Para ir al panel de crear usuario; 
+     */
+    private void irCreaUsuario(){
+        IGCrearUsuario crearUsuario = new IGCrearUsuario();
+        
+        crearUsuario.setcoordTipoUsuario(coordTipoUsuario);
+        coordTipoUsuario.setLogicaTipoUsuario(logicaTipoUsuario);
+        
+        crearUsuario.setCoordUsuario(coordUsuario);
+        coordUsuario.setLogicaUsuario(logicaUsuario);
+       
+        crearUsuario.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irReporte(){
+        reporte = new IGReporte();
+        reporte.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(reporte, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irCreaInvitacion(){
+        IGCrearInvitacion crearInvitacion = new  IGCrearInvitacion();
+        
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        crearInvitacion.setCoordInvitado(coordinvitado);
 
+        coordEvento.setLogicaEvento(logicaEvento);
+        crearInvitacion.setCoordEvento(coordEvento);
+        
+        coordinadorInvitacion.setLogicaInv(logicaInvitacion);
+        crearInvitacion.setCoordinador(coordinadorInvitacion);
+        
+        crearInvitacion.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(crearInvitacion, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irListaInvitado(){
+        IGListaInvitado ListaInvitado = new  IGListaInvitado();
+        
+        ListaInvitado.setCoordInvitado(coordinvitado);
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        
+        ListaInvitado.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(ListaInvitado, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irAgregarInvitado(){
+        IGAgregarInvitado AgregarInvitado = new IGAgregarInvitado();
+        
+        AgregarInvitado.setCoordEvento(coordEvento);
+        coordEvento.setLogicaEvento(logicaEvento);
+        
+        coordinvitado.setLogicaInvitado(logicaInvitado);
+        AgregarInvitado.setCoordInvitado(coordinvitado);
+        
+        AgregarInvitado.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(AgregarInvitado, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irCreaEvento(){
+        IGCrearEvento crearEvento = new IGCrearEvento();
+       
+        crearEvento.setCoordTipoEvento(coordTipoEvento);
+        crearEvento.setCoordEvento(coordEvento);
+        coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
+        coordEvento.setLogicaEvento(logicaEvento);
+        
+        crearEvento.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(crearEvento, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+
+    private void irListaUsuario(){
+        IGListaUsuario listaUsuario = new IGListaUsuario();
+        
+        coordUsuario.setLogicaUsuario(logicaUsuario);
+        listaUsuario.setCoordUsuario(coordUsuario);
+       
+        listaUsuario.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(listaUsuario, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    private void irListaEvento(){
+        IGListaEvento listaEvento = new IGListaEvento();
+        
+        
+        coordEvento.setLogicaEvento(logicaEvento);
+        coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
+        coordEvento.setLogicaEvento(logicaEvento);
+        
+        listaEvento.setCoordEvento(coordEvento);
+        listaEvento.setCoordTipoEvento(coordTipoEvento);
+        
+        listaEvento.setSize(1003, 712);
+        pnlPrincipal.removeAll();
+        pnlPrincipal.add(listaEvento, BorderLayout.CENTER);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }
+    
+   private void cerrarSesion(){
+       System.exit(0);
+   }
+   
+   private void irEventoActuales(){
+       IGLIstaEventoActuales eventoActuales = new IGLIstaEventoActuales();
+       eventoActuales.setVisible(true);
+       eventoActuales.setUsuarioActivo(usuarioActivo);
+       this.setVisible(false);
+   }
+    
+       private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           iniciar();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,7 +241,7 @@ public class PanelControl extends javax.swing.JFrame {
         btnEventoActual = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         txtNameUser = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbCerrarSesion = new javax.swing.JLabel();
         lbListaUsuario = new javax.swing.JLabel();
         lbCreaUsuario = new javax.swing.JLabel();
         lbCrearEvento = new javax.swing.JLabel();
@@ -86,15 +276,25 @@ public class PanelControl extends javax.swing.JFrame {
         btnEventoActual.setFont(new java.awt.Font("Open Sans", 1, 15)); // NOI18N
         btnEventoActual.setForeground(new java.awt.Color(255, 255, 255));
         btnEventoActual.setText("Evento actual");
+        btnEventoActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEventoActualActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
 
         txtNameUser.setFont(new java.awt.Font("Open Sans", 1, 17)); // NOI18N
         txtNameUser.setText("Juan Matos Marte");
 
-        jLabel1.setBackground(new java.awt.Color(66, 66, 66));
-        jLabel1.setFont(new java.awt.Font("Open Sans", 1, 18)); // NOI18N
-        jLabel1.setText("Cerrar sesión ");
+        lbCerrarSesion.setBackground(new java.awt.Color(66, 66, 66));
+        lbCerrarSesion.setFont(new java.awt.Font("Open Sans", 1, 18)); // NOI18N
+        lbCerrarSesion.setText("Cerrar sesión ");
+        lbCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarSesionMouseClicked(evt);
+            }
+        });
 
         lbListaUsuario.setBackground(new java.awt.Color(255, 255, 255));
         lbListaUsuario.setFont(new java.awt.Font("Open Sans", 1, 18)); // NOI18N
@@ -203,7 +403,7 @@ public class PanelControl extends javax.swing.JFrame {
                             .addComponent(lbListaInvitado)
                             .addComponent(lbCrearInvitacion)
                             .addComponent(lbReporte)
-                            .addComponent(jLabel1)))
+                            .addComponent(lbCerrarSesion)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +421,7 @@ public class PanelControl extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(lbCerrarSesion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbCreaUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -301,11 +501,7 @@ public class PanelControl extends javax.swing.JFrame {
     }//GEN-LAST:event_lbListaUsuarioMouseClicked
 
     private void lbCrearEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearEventoMouseClicked
-        try {
-            irCreaEvento();
-        } catch (ParseException ex) {
-            Logger.getLogger(PanelControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       irCreaEvento();
     }//GEN-LAST:event_lbCrearEventoMouseClicked
 
     private void lbListaEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbListaEventoMouseClicked
@@ -328,78 +524,15 @@ public class PanelControl extends javax.swing.JFrame {
         irReporte();
     }//GEN-LAST:event_lbReporteMouseClicked
 
-    /**
-     * Para ir al panel de crear usuario; 
-     */
-    private void irCreaUsuario(){
-        IGCrearUsuario crearUsuario = new IGCrearUsuario();
-        crearUsuario.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(crearUsuario, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irReporte(){
-        reporte = new IGReporte();
-        reporte.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(reporte, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irCreaInvitacion(){
-        crearInvitacion = new  IGCrearInvitacion();
-        crearInvitacion.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(crearInvitacion, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irListaInvitado(){
-        ListaInvitado = new  IGListaInvitado ();
-        ListaInvitado.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(ListaInvitado, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irAgregarInvitado(){
-        AgregarInvitado = new IGAgregarInvitado();
-        AgregarInvitado.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(AgregarInvitado, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irCreaEvento() throws ParseException{
-        IGCrearEvento crearEvento = new IGCrearEvento();
-       
-        crearEvento.setCoordTipoEvento(coordTipoEvento);
-        coordTipoEvento.setLogicaTipoEvento(logicaTipoEvento);
-        
-        crearEvento.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(crearEvento, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
+    private void lbCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarSesionMouseClicked
+       cerrarSesion();
+    }//GEN-LAST:event_lbCerrarSesionMouseClicked
 
-    private void irListaUsuario(){
-        listaUsuario= new IGListaUsuario ();
-        listaUsuario.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(listaUsuario, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
-    private void irListaEvento(){
-        listaEvento = new IGListaEvento();
-        listaEvento.setSize(1003, 712);
-        pnlPrincipal.removeAll();
-        pnlPrincipal.add(listaEvento, BorderLayout.CENTER);
-        pnlPrincipal.revalidate();
-        pnlPrincipal.repaint();
-    }
+    private void btnEventoActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventoActualActionPerformed
+        irEventoActuales();
+    }//GEN-LAST:event_btnEventoActualActionPerformed
+
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -435,13 +568,13 @@ public class PanelControl extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEventoActual;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbAgregarInvitado;
+    private javax.swing.JLabel lbCerrarSesion;
     private javax.swing.JLabel lbCreaUsuario;
     private javax.swing.JLabel lbCrearEvento;
     private javax.swing.JLabel lbCrearInvitacion;

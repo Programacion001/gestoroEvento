@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.DAO;
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,16 +16,22 @@ public class InvitacionDAO {
     
     Connection con = Conexion.getConnection();
     public void registrarInvitacion(EventoVO evento,InvitadoVO invitado) throws SQLException{
+       String consulta = "insert into asisten (id_Evento, id_invitado, Status) values (?,?,? )";
+       String status = "Ausente";
     try{
-        Statement query = con.createStatement();
-        query.executeUpdate("insert into asisten (id_Evento,id_invitado,Status) values ('"+evento.getId()+"','"+ invitado.getId()+"','Ausente')");
-        JOptionPane.showMessageDialog(null, "Se ha registrado la invtiacion","Información",JOptionPane.INFORMATION_MESSAGE);
-			query.close();
+        PreparedStatement stm = con.prepareStatement(consulta);
+        stm.setInt(1, evento.getId());
+        stm.setInt(2, invitado.getId());
+        stm.setString(3, status);
+        stm.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Se ha registrado la invitacion","Información",JOptionPane.INFORMATION_MESSAGE);
+        stm.close();
     }catch(SQLException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "No se Registro");
 }
     }
+    
    public InvitacionVO buscarInvitacion(EventoVO evento,InvitadoVO invitado) throws SQLException{
        InvitacionVO invitaciones = null;
        boolean existe = false;
@@ -62,6 +64,7 @@ public class InvitacionDAO {
            consulta.setInt(4,evento.getId());
            consulta.setInt(5,invitado.getId());
            consulta.executeUpdate();
+
        } catch(SQLException	 e){
 
             System.out.println(e);
@@ -82,11 +85,55 @@ public class InvitacionDAO {
 }
  }
  
-public void listaInvitaciones(InvitacionVO invitaciones){
-    ArrayList<InvitacionVO> invitacionList = new ArrayList<InvitacionVO>();
-    for (InvitacionVO x: invitacionList ){
-        invitacionList.add(invitaciones);
-    }
+    public ArrayList<InvitadoVO> listaInvitacion(int idevento) throws SQLException{
+      ArrayList<InvitadoVO> listainvitados = new ArrayList<InvitadoVO>();
+     PreparedStatement consulta = con.prepareStatement(
+             "select i.id_evento,inv.id_invitados,inv.apellido,inv.nombre,inv.sexo,inv.email,inv.telefono,"
+             + "i.Status from invitados inv inner join\n" +
+              "asisten I on i.id_invitado = inv.id_invitados where i.id_evento = ? ORDER BY i.id_evento ASC;");
+    consulta.setInt(1,idevento );
+        ResultSet response = consulta.executeQuery();
+        while(response.next()){
+        InvitadoVO invitados = new InvitadoVO();
+        invitados.setId(response.getInt(2));
+        invitados.setApellido(response.getString(3));
+        invitados.setNombre(response.getString(4));
+        invitados.setSexo(response.getString(5));
+        invitados.setEmail(response.getString(6));
+        invitados.setTelefono(response.getString(7));
+        invitados.setStatus(response.getString(8));
+        listainvitados.add(invitados);
+        
+        }
+
+        return listainvitados;
+
+      }
     
-}
-}
+      public ArrayList<InvitadoVO> listaInvitacionAusente(int idevento) throws SQLException{
+      ArrayList<InvitadoVO> listainvitados = new ArrayList<InvitadoVO>();
+         
+     PreparedStatement consulta = con.prepareStatement(
+             "select i.id_evento,inv.id_invitados,inv.apellido,inv.nombre,inv.sexo,inv.email,inv.telefono,"
+             + "i.Status from invitados inv inner join\n" +
+              "asisten I on i.id_invitado = inv.id_invitados where i.id_evento = ? and i.Status = ? ORDER BY i.id_evento ASC;");
+    consulta.setInt(1,idevento );
+    consulta.setString(2,"Ausente");
+        ResultSet response = consulta.executeQuery();
+        while(response.next()){
+        InvitadoVO invitados = new InvitadoVO();
+        invitados.setId(response.getInt(2));
+        invitados.setApellido(response.getString(3));
+        invitados.setNombre(response.getString(4));
+        invitados.setSexo(response.getString(5));
+        invitados.setEmail(response.getString(6));
+        invitados.setTelefono(response.getString(7));
+        invitados.setStatus(response.getString(8));
+        listainvitados.add(invitados);
+        
+        }
+
+        return listainvitados;
+
+      }
+    }

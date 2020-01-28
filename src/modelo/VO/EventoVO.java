@@ -5,21 +5,53 @@
  */
 package modelo.VO;
 
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 public class EventoVO {
+    
 private int _Id;
 private String _nombre;
 private Date _Fecha;
 private String _Ubicacion;
 private String _Status;
-private TipoEventoVO _Tipo;
+private int _Tipo;
+private int _IdUsuario;
+private String hora;
+private String _tipoEvento;
+
+    public String getTipoEvento() {
+        return _tipoEvento;
+    }
+
+    public void setTipoEvento(String _tipoEvento) {
+        this._tipoEvento = _tipoEvento;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+  
 static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+
 
 public EventoVO(){}
 
+  public int getIdUsuario() {
+        return _IdUsuario;
+    }
+
+    public void setIdUsuario(int _IdUsuario) {
+        this._IdUsuario = _IdUsuario;
+    }
     public int getId() {
         return _Id;
     }
@@ -60,11 +92,11 @@ public EventoVO(){}
         this._Status = _Status;
     }
 
-    public TipoEventoVO getTipo() {
+    public int getTipo() {
         return _Tipo;
     }
 
-    public void setTipo(TipoEventoVO _Tipo) {
+    public void setTipo(int _Tipo) {
         this._Tipo = _Tipo;
     }
 

@@ -111,12 +111,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel27" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorLunes" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel26" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantLunes" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -131,12 +131,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantLunes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorLunes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -186,7 +186,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel26">
+        <Component class="javax.swing.JLabel" name="lbCantLunes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -197,10 +197,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value=" 0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel27">
+        <Component class="javax.swing.JLabel" name="lbPorLunes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -211,7 +211,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -233,12 +233,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel37" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorMates" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel36" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantMates" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -253,12 +253,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantMates" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorMates" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -308,7 +308,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel36">
+        <Component class="javax.swing.JLabel" name="lbCantMates">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -319,10 +319,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel37">
+        <Component class="javax.swing.JLabel" name="lbPorMates">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -333,7 +333,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -355,12 +355,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel42" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorJueves" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel41" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantJueves" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -375,12 +375,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantJueves" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorJueves" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -430,7 +430,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel41">
+        <Component class="javax.swing.JLabel" name="lbCantJueves">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -441,10 +441,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel42">
+        <Component class="javax.swing.JLabel" name="lbPorJueves">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -455,7 +455,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -477,12 +477,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel52" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorViernes" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel51" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantViernes" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -497,12 +497,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantViernes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorViernes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -552,7 +552,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel51">
+        <Component class="javax.swing.JLabel" name="lbCantViernes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -563,10 +563,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel52">
+        <Component class="javax.swing.JLabel" name="lbPorViernes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -577,7 +577,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -599,12 +599,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel55" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel57" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorMiercoles" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel54" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel56" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantMiercoles" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -619,12 +619,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantMiercoles" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel57" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorMiercoles" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -674,7 +674,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel56">
+        <Component class="javax.swing.JLabel" name="lbCantMiercoles">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -685,10 +685,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel57">
+        <Component class="javax.swing.JLabel" name="lbPorMiercoles">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -699,7 +699,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -721,12 +721,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel60" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel62" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorSabado" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel59" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel61" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbCantSabado" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -741,12 +741,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel59" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel61" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCantSabado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel60" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel62" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorSabado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -796,7 +796,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel61">
+        <Component class="javax.swing.JLabel" name="lbCantSabado">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -807,10 +807,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel62">
+        <Component class="javax.swing.JLabel" name="lbPorSabado">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -821,7 +821,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="0%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -843,12 +843,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel65" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel67" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbPorDomingo" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel64" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel66" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbDomLunes" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -863,12 +863,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel64" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel66" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbDomLunes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel65" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel67" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorDomingo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -918,7 +918,7 @@
             <Property name="text" type="java.lang.String" value="Porcentaje: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel66">
+        <Component class="javax.swing.JLabel" name="lbDomLunes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -929,10 +929,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="7844"/>
+            <Property name="text" type="java.lang.String" value="  0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel67">
+        <Component class="javax.swing.JLabel" name="lbPorDomingo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
@@ -943,7 +943,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b6" green="b6" red="bb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="25%"/>
+            <Property name="text" type="java.lang.String" value="   0%"/>
           </Properties>
         </Component>
       </SubComponents>

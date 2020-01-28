@@ -1,80 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.Logica;
+
 import controlador.CoordUsuario;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.DAO.UsuarioDAO;
 import modelo.VO.UsuarioVO;
-/**
- *
- * @author Bill Aponte
- */
+
 public class LogicaUsuario {
-private CoordUsuario coordUsuario;
-private UsuarioDAO Usuario;   
+    UsuarioDAO usuarioConsulta;
+    CoordUsuario coordUsuario;
 
     public void setCoordUsuario(CoordUsuario coordUsuario) {
         this.coordUsuario = coordUsuario;
     }
-public void validarREsgistrarUsuario(UsuarioVO invitado)throws SQLException{
- if(invitado.getId()==0)   {
-JOptionPane.showMessageDialog(null, "Debe de completar llenar el campo");
-} 
-else{ 
- Usuario = new UsuarioDAO();
- Usuario.AgregarUsuario(invitado);
- }
-}
- public void ValidarEliminarUsuario(int id)throws SQLException{
- Usuario = new UsuarioDAO();
- Usuario.EliminarUsuario(id);
-
- }  
- public void ValidarMOdificarUsuario(UsuarioVO invitado )throws SQLException{
- 
- if(invitado.getNomUser().compareTo("")==0)   {
-JOptionPane.showMessageDialog(null, "Debe de completar llenar el campo");
-} 
-else{ 
- 
- Usuario.modificarUsuario(invitado);
- }
- }
+    public void validarAgregarUsuario( UsuarioVO usuario){
+        if(usuario.getNomUser().compareTo("") == 0 || usuario.getNombre().compareTo("") == 0
+                || usuario.getPassword().compareTo("") == 0 || usuario.getApellido().compareTo("") == 0){
+            JOptionPane.showMessageDialog(null,"Debe de llenar todos los campos","Advertencia",JOptionPane.WARNING_MESSAGE); 
+        }else{
+            usuarioConsulta = new UsuarioDAO();
+            usuarioConsulta.AgregarUsuario(usuario);
+        }
+    }
+    public ArrayList<UsuarioVO> listaUsuario(){
+        usuarioConsulta = new UsuarioDAO();
+        return usuarioConsulta.listaUsuario();
+    }
+    public void verificarEliminarUsuario (int id){
+        usuarioConsulta = new UsuarioDAO();
+        usuarioConsulta.eliminarUsuario(id);
+    }
     
- public UsuarioVO buscarUsuario(UsuarioVO usuario){
+    public void verificarModificarUsuario(UsuarioVO usuario){
+        if (usuario.getId() > 0) {
+            usuarioConsulta = new UsuarioDAO();
+            usuarioConsulta.modificarUsuario(usuario);
+         }
+    }
     
-     if(usuario.getNomUser().compareTo("")==0){
-      Usuario = new UsuarioDAO();
-     return Usuario.listaUsuarios(usuario);
-     }else{
-    return null;
-     }
-   
-     
-     
- 
- 
- }   
-    
+    public UsuarioVO infoUsuario(int id){
+        System.out.println("Desde el DAO");
+        usuarioConsulta = new UsuarioDAO();
+        return usuarioConsulta.InfoUsuario(id);
+    }
     
 }
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-

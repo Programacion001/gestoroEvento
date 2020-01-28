@@ -1,35 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
-import java.sql.SQLException;
-import modelo.DAO.TipoUsuarioDAO;
+import java.util.ArrayList;
 import modelo.Logica.LogicaTipoUsuario;
+
 import modelo.VO.TipoUsuarioVO;
 
-/**
- *
- * @author Bill Aponte
- */
+
 public class CoordTipoUsuario {
- LogicaTipoUsuario  LogTipoUsuario; 
- public LogicaTipoUsuario getLogTipoUsuario() {
-        return LogTipoUsuario;
+    private LogicaTipoUsuario logicaTipoUsuario;
+
+    public void setLogicaTipoUsuario(LogicaTipoUsuario logicaTipoUsuario) {
+        this.logicaTipoUsuario = logicaTipoUsuario;
     }
+    
+    public void validarAgregarTipoEvento(TipoUsuarioVO usuario){
+        logicaTipoUsuario.validarAgregarTipoEvento(usuario);
+    }
+    
+    public ArrayList<TipoUsuarioVO> validarConsultaTipoEvento(){
+       return logicaTipoUsuario.validarConsultaTipoUsuario();
 
-
-public void AgregarTipoUsuario( TipoUsuarioVO tipoUsuario ) throws SQLException{
-LogTipoUsuario.validarAgregarTipoUsuario(tipoUsuario);
-
-
-}
-
-  
-
-
-
+   }
+    public int BusquedaTipoUsuario(String tipoUsuario){
+        return logicaTipoUsuario.verificarBusquedaTipo(tipoUsuario);
+    }
 
 }

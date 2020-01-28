@@ -1,20 +1,15 @@
 package controlador;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.Logica.LogicaInvitacion;
 import modelo.VO.EventoVO;
 import modelo.VO.InvitacionVO;
 import modelo.VO.InvitadoVO;
 import vistas.IGCrearInvitacion;
 public class CoordInvitacion {
+
   private LogicaInvitacion logicainv;
-  private IGCrearInvitacion ventinvitacion;
-  
-  public IGCrearInvitacion getinvIG(){
-      return ventinvitacion;
-  }
-  public void setinvIF(IGCrearInvitacion ventinvitacion){
-      this.ventinvitacion = ventinvitacion;
-  }
+
   public LogicaInvitacion getLogicaInv(){
       return logicainv;
   }
@@ -38,7 +33,11 @@ public class CoordInvitacion {
       logicainv.validarEliminarInvitacion(evento, invitado);
   }
   
-  public void listaInvitacion(InvitacionVO invitacion){
-      logicainv.validadListaInvitacion(invitacion);
+  public ArrayList<InvitadoVO> listaInvitacion(int idevento) throws SQLException{
+      return logicainv.validadListaInvitacion(idevento);
+  }
+  
+  public ArrayList<InvitadoVO> listaInvitacionAusente(int idevento) throws SQLException{
+       return logicainv.verificarListaInvitacionAusente(idevento);
   }
 }

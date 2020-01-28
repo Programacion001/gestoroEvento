@@ -83,9 +83,9 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel14" min="-2" pref="195" max="-2" attributes="0"/>
+                      <Component id="lbNomEvento" min="-2" pref="195" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                      <Component id="btnEventoActual1" min="-2" pref="281" max="-2" attributes="0"/>
+                      <Component id="btnEventoFinalizado" min="-2" pref="281" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -94,8 +94,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" pref="49" max="32767" attributes="0"/>
-                      <Component id="jLabel14" alignment="3" max="32767" attributes="0"/>
-                      <Component id="btnEventoActual1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lbNomEvento" alignment="3" max="32767" attributes="0"/>
+                      <Component id="btnEventoFinalizado" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -115,7 +115,7 @@
                 <Property name="text" type="java.lang.String" value="Evento:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel14">
+            <Component class="javax.swing.JLabel" name="lbNomEvento">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -129,7 +129,7 @@
                 <Property name="text" type="java.lang.String" value="Conferencia de Huawei "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEventoActual1">
+            <Component class="javax.swing.JButton" name="btnEventoFinalizado">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="50" green="af" red="4f" type="rgb"/>
@@ -142,6 +142,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Terminar registro del evento  "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEventoFinalizadoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -165,21 +168,21 @@
                       <Component id="jSeparator1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbRegistrarInvitado" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbListaInvitado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbCerrarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtNameUser" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -197,7 +200,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCerrarSesion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbRegistrarInvitado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -223,6 +226,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Evento actual"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEventoActualActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
               <Properties>
@@ -239,7 +245,7 @@
                 <Property name="text" type="java.lang.String" value="Juan Matos Marte"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lbCerrarSesion">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="42" green="42" red="42" type="rgb"/>
@@ -249,6 +255,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cerrar sesi&#xf3;n "/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbCerrarSesionMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbListaInvitado">
               <Properties>

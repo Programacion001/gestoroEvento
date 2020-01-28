@@ -1,7 +1,9 @@
 
 package vistas;
 
+import controlador.CoordReporte;
 import java.awt.BorderLayout;
+import modelo.Logica.LogicaReporte;
 import vistas.reportePanel.pnlDiaMasVisitado;
 import vistas.reportePanel.pnlEventoVisitado;
 import vistas.reportePanel.pnlInvitadoEvento;
@@ -11,16 +13,17 @@ import vistas.reportePanel.pnlInvitadoEvento;
 
 public class IGReporte extends javax.swing.JPanel {
 
- 
+    private CoordReporte coordReporte;
+    private LogicaReporte  logicareporte;
     public IGReporte() {
         initComponents();
+        
+        coordReporte = new CoordReporte();
+        logicareporte = new LogicaReporte();
+        
         irPersonasEventos();
       
     }
-    
-   
-    
-
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,6 +198,9 @@ public class IGReporte extends javax.swing.JPanel {
     
     private void irDiaMayorAsistencia(){
         pnlDiaMasVisitado diaMasVisitado = new pnlDiaMasVisitado();
+       coordReporte.setLogicaReporte(logicareporte);
+       diaMasVisitado.setCoordReporte(coordReporte);
+       
         diaMasVisitado.setSize(893, 498);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(diaMasVisitado, BorderLayout.CENTER);
@@ -204,6 +210,10 @@ public class IGReporte extends javax.swing.JPanel {
     
     private void irEventoVisita(){
         pnlInvitadoEvento invitadoEvento = new pnlInvitadoEvento();
+        
+        coordReporte.setLogicaReporte(logicareporte);
+        invitadoEvento.setCoordReporte(coordReporte);
+        
         invitadoEvento.setSize(893, 498);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(invitadoEvento, BorderLayout.CENTER);
@@ -212,7 +222,12 @@ public class IGReporte extends javax.swing.JPanel {
     }
     
     private void irPersonasEventos(){
+        
         pnlEventoVisitado eventoVisita= new pnlEventoVisitado();
+        
+        coordReporte.setLogicaReporte(logicareporte);
+        eventoVisita.setCoordReporte(coordReporte);
+        
         eventoVisita.setSize(893, 498);
         pnlPrincipal.removeAll();
         pnlPrincipal.add(eventoVisita, BorderLayout.CENTER);

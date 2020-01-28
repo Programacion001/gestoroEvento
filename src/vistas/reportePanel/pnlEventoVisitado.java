@@ -1,18 +1,36 @@
 
 package vistas.reportePanel;
 
+import controlador.CoordReporte;
 import java.awt.Color;
 import java.awt.Font;
+import static java.lang.Thread.sleep;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import modelo.VO.PersonaEventoVO;
 
 public class pnlEventoVisitado extends javax.swing.JPanel {
 
     public pnlEventoVisitado() {
         initComponents();
         personalizarTable();
+        llamadado();
+       
     }
 
     
+    private CoordReporte coordReporte;
+    private int count = 0;
+    public CoordReporte getCoordReporte() {
+        return coordReporte;
+        
+    }
+
+    public void setCoordReporte(CoordReporte coordReporte) {
+        this.coordReporte = coordReporte;
+    }
     
     private void personalizarTable(){
         JTableHeader Theader = tbUsuario.getTableHeader();
@@ -24,6 +42,51 @@ public class pnlEventoVisitado extends javax.swing.JPanel {
         tbUsuario.setForeground(bgHeader);
         tbUsuario.setRowHeight(30);
        //((DefaultTableCellRenderer)Theader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+    }
+    
+    
+    private void listarTabla() throws SQLException{
+       ArrayList<PersonaEventoVO> personasEventos = coordReporte.numPersona();
+        Object[][] fila = new Object[personasEventos.size()][6];
+        for (int i = 0; i < personasEventos.size(); i++) {
+            fila[i][0] = personasEventos.get(i).getId();
+            fila[i][1] = personasEventos.get(i).getNombre();
+            fila[i][2] = personasEventos.get(i).getTipoEvento();
+            fila[i][3] = personasEventos.get(i).getFecha().toString();
+            fila[i][4] = personasEventos.get(i).getCantidadPersona();
+        }
+       ;
+       
+        Object[] titulo = {"ID", "Nombre", "Tipo", "Fecha", "Cantidad"};
+        
+        DefaultTableModel model = new DefaultTableModel(fila, titulo){
+             public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
+        
+        tbUsuario.setModel(model);
+
+    }
+    
+    
+    private void llamadado(){
+         Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (count == 0) {
+                        try {
+                           sleep(100);
+                           listarTabla();
+                        } catch (Exception e) {
+
+                        }
+                    }else{
+                        break;
+                    }
+                  count++;
+                }
+            }
+        };
+       hilo.start();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,14 +152,7 @@ public class pnlEventoVisitado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioMouseClicked
-        //        System.out.println(tbUsuario.getSelectedRow());
-        //        System.out.println(tbUsuario.getValueAt(0, 2) );
-        int[] count = tbUsuario.getSelectedRows();
-        for (int i = 0; i < count.length; i++) {
-            System.out.println(count[i]);
-        }
 
-        System.out.println();
     }//GEN-LAST:event_tbUsuarioMouseClicked
 
 

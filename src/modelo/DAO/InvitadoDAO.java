@@ -5,14 +5,16 @@
  */
 package modelo.DAO;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import modelo.VO.InvitacionVO;
 import modelo.VO.InvitadoVO;
-import modelo.VO.UsuarioVO;
 import modelo.conexion.Conexion;
 
 /**
@@ -30,32 +32,31 @@ public class InvitadoDAO {
  
  Conexion conex= new Conexion();
 		
-		try {
-			Statement estatuto = conex.getConnection().createStatement();
-			estatuto.executeUpdate("INSERT INTO Invitados VALUES ('"+invitado.getId()+"', '"
-					+invitado.getApellido()+"', '"+invitado.getSexo()+"', '"
-					+invitado.getDireccion()+"', '"+invitado.getNombre()+"', '"
-                                        +invitado.getEmail()+"', '"+invitado.getTelefono()+"')");
-			JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente","Información",JOptionPane.INFORMATION_MESSAGE);
-			estatuto.close();
-			conex.desconetar();
-			
-		} catch (SQLException e) {
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+		estatuto.executeUpdate("INSERT INTO invitados  (Apellido, Sexo, Direccion, Nombre, Email, telefono) VALUES ('"
+			+invitado.getApellido()+"', '"+invitado.getSexo()+"', '"
+			+invitado.getDireccion()+"', '"+invitado.getNombre()+"', '"
+                        +invitado.getEmail()+"', '"+invitado.getTelefono()+"')");
+		JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente","Información",JOptionPane.INFORMATION_MESSAGE);
+		estatuto.close();	
+	} catch (SQLException e) {
             System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "No se Registro");
-		}
+            JOptionPane.showMessageDialog(null, "No se Registro");
+	}
  }
+
  
  
-    public void EliminarInvitado(InvitadoVO id){
+    public void EliminarInvitado(int id){
     
-      Conexion conex= new Conexion();
+      Conexion conex = new Conexion();
 		try {
 			Statement estatuto = conex.getConnection().createStatement();
 			estatuto.executeUpdate("DELETE FROM Invitados WHERE id_Invitados='"+id+"'");
             JOptionPane.showMessageDialog(null, " Se ha Eliminado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 			estatuto.close();
-			conex.desconetar();
+			
 			
 		} catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -67,50 +68,93 @@ public class InvitadoDAO {
                 
     public void  modificarInvitado(InvitadoVO invitado){
 		
-		Conexion conex= new Conexion();
-		try{
-			String consulta="UPDATE invitados SET id_Usuario = ? ,Contraseña = ? , Nombre=? ,Apellido=? , Nom_usuario= ?,Tipo_user =? WHERE id_Usuario= ? ";
-			PreparedStatement estatuto = conex.getConnection().prepareStatement(consulta);
+	Conexion conex = new Conexion();
+	try{
+	   String consulta=" UPDATE invitados SET Apellido = ? , Sexo=? , Direccion = ? ,"
+                + " Nombre = ?, Email = ?, Telefono =?"
+                + "WHERE id_Invitados = ? ";
+	    PreparedStatement estatuto = conex.getConnection().prepareStatement(consulta);
 			
-            estatuto.setInt(1, invitado.getId());
-            estatuto.setString(2, invitado.getApellido());
-            estatuto.setString(3, invitado.getSexo());
-            estatuto.setString(4,invitado.getDireccion());
-            estatuto.setString(5,invitado.getNombre());
-            estatuto.setString(5,invitado.getEmail());
-            estatuto.setString(5,invitado.getTelefono());      
+               estatuto.setString(1, invitado.getApellido());
+               estatuto.setString(2, invitado.getSexo());
+               estatuto.setString(3, invitado.getDireccion());
+               estatuto.setString(4, invitado.getNombre());
+               estatuto.setString(5, invitado.getEmail());
+               estatuto.setString(6, invitado.getTelefono());
+               estatuto.setInt(7, invitado.getId());
+               
             estatuto.executeUpdate();
 
           JOptionPane.showMessageDialog(null, " Se ha Modificado Correctamente ","Confirmación",JOptionPane.INFORMATION_MESSAGE);
-         
+          estatuto.close();
 
-        }catch(SQLException	 e){
+        }catch(SQLException e){
 
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Error al Modificar","Error",JOptionPane.ERROR_MESSAGE);
 
         }
-	}            
+}            
                 
-<<<<<<< HEAD
+               
+    
+    public ArrayList<InvitadoVO> listaInvitado(){
+       Connection con = Conexion.getConnection();
+       ArrayList<InvitadoVO>  invitados = new ArrayList<InvitadoVO>();
+        try {
+            String query = "select * from invitados";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                InvitadoVO invitado = new InvitadoVO();
+                invitado.setId(rs.getInt(1));
+                invitado.setApellido(rs.getString(2));
+                invitado.setSexo(rs.getString(3));
+                invitado.setDireccion(rs.getString(4));
+                invitado.setNombre(rs.getString(5));
+                invitado.setEmail(rs.getString(6));
+                invitado.setTelefono(rs.getString(7));
+                invitados.add(invitado);
                 
-            public void listaInvitado(InvitadoVO invitados){
-    ArrayList<InvitadoVO> invitadoList = new ArrayList<InvitadoVO>();
-    for (InvitadoVO x: invitadoList ){
-        invitadoList.add(invitados);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return invitados; 
     }
-   
-=======
-
->>>>>>> 886b96f474d93628b323ac49b7f539bb3c030f1a
-}    
-                
-          public InvitadoVO eventoActuarPersonas(int idEvento){
-     return null;
-     
-
+    
+   public InvitadoVO infoInvitado(int id){
+       Connection con = Conexion.getConnection();
+       InvitadoVO invitado = new InvitadoVO();
+          
+            String query = "SELECT * FROM invitados WHERE id_Invitados = ?" ;
+           try (
+              PreparedStatement stmt = con.prepareStatement(query)) {
+               stmt.setInt(1, id);
+               ResultSet rs = stmt.executeQuery();
+               while(rs.next()){
+                invitado.setId(rs.getInt(1));
+                invitado.setApellido(rs.getString(2));
+                invitado.setSexo(rs.getString(3));
+                invitado.setDireccion(rs.getString(4));
+                invitado.setNombre(rs.getString(5));
+                invitado.setEmail(rs.getString(6));
+                invitado.setTelefono(rs.getString(7));
+               
+               }
+               rs.close();
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return invitado; 
     }
-        
+
+}
+
                 
  
  
